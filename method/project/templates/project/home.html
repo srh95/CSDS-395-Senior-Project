@@ -1,4 +1,4 @@
-{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <title>Method</title>
-    <link rel= "stylesheet" href="style.css">
+    {% load static %}
+    <link rel= "stylesheet" href="{%static 'style.css' %}">
 </head>
 <body>
     <div id="container">
@@ -18,11 +19,11 @@
                 <li><a href="#">My Picks</a></li>
                 <li><a href="#">Teams</a></li>
                 <li><a href="#">News</a></li>
-                <li id="login"><a href="#">Login</a></li>
+                <li id="login"><a href="/accounts/login/">Login</a></li>
      
         </div>
         <div id= "image">
-            <img src="i.png" alt="i png">
+            <img src="{% static 'img/i.png'%}" alt="i png">
             
         </div>
     </div>
