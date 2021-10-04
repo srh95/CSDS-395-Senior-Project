@@ -12,20 +12,32 @@
         <div class="center">
             <h1>Login</h1>
             <form method="post">
+                {% csrf_token %}
+
+                {% block content %}
                 <div class="txt_field">
-                    <input type="text" required>
+                    <input id="username" type="text" name="username" required>
                     <label>Email</label>
                 </div>
                 <div class="txt_field">
-                    <input type="password" required>
+                    <input id="password" type="text" name="password" required>
                     <label>Password</label>
                 </div>
                 <div class="pass">Forgot Password</div>
                 <input type="submit" value="Login">
+
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+                     {% endfor %}
+                {% endif %}
+
                 <div class="signup_link">
                     <a href="/accounts/register/">Not a member? Sign up here</a>
 
                 </div>
+                {% endblock %}
             </form>
         </div>
 
