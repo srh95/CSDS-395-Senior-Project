@@ -1,10 +1,11 @@
-{% load static %}
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
         <title>Login Page</title>
-        <link rel="stylesheet" href="style1.css">
+        {% load static %}
+        <link rel="stylesheet" href="{%static 'style1.css'%}">
 
     </head>
     <body>
@@ -22,7 +23,8 @@
                 <div class="pass">Forgot Password</div>
                 <input type="submit" value="Login">
                 <div class="signup_link">
-                    Not a member?
+                    <a href="/accounts/register/">Not a member? Sign up here</a>
+
                 </div>
             </form>
         </div>
