@@ -1,0 +1,114 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #165397;
+    height: 100vh;
+    overflow: hidden;
+}
+.center{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    background: white;
+    width: 400px;
+}
+
+.center h1{
+    padding: 0 0 20px 0;
+    text-align: center;
+    border-bottom: 1px solid silver;
+}
+
+.center form{
+    box-sizing: border-box;
+    padding: 0 40px;
+}
+.txt_field label{
+    pointer-events: none;
+    top: 50%;
+    left: 5px;
+    position: absolute;
+    font-size: 16px;
+    color: #adadad;
+    transform: translateY(-50%);
+    transition: .5s;
+}
+
+form .txt_field{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+}
+
+.txt_field span::before{
+    top: 40px;
+    position: absolute;
+    content: '';
+    height: 2px;
+    background: #2691d9;
+    width: 100%;
+    left: 0;
+}
+
+.txt_field input{
+    outline: none;
+    border: none;
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    background: none;
+    padding: 0 5px;
+
+}
+
+.txt_field input:focus ~ label,
+.txt_field input:valid  ~ label{
+    color: #2691d9;
+    top: -5px;
+
+}
+.pass:hover{
+    text-decoration: underline;
+}
+
+.pass{
+    margin: -5px 0 20px 5px;
+    cursor: pointer;
+    color: #a6a6a6;
+}
+.txt_field input:focus ~ span::before,
+.txt_field input:valid  ~ span::before{
+    width: 100%;
+
+}
+input[type="submit"]{
+    outline: none;
+    cursor: pointer;
+    color: #e9f4fb;
+    font-weight: 700;
+    border: 1px solid;
+    height: 50px;
+    width: 100%;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 18px;
+}
+.signup_link a{
+    color:#2691d9 ;
+    text-decoration: none;
+}
+.signup_link{
+    color: #666666;
+    font-size: 16px;
+    text-align: center;
+    margin: 30px 0;
+}
+input[type="submit"]:hover{
+    transition: .5s;
+    border-color: #2691d9;
+}
+
+
