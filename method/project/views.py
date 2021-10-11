@@ -60,7 +60,7 @@ def login(request):
                     if(name.user_password != password):
                         messages.error(request, 'Incorrect password')
                         return HttpResponseRedirect('/accounts/login/')
-                    url = 'user/home/' + str(name.id)
+                    url = 'home/' + str(name.id)
                     return HttpResponseRedirect(url)
             except ObjectDoesNotExist:
                     messages.error(request, 'Username does not exist')
@@ -75,8 +75,11 @@ def user_home(request, user_id):
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/userHome.html', context)
 
+def news(request):
+    return render(request,'project/News.html')
 
-
+def createBracket(request):
+    return render(request, 'project/bracket.html')
 
 
 

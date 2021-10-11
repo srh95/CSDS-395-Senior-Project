@@ -13,12 +13,12 @@
         <div id="logo">Method</div>
         <div id="navbar">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
                 <li><a href="#">Scores</a></li>
                 <li><a href="#">My Brackets</a></li>
                 <li><a href="#">Teams</a></li>
-                <li><a href="#">News</a></li>
-                <li id="login"><a href="#">Log Out</a></li>
+                <li><a href="/news/">News</a></li>
+                <li id="login"><a href="{% url 'home' %}">Log Out</a></li>
 
         </div>
 
@@ -27,6 +27,8 @@
             <img src="{% static 'img/i.png'%}" alt="i png">
 
         </div>
+
+        <button id="CreateBtn" class="btnStyle" onclick="document.location.href = '/createBracket/'">Create Bracket </button>
 
 
     </div>
