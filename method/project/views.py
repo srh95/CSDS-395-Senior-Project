@@ -82,8 +82,8 @@ def createBracket(request):
     return render(request, 'project/bracket.html')
 
 
-
-
+def scores(request):
+    return render(request, 'project/scores.html')
 
 
 

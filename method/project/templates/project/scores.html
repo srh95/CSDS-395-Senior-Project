@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method</title>
+    {% load static %}
+    <link rel= "stylesheet" href="{%static 'style.css' %}">
+
+</head>
+
+<style>
+* {box-sizing: border-box}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 20%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+
+#first {background-color: blue;}
+#second {background-color: blue;}
+#sweet {background-color: blue;}
+#elite {background-color: blue;}
+#final {background-color: blue}
+
+</style>
+<body>
+
+<div id="container">
+        <div id="logo">Method</div>
+        <div id="navbar">
+            <ul>
+                <li><a href="{% url 'home'%}">Home</a></li>
+                <li><a href="{% url 'scores'%}">Scores</a></li>
+                <li><a href="#">Teams</a></li>
+                <li><a href="{% url 'news'%}">News</a></li>
+                <li id="login"><a href="/accounts/login/">Login</a></li>
+        </div>
+     </div>
+
+<button class="tablink" onclick="openPage('first', this, 'blue')" id="defaultOpen">First Round</button>
+<button class="tablink" onclick="openPage('second', this, 'blue')">Second Round</button>
+<button class="tablink" onclick="openPage('sweet', this, 'blue')">Sweet 16</button>
+<button class="tablink" onclick="openPage('elite', this, 'blue')">Elite 8</button>
+<button class="tablink" onclick="openPage('final', this, 'blue')">Final Four/Championship</button>
+
+<div id="first" class="tabcontent">
+  <h3>First Round</h3>
+  <p>First round results</p>
+</div>
+
+<div id="second" class="tabcontent">
+  <h3>Second Round</h3>
+  <p>Second round results</p>
+</div>
+
+<div id="sweet" class="tabcontent">
+  <h3>Sweet 16</h3>
+  <p>Sweet 16 results</p>
+</div>
+
+<div id="elite" class="tabcontent">
+  <h3>Elite 8</h3>
+  <p>Elite 8 results</p>
+</div>
+
+<div id="final" class="tabcontent">
+  <h3>Final Four/Championship</h3>
+  <p>Final four results</p>
+    <p>Championship results</p>
+</div>
+
+
+<script>
+// code to open page tabs
+function openPage(pageName,elmnt,color) {
+
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  tablinks = document.getElementsByClassName("tablink");
+
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+document.getElementById("defaultOpen").click();
+</script>
+
+</body>
+</html>
+
