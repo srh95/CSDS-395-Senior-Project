@@ -57,6 +57,12 @@
 {
     color: #165397;
 }
+
+#navbar ul li active a
+{
+    color: #165397;
+}
+
 /* login button */
 #navbar ul #login
 {
@@ -228,5 +234,4 @@
     font-size:20px;
     color: #2691d9;
     text-shadow: 2px 2px 4px black;
-
 }

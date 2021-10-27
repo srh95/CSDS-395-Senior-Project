@@ -13,18 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 from django.urls import path, include
 from project import views
 from django.contrib import admin
 app_name = 'project'
 
 urlpatterns = [
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
     path('admin/', admin.site.urls),
-    path('home/',views.home, name='home'),
+    path('',views.home, name='home'),
     path('accounts/login/', views.login, name='login'),
     path('accounts/register/',views.register, name='register'),
     path('accounts/login/home/<int:user_id>', views.user_home, name='home'),
     path('news/', views.news, name='news'),
-    path('createBracket/', views.createBracket, name='create')
+    path('createBracket/', views.createBracket, name='create'),
+    path('scores/', views.scores, name='scores')
+
 ]
