@@ -29,6 +29,7 @@ urlpatterns = [
     path('accounts/login/home/<int:user_id>', views.user_home, name='home'),
     path('news/', views.news, name='news'),
     path('createBracket/', views.createBracket, name='create'),
-    path('scores/', views.scores, name='scores')
+    path('scores/', views.scores, name='scores'),
+    path('teams/', views.teams, name='teams')
 
 ]
