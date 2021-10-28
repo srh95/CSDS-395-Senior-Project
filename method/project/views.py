@@ -85,5 +85,6 @@ def createBracket(request):
 def scores(request):
     return render(request, 'project/scores.html')
 
-
+def teams(request):
+    return render(request, 'project/teams.html')
 
