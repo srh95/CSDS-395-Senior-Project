@@ -6,7 +6,7 @@
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <title>Method</title>
     {% load static %}
-    <link rel= "stylesheet" href="{%static 'style.css' %}">
+    <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
 
 </head>
 
@@ -32,21 +32,28 @@ body, html {
 }
 
 .tablink:hover {
-  background-color: #777;
+  background-color: #A6DCFF;
 }
 
 .tabcontent {
-  color: #165397;
+  color: white;
   display: none;
   padding: 100px 20px;
-  height: 100%;
+  height: 700%;
 }
 
-#first {background-color: #165397;}
-#second {background-color: blue;}
-#sweet {background-color: blue;}
-#elite {background-color: blue;}
-#final {background-color: blue}
+.teams {
+ font-family: "Arial", Impact, Charcoal, sans-serif;
+ font-weight: bold;
+ font-size:40px;
+ text-transform: uppercase;
+}
+
+#first {background-color: #7BB4DA;}
+#second {background-color: #7BB4DA;}
+#sweet {background-color: #7BB4DA;}
+#elite {background-color: #7BB4DA;}
+#final {background-color: #7BB4DA}
 
 </style>
 <body>
@@ -61,17 +68,208 @@ body, html {
                 <li><a href="{% url 'news'%}">News</a></li>
                 <li id="login"><a href="/accounts/login/">Login</a></li>
         </div>
-     </div>
+ </div>
 
-<button class="tablink" onclick="openPage('first', this, '#e9e9eb')" id="defaultOpen">First Round</button>
-<button class="tablink" onclick="openPage('second', this, '#e9e9eb')">Second Round</button>
-<button class="tablink" onclick="openPage('sweet', this, '#e9e9eb')">Sweet 16</button>
-<button class="tablink" onclick="openPage('elite', this, '#e9e9eb')">Elite 8</button>
-<button class="tablink" onclick="openPage('final', this, '#e9e9eb')">Final Four/Championship</button>
+<button class="tablink" onclick="openPage('first', this, '#7BB4DA')" id="defaultOpen">First Round</button>
+<button class="tablink" onclick="openPage('second', this, '#7BB4DA')">Second Round</button>
+<button class="tablink" onclick="openPage('sweet', this, '#7BB4DA')">Sweet 16</button>
+<button class="tablink" onclick="openPage('elite', this, '#7BB4DA')">Elite 8</button>
+<button class="tablink" onclick="openPage('final', this, '#7BB4DA')">Final Four/Championship</button>
 
 <div id="first" class="tabcontent">
-  <h3>First Round</h3>
-  <p>First round results</p>
+    <div class="boxed">
+        <div class="teams">
+            {{teams1.0}}
+        <p>{{teams1.1}}</p>
+        </div>
+    </div>
+    <div class="boxed">
+        <div class="teams">
+        {{teams1.2}}
+        <p>{{teams1.3}}</p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teams1.4}}
+        <p>{{teams1.5}}</p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.6}}</p>
+        {{teams1.7}}
+        </div>
+    </div>
+      <div class="bottom_boxed">
+          <div class="teams">
+        <p>{{teams1.8}}</p>
+              {{teams1.9}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.10}}</p>
+              {{teams1.11}}
+          </div>
+    </div>
+        <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.12}}</p>
+              {{teams1.13}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.14}}</p>
+              {{teams1.15}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.16}}</p>
+              {{teams1.17}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.18}}</p>
+              {{teams1.19}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.20}}</p>
+              {{teams1.21}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.22}}</p>
+              {{teams1.23}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.24}}</p>
+              {{teams1.25}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.26}}</p>
+              {{teams1.27}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.28}}</p>
+              {{teams1.29}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.30}}</p>
+              {{teams1.31}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+       <div class="teams">
+        <p>{{teams1.32}}</p>
+              {{teams1.33}}
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.34}}</p>
+              {{teams1.35}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.36}}</p>
+              {{teams1.37}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.38}}</p>
+              {{teams1.39}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.40}}</p>
+              {{teams1.41}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.42}}</p>
+              {{teams1.43}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.44}}</p>
+              {{teams1.45}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.46}}</p>
+              {{teams1.47}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.48}}</p>
+              {{teams1.49}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.50}}</p>
+              {{teams1.51}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.52}}</p>
+              {{teams1.53}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.54}}</p>
+              {{teams1.55}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.56}}</p>
+              {{teams1.57}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.58}}</p>
+              {{teams1.59}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.60}}</p>
+              {{teams1.61}}
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        <p>{{teams1.62}}</p>
+              {{teams1.63}}
+        </div>
+    </div>
+
 </div>
 
 <div id="second" class="tabcontent">
