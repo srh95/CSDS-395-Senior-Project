@@ -1,13 +1,13 @@
+import requests
+from bs4 import BeautifulSoup
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 
-
 from .models import (
     User
 )
-
 from .forms import(
     RegisterForm,
     LoginForm
@@ -83,7 +83,14 @@ def createBracket(request):
 
 
 def scores(request):
-    return render(request, 'project/scores.html')
+    url = "https://www.ncaa.com/march-madness-live/scores"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, "html.parser")
+    content = soup.find('div', {'id': 'round-2'})
+    teams1 = []
+    for i in content.findAll('img'):
+        teams1.append(i['alt'])
+    return render(request, 'project/scores.html', {'teams1': teams1})
 
 def teams(request):
     return render(request, 'project/teams.html')
