@@ -62,11 +62,12 @@ body, html {
         <div id="logo">Method</div>
         <div id="navbar">
             <ul>
-                <li><a href="{% url 'home'%}">Home</a></li>
-                <li><a href="{% url 'scores'%}">Scores</a></li>
+                <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
+                <li><a href="/scores/{{user.id}}">Scores</a></li>
                 <li><a href="{% url 'teams'%}">Teams</a></li>
+                <li><a href="#">MyBracket</a></li>
                 <li><a href="{% url 'news'%}">News</a></li>
-                <li id="login"><a href="/accounts/login/">Login</a></li>
+                <li id="login"><a href="{% url 'home' %}">Logout</a></li>
         </div>
  </div>
 
@@ -470,6 +471,7 @@ body, html {
         <p>{{teamsc.1}}</p>
         </div>
     </div>
+
 </div>
 
 
