@@ -81,16 +81,61 @@ def news(request):
 def createBracket(request):
     return render(request, 'project/bracket.html')
 
-
-def scores(request):
+# method to scrape for team names
+def scoreScrape():
     url = "https://www.ncaa.com/march-madness-live/scores"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
+
+    # scrape for first round teams
     content = soup.find('div', {'id': 'round-2'})
     teams1 = []
     for i in content.findAll('img'):
         teams1.append(i['alt'])
-    return render(request, 'project/scores.html', {'teams1': teams1})
+
+    # scrape for second round teams
+    content = soup.find('div', {'id': 'round-3'})
+    teams2 = []
+    for i in content.findAll('img'):
+        teams2.append(i['alt'])
+
+    # scrape for sweet 16 teams
+    content = soup.find('div', {'id': 'round-4'})
+    teams16 = []
+    for i in content.findAll('img'):
+        teams16.append(i['alt'])
+
+    # scrape for elite 8 teams
+    content = soup.find('div', {'id': 'round-5'})
+    teams8 = []
+    for i in content.findAll('img'):
+        teams8.append(i['alt'])
+
+    # scrape for final 4 teams
+    content = soup.find('div', {'id': 'round-6'})
+    teams4 = []
+    for i in content.findAll('img'):
+        teams4.append(i['alt'])
+
+    # scrape for final 4 teams
+    content = soup.find('div', {'id': 'round-7'})
+    teamsc = []
+    for i in content.findAll('img'):
+        teamsc.append(i['alt'])
+
+    return teams1, teams2, teams16, teams8, teams4, teamsc
+
+def scores(request):
+    [teams1, teams2, teams16, teams8, teams4, teamsc] = scoreScrape()
+    context = {'teams1': teams1, 'teams2': teams2, 'teams16': teams16, 'teams8': teams8, 'teams4': teams4, 'teamsc': teamsc}
+    return render(request, 'project/scores.html', context)
+
+
+def userScores(request, user_id):
+    [teams1, teams2, teams16, teams8, teams4, teamsc] = scoreScrape()
+    user = get_object_or_404(User, pk=user_id)
+    context = {'user': user, 'user_id': user_id, 'teams1': teams1, 'teams2': teams2, 'teams16': teams16, 'teams8': teams8, 'teams4': teams4, 'teamsc': teamsc}
+    return render(request, 'project/userScores.html', context)
 
 def teams(request):
     return render(request, 'project/teams.html')

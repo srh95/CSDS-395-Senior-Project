@@ -239,7 +239,7 @@
 .boxed {
   width: 500px;
   height: 250px;
-  border: 2px solid black;
+  border: 2px solid white;
   display: inline-block;
   margin-left: 125px;
   margin-top: 10px;
@@ -248,7 +248,7 @@
 .bottom_boxed {
   width: 500px;
   height: 250px;
-  border: 2px solid black;
+  border: 2px solid white;
   display: inline-block;
   margin-left: 125px;
   margin-top: 50px;

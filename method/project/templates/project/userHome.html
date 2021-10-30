@@ -14,7 +14,7 @@
         <div id="navbar">
             <ul>
                 <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
-                <li><a href="{% url 'scores'%}">Scores</a></li>
+                <li><a href="/scores/{{user.id}}">Scores</a></li>
                 <li><a href="#">My Brackets</a></li>
                 <li><a href="{% url 'teams'%}">Teams</a></li>
                 <li><a href="/news/">News</a></li>
