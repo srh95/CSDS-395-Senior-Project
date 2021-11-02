@@ -31,6 +31,6 @@ urlpatterns = [
     path('createBracket/<int:user_id>', views.createBracket, name='create'),
     path('scores/', views.scores, name='scores'),
     path('scores/<int:user_id>', views.userScores, name='userscores'),
-    path('teams/', views.teams, name='teams')
+    path('teams/', views.teams, name='teams'),
 
 ]

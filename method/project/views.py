@@ -7,10 +7,6 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from svglib.svglib import svg2rlg
-from reportlab.graphics import renderPM
-
-
 
 from .models import (
     User, Team
