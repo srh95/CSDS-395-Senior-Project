@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
-from django.urls import path, include
+from django.urls import path
 from project import views
 from django.contrib import admin
 app_name = 'project'
