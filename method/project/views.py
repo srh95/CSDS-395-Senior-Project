@@ -1,4 +1,5 @@
 import requests
+import random
 from bs4 import BeautifulSoup
 import shutil
 import os.path
@@ -12,7 +13,7 @@ from reportlab.graphics import renderPM
 
 
 from .models import (
-    User
+    User, Team
 )
 from .forms import(
     RegisterForm,
@@ -24,6 +25,23 @@ def index(request):
 
 def home(request):
     return render(request,'project/home.html')
+
+def createteam(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            x = random.randomint(1000,2000)
+            print(x)
+        database = Team.objects.create(
+            user_name=form.cleaned_data['name'],
+            user_username=form.cleaned_data['username'],
+            user_password=form.cleaned_data['password1']
+        )
+        database.save()
+    else:
+        print("Team cannot be created")
+
+
 
 def register(request):
     if request.method == 'POST':
