@@ -84,8 +84,10 @@ def user_home(request, user_id):
 def news(request):
     return render(request,'project/News.html')
 
-def createBracket(request):
-    return render(request, 'project/bracket.html')
+def createBracket(request,user_id):
+    user = get_object_or_404(User, pk=user_id)
+    context = {'user': user, 'user_id': user_id}
+    return render(request, 'project/bracket.html',context)
 
 # method to scrape for game info
 def scoreScrape():
@@ -155,9 +157,9 @@ def scores(request):
 
 
 def userScores(request, user_id):
-    [teamL, teamW] = scoreScrape()
+    [teamL, teamW, imgsL] = scoreScrape()
     user = get_object_or_404(User, pk=user_id)
-    context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW}
+    context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
     return render(request, 'project/userScores.html', context)
 
 def teams(request):

@@ -83,7 +83,6 @@ font-weight: normal;
 <script>
     function createSRC(img_name) {
         return "method/project/static/team_img";
-
     }
 </script>
 
@@ -108,14 +107,18 @@ font-weight: normal;
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/drexel.svg'%}" alt="name" height="87" width="100" />
         {{teamL.12}} {{teamL.13}}
-        <p><b>{{teamW.12}} {{teamW.13}}</b></p>
+        <p><img src="{% static 'team_img/illinois.svg'%}" alt="name" height="87" width="100" />
+            <b>{{teamW.12}} {{teamW.13}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/utah-st.svg'%}" alt="name" height="87" width="100" />
        {{teamL.14}} {{teamL.15}}
-            <p><b>{{teamW.14}} {{teamW.15}}</b></p>
+            <p><img src="{% static 'team_img/texas-tech.svg'%}" alt="name" height="87" width="100" />
+                <b>{{teamW.14}} {{teamW.15}}</b></p>
         </div>
     </div>
       <div class="bottom_boxed">

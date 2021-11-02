@@ -1,10 +1,212 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>BRACKET</title>
-</head>
-<body>
-<h1>Create Bracket page</h1>
-</body>
-</html>
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="viewport" content="width=device-width,initial-scale=1.0">
+ <link rel="stylesheet" href="text.css">
+ <title>March Madness 2021 Tournament</title>
+    {% load static %}
+    <link rel= "stylesheet" href="{%static 'bracketStyle.css' %}">
+    <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
+ </head>
+ <body>
+
+<div id="container">
+        <div id="logo">Method</div>
+        <div id="navbar">
+            <ul>
+                <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
+                <li><a href="/scores/{{user.id}}">Scores</a></li>
+                <li><a href="{% url 'teams'%}">Teams</a></li>
+                <li><a href="#">MyBracket</a></li>
+                <li><a href="{% url 'news'%}">News</a></li>
+                <li id="login"><a href="{% url 'home' %}">Logout</a></li>
+        </div>
+ </div>
+
+ <header class="hero">
+ <div class="hero-wrap">
+ <p class="intro" id="intro"></p>
+ <h1 id="headline">Method</h1>
+ <p class="year"><i class="fa fa-star"></i> 2022 <i class="fa fa-star"></i></p>
+ <p>NCAA March Madness Tournament 2022</p>
+ </div>
+ </header>
+
+
+ <section id="bracket">
+ <div class="container">
+ <div class="split split-one">
+ <div class="round round-one current">
+ <div class="round-details">Round 1<br/><span class="date"></span></div>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ </div> <!-- END ROUND ONE -->
+
+ <div class="round round-two">
+ <div class="round-details">Round 2<br/><span class="date"> </span></div>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ </div> <!-- END ROUND TWO -->
+
+ <div class="round round-three">
+ <div class="round-details">Round 3<br/><span class="date">March 22</span></div>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ </div> <!-- END ROUND THREE -->
+ </div>
+
+ <div class="champion">
+ <div class="semis-l">
+ <div class="round-details">west semifinals <br/><span class="date">March 26-28</span></div>
+ <ul class ="matchup championship">
+ <li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ </ul>
+ </div>
+ <div class="final">
+ <i class="fa fa-trophy"></i>
+ <div class="round-details">championship <br/><span class="date">March 30 - Apr. 1</span></div>
+ <ul class ="matchup championship">
+ <li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ </ul>
+ </div>
+ <div class="semis-r">
+ <div class="round-details">east semifinals <br/><span class="date">March 26-28</span></div>
+ <ul class ="matchup championship">
+ <li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ </ul>
+ </div>
+ </div>
+
+
+ <div class="split split-two">
+
+
+ <div class="round round-three">
+ <div class="round-details">Round 3<br/><span class="date">March 22</span></div>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ </div> <!-- END ROUND THREE -->
+
+ <div class="round round-two">
+ <div class="round-details">Round 2<br/><span class="date">March 18</span></div>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ </div> <!-- END ROUND TWO -->
+ <div class="round round-one current">
+ <div class="round-details">Round 1<br/><span class="date"> </span></div>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ </div> <!-- END ROUND ONE -->
+ </div>
+ </div>
+ </section>
+ <section class="share">
+ <div class="share-wrap">
+ <a class="share-icon" href="https://twitter.com/_joebeason"><i class="fa fa-twitter"></i></a>
+ <a class="share-icon" href="#"><i class="fa fa-facebook"></i></a>
+ <a class="share-icon" href="#"><i class="fa fa-envelope"></i></a>
+ </div>
+ </section>
