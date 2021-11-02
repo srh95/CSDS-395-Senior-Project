@@ -6,8 +6,7 @@
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <title>Method</title>
     {% load static %}
-    <link rel= "stylesheet" href="{%static 'style.css' %}">
-
+    <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
 </head>
 
 <style>
@@ -20,7 +19,7 @@ body, html {
 }
 
 .tablink {
-  background-color: #555;
+  background-color: #165397;
   color: white;
   float: left;
   border: none;
@@ -32,21 +31,33 @@ body, html {
 }
 
 .tablink:hover {
-  background-color: #777;
+  background-color: #A6DCFF;
 }
 
 .tabcontent {
   color: white;
   display: none;
   padding: 100px 20px;
-  height: 100%;
+  height: 700%;
 }
 
-#first {background-color: blue;}
-#second {background-color: blue;}
-#sweet {background-color: blue;}
-#elite {background-color: blue;}
-#final {background-color: blue}
+.teams {
+ font-family: sans-serif;
+ font-size:40px;
+ font-weight: normal;
+}
+.scores {
+font-family: sans-serif;
+font-size:40px;
+font-weight: normal;
+
+}
+
+#first {background-color: #7BB4DA;}
+#second {background-color: #7BB4DA;}
+#sweet {background-color: #7BB4DA;}
+#elite {background-color: #7BB4DA;}
+#final {background-color: #7BB4DA}
 
 </style>
 <body>
@@ -57,42 +68,425 @@ body, html {
             <ul>
                 <li><a href="{% url 'home'%}">Home</a></li>
                 <li><a href="{% url 'scores'%}">Scores</a></li>
-                <li><a href="#">Teams</a></li>
+                <li><a href="{% url 'teams'%}">Teams</a></li>
                 <li><a href="{% url 'news'%}">News</a></li>
                 <li id="login"><a href="/accounts/login/">Login</a></li>
         </div>
-     </div>
+ </div>
 
-<button class="tablink" onclick="openPage('first', this, 'blue')" id="defaultOpen">First Round</button>
-<button class="tablink" onclick="openPage('second', this, 'blue')">Second Round</button>
-<button class="tablink" onclick="openPage('sweet', this, 'blue')">Sweet 16</button>
-<button class="tablink" onclick="openPage('elite', this, 'blue')">Elite 8</button>
-<button class="tablink" onclick="openPage('final', this, 'blue')">Final Four/Championship</button>
+<button class="tablink" onclick="openPage('first', this, '#7BB4DA')" id="defaultOpen">First Round</button>
+<button class="tablink" onclick="openPage('second', this, '#7BB4DA')">Second Round</button>
+<button class="tablink" onclick="openPage('sweet', this, '#7BB4DA')">Sweet 16</button>
+<button class="tablink" onclick="openPage('elite', this, '#7BB4DA')">Elite 8</button>
+<button class="tablink" onclick="openPage('final', this, '#7BB4DA')">Final Four/Championship</button>
+
+<script>
+    function createSRC(img_name) {
+        return "method/project/static/team_img";
+
+    }
+</script>
+
+<script></script>
 
 <div id="first" class="tabcontent">
-  <h3>First Round</h3>
-  <p>First round results</p>
+    <div class="boxed">
+        <div class="teams">
+            <img src="{% static 'team_img/virginia-tech.svg'%}" alt="name" height="87" width="100" />
+            {{teamL.8}} {{teamL.9}}
+            <p><img src="{% static 'team_img/florida.svg'%}" alt="name" height="87" width="100" />
+            <b>{{teamW.8}} {{teamW.9}}</b></p>
+        </div>
+    </div>
+    <div class="boxed">
+        <div class="teams">
+            <img src="{% static 'team_img/colgate.svg'%}" alt="name" height="87" width="100" />
+        {{teamL.10}} {{teamL.11}}
+            <p><img src="{% static 'team_img/arkansas.svg'%}" alt="name" height="87" width="100" />
+                <b>{{teamW.10}} {{teamW.11}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.12}} {{teamL.13}}
+        <p><b>{{teamW.12}} {{teamW.13}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+       {{teamL.14}} {{teamL.15}}
+            <p><b>{{teamW.14}} {{teamW.15}}</b></p>
+        </div>
+    </div>
+      <div class="bottom_boxed">
+          <div class="teams">
+            {{teamL.16}} {{teamL.17}}
+              <p><b>{{teamW.16}} {{teamW.17}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.18}} {{teamL.19}}
+            <p><b>{{teamW.18}} {{teamW.19}}</b></p>
+          </div>
+    </div>
+        <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.20}} {{teamL.21}}
+            <p><b>{{teamW.20}} {{teamW.21}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.22}} {{teamL.23}}
+            <p><b>{{teamW.22}} {{teamW.23}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.24}} {{teamL.25}}
+            <p><b>{{teamW.24}} {{teamW.25}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.26}} {{teamL.27}}
+            <p><b>{{teamW.26}} {{teamW.27}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.28}} {{teamL.29}}
+            <p><b>{{teamW.28}} {{teamW.29}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.30}} {{teamL.31}}
+            <p><b>{{teamW.30}} {{teamW.31}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.32}} {{teamL.33}}
+            <p><b>{{teamW.32}} {{teamW.33}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.34}} {{teamL.35}}
+            <p><b>{{teamW.34}} {{teamW.35}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.36}} {{teamL.37}}
+            <p><b>{{teamW.36}} {{teamW.37}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.38}} {{teamL.39}}
+            <p><b>{{teamW.38}} {{teamW.39}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+       <div class="teams">
+            {{teamL.40}} {{teamL.41}}
+            <p><b>{{teamW.40}} {{teamW.41}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.42}} {{teamL.43}}
+            <p><b>{{teamW.42}} {{teamW.43}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+            {{teamL.44}} {{teamL.45}}
+            <p><b>{{teamW.44}} {{teamW.45}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.46}} {{teamL.47}}
+            <p><b>{{teamW.46}} {{teamW.47}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.48}} {{teamL.49}}
+            <p><b>{{teamW.48}} {{teamW.49}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.50}} {{teamL.51}}
+            <p><b>{{teamW.50}} {{teamW.51}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.52}} {{teamL.53}}
+            <p><b>{{teamW.52}} {{teamW.53}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.54}} {{teamL.55}}
+            <p><b>{{teamW.54}} {{teamW.55}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.56}} {{teamL.57}}
+            <p><b>{{teamW.56}} {{teamW.57}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+       {{teamL.58}} {{teamL.59}}
+            <p><b>{{teamW.58}} {{teamW.59}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.60}} {{teamL.61}}
+            <p><b>{{teamW.60}} {{teamW.61}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+       {{teamL.62}} {{teamL.63}}
+            <p><b>{{teamW.62}} {{teamW.63}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.64}} {{teamL.65}}
+            <p><b>{{teamW.64}} {{teamW.65}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.66}} {{teamL.67}}
+            <p><b>{{teamW.66}} {{teamW.67}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+       {{teamL.68}} {{teamL.69}}
+            <p><b>{{teamW.68}} {{teamW.69}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.70}} {{teamL.71}}
+            <p><b>{{teamW.70}} {{teamW.71}}</b></p>
+        </div>
+    </div>
+
 </div>
 
 <div id="second" class="tabcontent">
-  <h3>Second Round</h3>
-  <p>Second round results</p>
+  <div class="boxed">
+        <div class="teams">
+        {{teamL.72}} {{teamL.73}}
+            <p><b>{{teamW.72}} {{teamW.73}}</b></p>
+        </div>
+    </div>
+<div class="boxed">
+        <div class="teams">
+        {{teamL.74}} {{teamL.75}}
+            <p><b>{{teamW.74}} {{teamW.75}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.76}} {{teamL.77}}
+            <p><b>{{teamW.76}} {{teamW.77}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.78}} {{teamL.79}}
+            <p><b>{{teamW.78}} {{teamW.79}}</b></p>
+        </div>
+    </div>
+      <div class="bottom_boxed">
+          <div class="teams">
+        {{teamL.80}} {{teamL.81}}
+            <p><b>{{teamW.80}} {{teamW.81}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.82}} {{teamL.83}}
+            <p><b>{{teamW.82}} {{teamW.83}}</b></p>
+          </div>
+    </div>
+        <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.84}} {{teamL.85}}
+            <p><b>{{teamW.84}} {{teamW.85}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.86}} {{teamL.87}}
+            <p><b>{{teamW.86}} {{teamW.87}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+      {{teamL.88}} {{teamL.89}}
+            <p><b>{{teamW.88}} {{teamW.89}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+       {{teamL.90}} {{teamL.91}}
+            <p><b>{{teamW.90}} {{teamW.91}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.92}} {{teamL.93}}
+            <p><b>{{teamW.92}} {{teamW.93}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.94}} {{teamL.95}}
+            <p><b>{{teamW.94}} {{teamW.95}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+       {{teamL.96}} {{teamL.97}}
+            <p><b>{{teamW.96}} {{teamW.97}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.98}} {{teamL.99}}
+            <p><b>{{teamW.98}} {{teamW.99}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.100}} {{teamL.101}}
+            <p><b>{{teamW.100}} {{teamW.101}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.102}} {{teamL.103}}
+            <p><b>{{teamW.102}} {{teamW.103}}</b></p>
+          </div>
+    </div>
 </div>
 
 <div id="sweet" class="tabcontent">
-  <h3>Sweet 16</h3>
-  <p>Sweet 16 results</p>
+  <div class="boxed">
+        <div class="teams">
+            {{teamL.104}} {{teamL.105}}
+            <p><b>{{teamW.104}} {{teamW.105}}</b></p>
+        </div>
+    </div>
+<div class="boxed">
+        <div class="teams">
+        {{teamL.106}} {{teamL.107}}
+            <p><b>{{teamW.106}} {{teamW.107}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.108}} {{teamL.109}}
+            <p><b>{{teamW.108}} {{teamW.109}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.110}} {{teamL.111}}
+            <p><b>{{teamW.110}} {{teamW.111}}</b></p>
+        </div>
+    </div>
+      <div class="bottom_boxed">
+          <div class="teams">
+        {{teamL.112}} {{teamL.113}}
+            <p><b>{{teamW.112}} {{teamW.113}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.114}} {{teamL.115}}
+            <p><b>{{teamW.114}} {{teamW.115}}</b></p>
+          </div>
+    </div>
+        <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.116}} {{teamL.117}}
+            <p><b>{{teamW.116}} {{teamW.117}}</b></p>
+          </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.118}} {{teamL.119}}
+            <p><b>{{teamW.118}} {{teamW.119}}</b></p>
+          </div>
+    </div>
 </div>
 
 <div id="elite" class="tabcontent">
-  <h3>Elite 8</h3>
-  <p>Elite 8 results</p>
+  <div class="boxed">
+        <div class="teams">
+            {{teamL.120}} {{teamL.121}}
+            <p><b>{{teamW.120}} {{teamW.121}}</b></p>
+        </div>
+    </div>
+<div class="boxed">
+        <div class="teams">
+        {{teamL.122}} {{teamL.123}}
+            <p><b>{{teamW.122}} {{teamW.123}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.124}} {{teamL.125}}
+            <p><b>{{teamW.124}} {{teamW.125}}</b></p>
+        </div>
+    </div>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.126}} {{teamL.127}}
+            <p><b>{{teamW.126}} {{teamW.127}}</b></p>
+        </div>
+    </div>
 </div>
 
 <div id="final" class="tabcontent">
-  <h3>Final Four/Championship</h3>
-  <p>Final four results</p>
-    <p>Championship results</p>
+  <h3>Final Four Results</h3>
+    <div class="boxed">
+        <div class="teams">
+            {{teamL.128}} {{teamL.129}}
+            <p><b>{{teamW.128}} {{teamW.129}}</b></p>
+        </div>
+    </div>
+<div class="boxed">
+        <div class="teams">
+        {{teamL.130}} {{teamL.131}}
+            <p><b>{{teamW.130}} {{teamW.131}}</b></p>
+        </div>
+    </div>
+    <h3>Championship results</h3>
+    <div class="bottom_boxed">
+        <div class="teams">
+        {{teamL.132}} {{teamL.133}}
+            <p><b>{{teamW.132}} {{teamW.133}}</b></p>
+        </div>
+    </div>
 </div>
 
 
