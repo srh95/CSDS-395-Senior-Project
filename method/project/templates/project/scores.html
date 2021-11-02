@@ -7,7 +7,6 @@
     <title>Method</title>
     {% load static %}
     <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
-
 </head>
 
 <style>
@@ -43,10 +42,15 @@ body, html {
 }
 
 .teams {
- font-family: "Arial", Impact, Charcoal, sans-serif;
- font-weight: bold;
+ font-family: sans-serif;
  font-size:40px;
- text-transform: uppercase;
+ font-weight: normal;
+}
+.scores {
+font-family: sans-serif;
+font-size:40px;
+font-weight: normal;
+
 }
 
 #first {background-color: #7BB4DA;}
@@ -76,197 +80,210 @@ body, html {
 <button class="tablink" onclick="openPage('elite', this, '#7BB4DA')">Elite 8</button>
 <button class="tablink" onclick="openPage('final', this, '#7BB4DA')">Final Four/Championship</button>
 
+<script>
+    function createSRC(img_name) {
+        return "method/project/static/team_img";
+
+    }
+</script>
+
+<script></script>
+
 <div id="first" class="tabcontent">
     <div class="boxed">
         <div class="teams">
-            {{teams1.0}}
-        <p>{{teams1.1}}</p>
+            <img src="{% static 'team_img/virginia-tech.svg'%}" alt="name" height="87" width="100" />
+            {{teamL.8}} {{teamL.9}}
+            <p><img src="{% static 'team_img/florida.svg'%}" alt="name" height="87" width="100" />
+            <b>{{teamW.8}} {{teamW.9}}</b></p>
         </div>
     </div>
     <div class="boxed">
         <div class="teams">
-        {{teams1.2}}
-        <p>{{teams1.3}}</p>
+            <img src="{% static 'team_img/colgate.svg'%}" alt="name" height="87" width="100" />
+        {{teamL.10}} {{teamL.11}}
+            <p><img src="{% static 'team_img/arkansas.svg'%}" alt="name" height="87" width="100" />
+                <b>{{teamW.10}} {{teamW.11}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        {{teams1.4}}
-        <p>{{teams1.5}}</p>
+        {{teamL.12}} {{teamL.13}}
+        <p><b>{{teamW.12}} {{teamW.13}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.6}}</p>
-        {{teams1.7}}
+       {{teamL.14}} {{teamL.15}}
+            <p><b>{{teamW.14}} {{teamW.15}}</b></p>
         </div>
     </div>
       <div class="bottom_boxed">
           <div class="teams">
-        <p>{{teams1.8}}</p>
-              {{teams1.9}}
+            {{teamL.16}} {{teamL.17}}
+              <p><b>{{teamW.16}} {{teamW.17}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.10}}</p>
-              {{teams1.11}}
+            {{teamL.18}} {{teamL.19}}
+            <p><b>{{teamW.18}} {{teamW.19}}</b></p>
           </div>
     </div>
         <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.12}}</p>
-              {{teams1.13}}
+            {{teamL.20}} {{teamL.21}}
+            <p><b>{{teamW.20}} {{teamW.21}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.14}}</p>
-              {{teams1.15}}
+            {{teamL.22}} {{teamL.23}}
+            <p><b>{{teamW.22}} {{teamW.23}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.16}}</p>
-              {{teams1.17}}
+            {{teamL.24}} {{teamL.25}}
+            <p><b>{{teamW.24}} {{teamW.25}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.18}}</p>
-              {{teams1.19}}
+            {{teamL.26}} {{teamL.27}}
+            <p><b>{{teamW.26}} {{teamW.27}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.20}}</p>
-              {{teams1.21}}
+            {{teamL.28}} {{teamL.29}}
+            <p><b>{{teamW.28}} {{teamW.29}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.22}}</p>
-              {{teams1.23}}
+            {{teamL.30}} {{teamL.31}}
+            <p><b>{{teamW.30}} {{teamW.31}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.24}}</p>
-              {{teams1.25}}
+            {{teamL.32}} {{teamL.33}}
+            <p><b>{{teamW.32}} {{teamW.33}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.26}}</p>
-              {{teams1.27}}
+            {{teamL.34}} {{teamL.35}}
+            <p><b>{{teamW.34}} {{teamW.35}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.28}}</p>
-              {{teams1.29}}
+        {{teamL.36}} {{teamL.37}}
+            <p><b>{{teamW.36}} {{teamW.37}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.30}}</p>
-              {{teams1.31}}
+            {{teamL.38}} {{teamL.39}}
+            <p><b>{{teamW.38}} {{teamW.39}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
        <div class="teams">
-        <p>{{teams1.32}}</p>
-              {{teams1.33}}
+            {{teamL.40}} {{teamL.41}}
+            <p><b>{{teamW.40}} {{teamW.41}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.34}}</p>
-              {{teams1.35}}
+            {{teamL.42}} {{teamL.43}}
+            <p><b>{{teamW.42}} {{teamW.43}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.36}}</p>
-              {{teams1.37}}
+            {{teamL.44}} {{teamL.45}}
+            <p><b>{{teamW.44}} {{teamW.45}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.38}}</p>
-              {{teams1.39}}
+        {{teamL.46}} {{teamL.47}}
+            <p><b>{{teamW.46}} {{teamW.47}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.40}}</p>
-              {{teams1.41}}
+        {{teamL.48}} {{teamL.49}}
+            <p><b>{{teamW.48}} {{teamW.49}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.42}}</p>
-              {{teams1.43}}
+        {{teamL.50}} {{teamL.51}}
+            <p><b>{{teamW.50}} {{teamW.51}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.44}}</p>
-              {{teams1.45}}
+        {{teamL.52}} {{teamL.53}}
+            <p><b>{{teamW.52}} {{teamW.53}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.46}}</p>
-              {{teams1.47}}
+        {{teamL.54}} {{teamL.55}}
+            <p><b>{{teamW.54}} {{teamW.55}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.48}}</p>
-              {{teams1.49}}
+        {{teamL.56}} {{teamL.57}}
+            <p><b>{{teamW.56}} {{teamW.57}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.50}}</p>
-              {{teams1.51}}
+       {{teamL.58}} {{teamL.59}}
+            <p><b>{{teamW.58}} {{teamW.59}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.52}}</p>
-              {{teams1.53}}
+        {{teamL.60}} {{teamL.61}}
+            <p><b>{{teamW.60}} {{teamW.61}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.54}}</p>
-              {{teams1.55}}
+       {{teamL.62}} {{teamL.63}}
+            <p><b>{{teamW.62}} {{teamW.63}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.56}}</p>
-              {{teams1.57}}
+        {{teamL.64}} {{teamL.65}}
+            <p><b>{{teamW.64}} {{teamW.65}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.58}}</p>
-              {{teams1.59}}
+        {{teamL.66}} {{teamL.67}}
+            <p><b>{{teamW.66}} {{teamW.67}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.60}}</p>
-              {{teams1.61}}
+       {{teamL.68}} {{teamL.69}}
+            <p><b>{{teamW.68}} {{teamW.69}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams1.62}}</p>
-              {{teams1.63}}
+        {{teamL.70}} {{teamL.71}}
+            <p><b>{{teamW.70}} {{teamW.71}}</b></p>
         </div>
     </div>
 
@@ -275,98 +292,98 @@ body, html {
 <div id="second" class="tabcontent">
   <div class="boxed">
         <div class="teams">
-            {{teams2.0}}
-        <p>{{teams2.1}}</p>
+        {{teamL.72}} {{teamL.73}}
+            <p><b>{{teamW.72}} {{teamW.73}}</b></p>
         </div>
     </div>
 <div class="boxed">
         <div class="teams">
-        {{teams2.2}}
-        <p>{{teams2.3}}</p>
+        {{teamL.74}} {{teamL.75}}
+            <p><b>{{teamW.74}} {{teamW.75}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        {{teams2.4}}
-        <p>{{teams2.5}}</p>
+        {{teamL.76}} {{teamL.77}}
+            <p><b>{{teamW.76}} {{teamW.77}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.6}}</p>
-        {{teams2.7}}
+        {{teamL.78}} {{teamL.79}}
+            <p><b>{{teamW.78}} {{teamW.79}}</b></p>
         </div>
     </div>
       <div class="bottom_boxed">
           <div class="teams">
-        <p>{{teams2.8}}</p>
-              {{teams2.9}}
+        {{teamL.80}} {{teamL.81}}
+            <p><b>{{teamW.80}} {{teamW.81}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.10}}</p>
-              {{teams2.11}}
+        {{teamL.82}} {{teamL.83}}
+            <p><b>{{teamW.82}} {{teamW.83}}</b></p>
           </div>
     </div>
         <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.12}}</p>
-              {{teams2.13}}
+        {{teamL.84}} {{teamL.85}}
+            <p><b>{{teamW.84}} {{teamW.85}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.14}}</p>
-              {{teams2.15}}
+        {{teamL.86}} {{teamL.87}}
+            <p><b>{{teamW.86}} {{teamW.87}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.16}}</p>
-              {{teams2.17}}
+      {{teamL.88}} {{teamL.89}}
+            <p><b>{{teamW.88}} {{teamW.89}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.18}}</p>
-              {{teams2.19}}
+       {{teamL.90}} {{teamL.91}}
+            <p><b>{{teamW.90}} {{teamW.91}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.20}}</p>
-              {{teams2.21}}
+        {{teamL.92}} {{teamL.93}}
+            <p><b>{{teamW.92}} {{teamW.93}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.22}}</p>
-              {{teams2.23}}
+        {{teamL.94}} {{teamL.95}}
+            <p><b>{{teamW.94}} {{teamW.95}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.24}}</p>
-              {{teams2.25}}
+       {{teamL.96}} {{teamL.97}}
+            <p><b>{{teamW.96}} {{teamW.97}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.26}}</p>
-              {{teams2.27}}
+        {{teamL.98}} {{teamL.99}}
+            <p><b>{{teamW.98}} {{teamW.99}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.28}}</p>
-              {{teams2.29}}
+        {{teamL.100}} {{teamL.101}}
+            <p><b>{{teamW.100}} {{teamW.101}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams2.30}}</p>
-              {{teams2.31}}
+        {{teamL.102}} {{teamL.103}}
+            <p><b>{{teamW.102}} {{teamW.103}}</b></p>
           </div>
     </div>
 </div>
@@ -374,50 +391,50 @@ body, html {
 <div id="sweet" class="tabcontent">
   <div class="boxed">
         <div class="teams">
-            {{teams16.0}}
-        <p>{{teams16.1}}</p>
+            {{teamL.104}} {{teamL.105}}
+            <p><b>{{teamW.104}} {{teamW.105}}</b></p>
         </div>
     </div>
 <div class="boxed">
         <div class="teams">
-        {{teams16.2}}
-        <p>{{teams16.3}}</p>
+        {{teamL.106}} {{teamL.107}}
+            <p><b>{{teamW.106}} {{teamW.107}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        {{teams16.4}}
-        <p>{{teams16.5}}</p>
+        {{teamL.108}} {{teamL.109}}
+            <p><b>{{teamW.108}} {{teamW.109}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams16.6}}</p>
-        {{teams16.7}}
+        {{teamL.110}} {{teamL.111}}
+            <p><b>{{teamW.110}} {{teamW.111}}</b></p>
         </div>
     </div>
       <div class="bottom_boxed">
           <div class="teams">
-        <p>{{teams16.8}}</p>
-              {{teams16.9}}
+        {{teamL.112}} {{teamL.113}}
+            <p><b>{{teamW.112}} {{teamW.113}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams16.10}}</p>
-              {{teams16.11}}
+        {{teamL.114}} {{teamL.115}}
+            <p><b>{{teamW.114}} {{teamW.115}}</b></p>
           </div>
     </div>
         <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams16.12}}</p>
-              {{teams16.13}}
+        {{teamL.116}} {{teamL.117}}
+            <p><b>{{teamW.116}} {{teamW.117}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams16.14}}</p>
-              {{teams16.15}}
+        {{teamL.118}} {{teamL.119}}
+            <p><b>{{teamW.118}} {{teamW.119}}</b></p>
           </div>
     </div>
 </div>
@@ -425,26 +442,26 @@ body, html {
 <div id="elite" class="tabcontent">
   <div class="boxed">
         <div class="teams">
-            {{teams8.0}}
-        <p>{{teams8.1}}</p>
+            {{teamL.120}} {{teamL.121}}
+            <p><b>{{teamW.120}} {{teamW.121}}</b></p>
         </div>
     </div>
 <div class="boxed">
         <div class="teams">
-        {{teams8.2}}
-        <p>{{teams8.3}}</p>
+        {{teamL.122}} {{teamL.123}}
+            <p><b>{{teamW.122}} {{teamW.123}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        {{teams8.4}}
-        <p>{{teams8.5}}</p>
+        {{teamL.124}} {{teamL.125}}
+            <p><b>{{teamW.124}} {{teamW.125}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-        <p>{{teams8.6}}</p>
-        {{teams8.7}}
+        {{teamL.126}} {{teamL.127}}
+            <p><b>{{teamW.126}} {{teamW.127}}</b></p>
         </div>
     </div>
 </div>
@@ -453,21 +470,21 @@ body, html {
   <h3>Final Four Results</h3>
     <div class="boxed">
         <div class="teams">
-            {{teams4.0}}
-        <p>{{teams4.1}}</p>
+            {{teamL.128}} {{teamL.129}}
+            <p><b>{{teamW.128}} {{teamW.129}}</b></p>
         </div>
     </div>
 <div class="boxed">
         <div class="teams">
-        {{teams4.2}}
-        <p>{{teams4.3}}</p>
+        {{teamL.130}} {{teamL.131}}
+            <p><b>{{teamW.130}} {{teamW.131}}</b></p>
         </div>
     </div>
     <h3>Championship results</h3>
     <div class="bottom_boxed">
         <div class="teams">
-        {{teamsc.0}}
-        <p>{{teamsc.1}}</p>
+        {{teamL.132}} {{teamL.133}}
+            <p><b>{{teamW.132}} {{teamW.133}}</b></p>
         </div>
     </div>
 </div>
