@@ -1,9 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
+import shutil
+import os.path
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPM
+
+
 
 from .models import (
     User
@@ -81,60 +87,77 @@ def news(request):
 def createBracket(request):
     return render(request, 'project/bracket.html')
 
-# method to scrape for team names
+# method to scrape for game info
 def scoreScrape():
     url = "https://www.ncaa.com/march-madness-live/scores"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
 
-    # scrape for first round teams
-    content = soup.find('div', {'id': 'round-2'})
-    teams1 = []
-    for i in content.findAll('img'):
-        teams1.append(i['alt'])
+    # scrape for team images
+    content = soup.findAll('img')
+    imgs = []
+    for i in content:
+        imgs.append(i.attrs['src'])
 
-    # scrape for second round teams
-    content = soup.find('div', {'id': 'round-3'})
-    teams2 = []
-    for i in content.findAll('img'):
-        teams2.append(i['alt'])
+    for img in imgs:
+        filename = img.split("/")[-1]
+        dest = "/Users/sophiahall/Documents/CSDS-395-Senior-Project/method/project/static/team_img"
+        # add img to directory if it doesn't already exist
+        # don't download website logo
+        if img == "/march-madness-live/public/assets/images/menu/mml-nav-logo.svg":
+            continue
+        if os.path.isfile(dest +'/' + filename) == False:
+            r = requests.get(img, stream = True)
+            if r.status_code == 200:
+                r.raw.decode_content = True
+                with open(filename, 'wb') as f:
+                    shutil.copyfileobj(r.raw, f)
+                    shutil.move(filename, dest)
+                print('Image sucessfully Downloaded: ', filename)
+            else:
+                print('Image Couldn\'t be retreived')
 
-    # scrape for sweet 16 teams
-    content = soup.find('div', {'id': 'round-4'})
-    teams16 = []
-    for i in content.findAll('img'):
-        teams16.append(i['alt'])
+    # scrape for losing teams and their scores
+    content = soup.findAll('div', {'class': "inactive-team"})
+    teamL = []
+    imgsL = []
+    for i in content:
+        header = i.find('header')
+        info = header.getText()
+        img_info = header.getText()
+        teamL.append(info)
+        imgname = info.replace(" ", "-")
+        img_name = ""
+        for char in imgname:
+            if char not in ".'":
+                img_name = img_name + char
+        imgsL.append("{% static 'team_img/" + img_name + ".svg"+"' %}")
+        # i need to replace the space with a dash and i need to remove all periods and then add .svg to the end
+    #print("Losing teams")
 
-    # scrape for elite 8 teams
-    content = soup.find('div', {'id': 'round-5'})
-    teams8 = []
-    for i in content.findAll('img'):
-        teams8.append(i['alt'])
 
-    # scrape for final 4 teams
-    content = soup.find('div', {'id': 'round-6'})
-    teams4 = []
-    for i in content.findAll('img'):
-        teams4.append(i['alt'])
 
-    # scrape for final 4 teams
-    content = soup.find('div', {'id': 'round-7'})
-    teamsc = []
-    for i in content.findAll('img'):
-        teamsc.append(i['alt'])
+    # scrape for winning teams and their scores
+    content = soup.findAll('div', {'class': "active-team"})
+    teamW = []
+    for i in content:
+        header = i.find('header')
+        teamW.append(header.getText())
+    #print("Winning teams")
+    #print(teamW)
 
-    return teams1, teams2, teams16, teams8, teams4, teamsc
+    return teamL, teamW, imgsL
 
 def scores(request):
-    [teams1, teams2, teams16, teams8, teams4, teamsc] = scoreScrape()
-    context = {'teams1': teams1, 'teams2': teams2, 'teams16': teams16, 'teams8': teams8, 'teams4': teams4, 'teamsc': teamsc}
+    [teamL, teamW, imgsL] = scoreScrape()
+    context = {'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
     return render(request, 'project/scores.html', context)
 
 
 def userScores(request, user_id):
-    [teams1, teams2, teams16, teams8, teams4, teamsc] = scoreScrape()
+    [teamL, teamW] = scoreScrape()
     user = get_object_or_404(User, pk=user_id)
-    context = {'user': user, 'user_id': user_id, 'teams1': teams1, 'teams2': teams2, 'teams16': teams16, 'teams8': teams8, 'teams4': teams4, 'teamsc': teamsc}
+    context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW}
     return render(request, 'project/userScores.html', context)
 
 def teams(request):
