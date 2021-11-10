@@ -235,3 +235,9 @@
     color: #2691d9;
     text-shadow: 2px 2px 4px black;
 }
+
+#instructions {
+    font-size: 30px;
+    font-weight: bold;
+    color: #165397;
+}
