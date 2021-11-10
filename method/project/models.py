@@ -15,4 +15,14 @@ class Team(models.Model):
     user_username = models.CharField(max_length=30)
     teamid = models.CharField(max_length=4)
 
+class Bracket(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE) #foreign key is the user_id
+    bracket_name = models.CharField(max_length=50)
+    stat1 = models.CharField(max_length=50)
+    stat2 = models.CharField(max_length=50)
+    stat3 = models.CharField(max_length=50)
+    stat4 = models.CharField(max_length=50)
+    stat5 = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.bracket_name
