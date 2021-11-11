@@ -145,7 +145,8 @@ def createBracket(request, user_id):
                 database = Bracket.objects.create(
                     bracket_name=save_form.cleaned_data['name'],
                     user=user,
-                    stat1=create_form.stat1,
+                    bracket=bracket,
+                    stat1=stat1,
                     stat2=stat2,
                     stat3=stat3,
                     stat4=stat4,
@@ -163,7 +164,8 @@ def createBracket(request, user_id):
 
 def myBracket(request,user_id):
     user = get_object_or_404(User, pk=user_id)
-    context = {'user': user, 'user_id': user_id}
+    brackets = Bracket.objects.filter(user__pk=user_id)
+    context = {'user': user, 'user_id': user_id, 'brackets': brackets}
     return render(request, 'project/bracket.html', context)
 
 # method to scrape for game info
