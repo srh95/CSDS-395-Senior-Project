@@ -22,4 +22,4 @@ class StatForm(forms.Form):
     stat5 = forms.CharField(label="stat5", max_length=50, required=True)
 
 class SaveForm(forms.Form):
-    name = forms.CharField(label='name', max_length=50, required=True)
+    name = forms.CharField(label='bracketname', max_length=50, required=True)
