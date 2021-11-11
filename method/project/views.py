@@ -103,40 +103,49 @@ def news(request):
 
 def createBracket(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    if request.method == 'POST':
-        if 'stat1' in request.POST:
+    # initialize the stats
+    stat1 = []
+    stat2 = []
+    stat3 = []
+    stat4 = []
+    stat5 = []
+    # initializing the bracket
+    bracket = []
 
-            create_form = StatForm(request.POST)
-            if create_form.is_valid():
-                print("Form is valid")
-                stat1 = create_form.cleaned_data['stat1']
-                stat2 = create_form.cleaned_data['stat2']
-                stat3 = create_form.cleaned_data['stat3']
-                stat4 = create_form.cleaned_data['stat4']
-                stat5 = create_form.cleaned_data['stat5']
+    # choosing the stats
+    if request.method == 'POST' and 'stat1' in request.POST:
+        create_form = StatForm(request.POST)
+        if create_form.is_valid():
+            print("Form is valid")
+            stat1 = create_form.cleaned_data['stat1']
+            stat2 = create_form.cleaned_data['stat2']
+            stat3 = create_form.cleaned_data['stat3']
+            stat4 = create_form.cleaned_data['stat4']
+            stat5 = create_form.cleaned_data['stat5']
 
-                ordered_stats = [stat1, stat2, stat3, stat4, stat5]
-                print(ordered_stats)
+            ordered_stats = [stat1, stat2, stat3, stat4, stat5]
+            print(stat5)
             # establish some check to make sure no stat was chosen more than once
             # call function that generates bracket, returns list of teams in order to fill in bracket
-                bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
-                context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket}
-
+            bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
+            context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket}
     else:
         create_form = StatForm()
-        bracket = []
         context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket}
 
-    if request.method == 'POST':
-        if 'name' in request.POST:
+    # naming and saving the bracket
+    if request.method == 'POST' and 'name' in request.POST:
             save_form = SaveForm(request.POST)
             print("saved the form")
             if save_form.is_valid():
                 print("Form is valid")
+                print(save_form.cleaned_data['name'])
+                print(stat5)
+                print(user_id)
                 database = Bracket.objects.create(
                     bracket_name=save_form.cleaned_data['name'],
                     user=user,
-                    stat1=stat1,
+                    stat1=create_form.stat1,
                     stat2=stat2,
                     stat3=stat3,
                     stat4=stat4,
