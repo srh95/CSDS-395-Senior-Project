@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
+    <link rel="stylesheet" href="{%static 'bracketStyle.css'%}">
+ </head>
+ <body>
+
+<div id="container">
+        <div id="logo">Method</div>
+        <div id="navbar">
+            <ul>
+                <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
+                <li><a href="/scores/{{user.id}}">Scores</a></li>
+                <li><a href="{% url 'teams'%}">Teams</a></li>
+                <li><a href="/myBracket/{{user.id}}">MyBracket</a></li>
+                <li><a href="{% url 'news'%}">News</a></li>
+                <li id="login"><a href="{% url 'home' %}">Logout</a></li>
+        </div>
+
+     </div>
+
+        <h1> Create a March Madness bracket </h1>
+
+
+<form method="post">
+    {% csrf_token %}
+
+
+    <label for="stat1">Most Important Stat:</label>
+<select name="stat1" id="stat1">
+    <option value="Stat 1">Stat 1</option>
+  <option value="Stat 2">Stat 2</option>
+  <option value="Stat 3">Stat 3</option>
+  <option value="Stat 4">Stat 4</option>
+    <option value="Stat 5">stat 5</option>
+</select>
+
+    <label for="stat2">Second Most Important Stat:</label>
+<select name="stat2" id="stat2">
+    <option value="Stat 1">Stat 1</option>
+  <option value="Stat 2">Stat 2</option>
+  <option value="Stat 3">Stat 3</option>
+  <option value="Stat 4">Stat 4</option>
+    <option value="Stat 5">stat 5</option>
+</select>
+
+
+
+<label for="stat3">Third Most Important Stat:</label>
+<select name="stat3" id="stat3">
+    <option value="Stat 1">Stat 1</option>
+  <option value="Stat 2">Stat 2</option>
+  <option value="Stat 3">Stat 3</option>
+  <option value="Stat 4">Stat 4</option>
+    <option value="Stat 5">stat 5</option>
+</select>
+
+<label for="stat4">Fourth Most Important Stat:</label>
+<select name="stat4" id="stat4">
+    <option value="Stat 1">Stat 1</option>
+  <option value="Stat 2">Stat 2</option>
+  <option value="Stat 3">Stat 3</option>
+  <option value="Stat 4">Stat 4</option>
+    <option value="Stat 5">stat 5</option>
+</select>
+
+<label for="stat5">Fifth Most Important Stat:</label>
+<select name="stat5" id="stat5">
+    <option value="Stat 1">Stat 1</option>
+  <option value="Stat 2">Stat 2</option>
+  <option value="Stat 3">Stat 3</option>
+  <option value="Stat 4">Stat 4</option>
+    <option value="Stat 5">stat 5</option>
+</select>
+
+
+
+
+
+    <input type="Submit" value="Generate bracket">
+
+
+</form>
+
+
+<p> Here is your generated bracket: </p>
+
+<section id="bracket">
+ <div class="container">
+ <div class="split split-one">
+ <div class="round round-one current">
+ <div class="round-details">Round 1<br/><span class="date"></span></div>
+ <ul class="matchup">
+ <li class="team team-top">{{bracket.0}} <span class="score"> </span></li>
+ <li class="team team-bottom"> {{bracket.1}}<span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">{{bracket.2}} <span class="score"> </span></li>
+ <li class="team team-bottom">{{bracket.3}} <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+     <ul class="matchup">
+ <li class="team team-top">{{bracket.0}} <span class="score"> </span></li>
+ <li class="team team-bottom"> {{bracket.1}}<span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">{{bracket.2}} <span class="score"> </span></li>
+ <li class="team team-bottom">{{bracket.3}} <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ </div> <!-- END ROUND ONE -->
+
+ <div class="round round-two">
+ <div class="round-details">Round 2<br/><span class="date"> </span></div>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+     <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ </div> <!-- END ROUND TWO -->
+
+ <div class="round round-three">
+ <div class="round-details">Round 3<br/><span class="date">March 22</span></div>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+     <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ </div> <!-- END ROUND THREE -->
+ </div>
+
+  <div class="round round-four">
+ <div class="round-details">Round 4<br/><span class="date">March 22</span></div>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+
+ <div class="champion">
+ <div class="semis-l">
+ <div class="round-details">west semifinals <br/><span class="date">March 26-28</span></div>
+ <ul class ="matchup championship">
+ <li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ </ul>
+ </div>
+ <div class="final">
+ <i class="fa fa-trophy"></i>
+ <div class="round-details">championship <br/><span class="date">March 30 - Apr. 1</span></div>
+ <ul class ="matchup championship">
+ <li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ </ul>
+ </div>
+ <div class="semis-r">
+ <div class="round-details">east semifinals <br/><span class="date">March 26-28</span></div>
+ <ul class ="matchup championship">
+ <li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
+ </ul>
+ </div>
+ </div>
+
+
+ <div class="split split-two">
+
+
+ <div class="round round-three">
+ <div class="round-details">Round 3<br/><span class="date">March 22</span></div>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ </div> <!-- END ROUND THREE -->
+
+ <div class="round round-two">
+ <div class="round-details">Round 2<br/><span class="date">March 18</span></div>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ </div> <!-- END ROUND TWO -->
+ <div class="round round-one current">
+ <div class="round-details">Round 1<br/><span class="date"> </span></div>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+     <ul class="matchup">
+ <li class="team team-top">{{bracket.0}} <span class="score"> </span></li>
+ <li class="team team-bottom"> {{bracket.1}}<span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">{{bracket.2}} <span class="score"> </span></li>
+ <li class="team team-bottom">{{bracket.3}} <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ </div> <!-- END ROUND ONE -->
+ </div>
+ </div>
+ </section>
+
+<save_form method="POST">
+    {% csrf_token %}
+ {{forms.save_form}}
+    <div class="txt_field">
+        <input id="name" type="text" name="name" required>
+        <label>Bracket Name</label>
+    </div>
+
+    <input type="Submit" name="savebracket" value="Save Bracket">
+</save_form>
+
+
+
+
+
+ </body>
+</html>
