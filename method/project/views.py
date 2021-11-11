@@ -11,22 +11,25 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import (
     User, Team
 )
-from .forms import(
+from .forms import (
     RegisterForm,
     LoginForm
 )
 
+
 def index(request):
     return HttpResponse("Hello world. You're at the website index.")
 
-def home(request):
-    return render(request,'project/home.html')
 
-def createteam(request):
+def home(request):
+    return render(request, 'project/home.html')
+
+
+def buildteam(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            x = random.randomint(1000,2000)
+            x = random.randomint(1000, 2000)
             print(x)
         database = Team.objects.create(
             user_name=form.cleaned_data['name'],
@@ -37,14 +40,12 @@ def createteam(request):
     else:
         print("Team cannot be created")
 
-
-
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             try:
-                if(User.objects.get(user_username=form.cleaned_data['username'])):
+                if (User.objects.get(user_username=form.cleaned_data['username'])):
                     messages.error(request, 'username already exists')
                     return HttpResponseRedirect('/accounts/register')
             except ObjectDoesNotExist:
@@ -65,6 +66,7 @@ def register(request):
 
     return render(request, 'project/register.html', {'form': form})
 
+
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -72,36 +74,40 @@ def login(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             try:
-                if(User.objects.get(user_username=username) is None):
+                if (User.objects.get(user_username=username) is None):
                     messages.error(request, 'Incorrect username')
                     return HttpResponseRedirect('/accounts/login/')
-                if(User.objects.get(user_username=username)):
+                if (User.objects.get(user_username=username)):
                     name = User.objects.get(user_username=username)
-                    if(name.user_password != password):
+                    if (name.user_password != password):
                         messages.error(request, 'Incorrect password')
                         return HttpResponseRedirect('/accounts/login/')
                     url = 'home/' + str(name.id)
                     return HttpResponseRedirect(url)
             except ObjectDoesNotExist:
-                    messages.error(request, 'Username does not exist')
-                    return HttpResponseRedirect('/accounts/login/')
+                messages.error(request, 'Username does not exist')
+                return HttpResponseRedirect('/accounts/login/')
     else:
         form = LoginForm()
 
     return render(request, 'project/login.html', {'form': form})
+
 
 def user_home(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/userHome.html', context)
 
-def news(request):
-    return render(request,'project/News.html')
 
-def createBracket(request,user_id):
+def news(request):
+    return render(request, 'project/News.html')
+
+
+def createBracket(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
-    return render(request, 'project/bracket.html',context)
+    return render(request, 'project/bracket.html', context)
+
 
 # method to scrape for game info
 def scoreScrape():
@@ -122,8 +128,8 @@ def scoreScrape():
         # don't download website logo
         if img == "/march-madness-live/public/assets/images/menu/mml-nav-logo.svg":
             continue
-        if os.path.isfile(dest +'/' + filename) == False:
-            r = requests.get(img, stream = True)
+        if os.path.isfile(dest + '/' + filename) == False:
+            r = requests.get(img, stream=True)
             if r.status_code == 200:
                 r.raw.decode_content = True
                 with open(filename, 'wb') as f:
@@ -147,11 +153,9 @@ def scoreScrape():
         for char in imgname:
             if char not in ".'":
                 img_name = img_name + char
-        imgsL.append("{% static 'team_img/" + img_name + ".svg"+"' %}")
+        imgsL.append("{% static 'team_img/" + img_name + ".svg" + "' %}")
         # i need to replace the space with a dash and i need to remove all periods and then add .svg to the end
-    #print("Losing teams")
-
-
+    # print("Losing teams")
 
     # scrape for winning teams and their scores
     content = soup.findAll('div', {'class': "active-team"})
@@ -159,10 +163,11 @@ def scoreScrape():
     for i in content:
         header = i.find('header')
         teamW.append(header.getText())
-    #print("Winning teams")
-    #print(teamW)
+    # print("Winning teams")
+    # print(teamW)
 
     return teamL, teamW, imgsL
+
 
 def scores(request):
     [teamL, teamW, imgsL] = scoreScrape()
@@ -176,6 +181,10 @@ def userScores(request, user_id):
     context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
     return render(request, 'project/userScores.html', context)
 
+
 def teams(request):
     return render(request, 'project/teams.html')
 
+
+def createteam(request):
+    return render(request, 'project/createTeam.html')

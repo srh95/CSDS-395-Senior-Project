@@ -2,9 +2,9 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>Login Page</title>
-        <link rel="stylesheet" href='style1.css'>
-
+        <title>Create Team Page</title>
+        {% load static %}
+        <link rel= "stylesheet" href="{%static 'style1.css' %}">
     </head>
     <body>
         <div class="center">
@@ -23,12 +23,14 @@
                         <option value="five">5</option>
                       </select>
                 </div>
-                <input type="submit" value="Create Group">
+                <input type="submit" value="Create Team">
 
                         <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}"></div>
 
                 <div class="signup_link">
-                    <a href="teams.html">Already have a group? Click Here</a>
+                    <div id="button">
+                        <a href="{% url 'teams'%}">Already Have a Team? Click Here</a>
+                    </div>
                 </div>
             </form>
         </div>

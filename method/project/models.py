@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import Group
 
 
 class User(models.Model):
@@ -9,10 +11,7 @@ class User(models.Model):
     def __str__(self):
         return self.user_name
 
-
 class Team(models.Model):
     teamname = models.CharField(max_length=200)
     user_username = models.CharField(max_length=30)
     teamid = models.CharField(max_length=4)
-
-

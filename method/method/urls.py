@@ -18,19 +18,20 @@ from django.views.generic.base import RedirectView
 from django.urls import path
 from project import views
 from django.contrib import admin
+
 app_name = 'project'
 
 urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
     path('admin/', admin.site.urls),
-    path('',views.home, name='home'),
+    path('', views.home, name='home'),
     path('accounts/login/', views.login, name='login'),
-    path('accounts/register/',views.register, name='register'),
+    path('accounts/register/', views.register, name='register'),
     path('accounts/login/home/<int:user_id>', views.user_home, name='userhome'),
     path('news/', views.news, name='news'),
     path('createBracket/<int:user_id>', views.createBracket, name='create'),
     path('scores/', views.scores, name='scores'),
     path('scores/<int:user_id>', views.userScores, name='userscores'),
     path('teams/', views.teams, name='teams'),
-
+    path('createteam/', views.createteam, name='createteam')
 ]
