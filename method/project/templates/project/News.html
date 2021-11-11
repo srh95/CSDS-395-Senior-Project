@@ -7,7 +7,7 @@
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <title>Method</title>
     {% load static %}
-        <link rel="stylesheet" href="{%static 'style.css'%}">
+        <link rel="stylesheet" href="{%static 'newsStyle.css'%}">
 </head>
 <body>
     <div id="container">
@@ -18,10 +18,19 @@
                 <li><a href="{% url 'scores' %}">Scores</a></li>
                 <li><a href="{% url 'news' %}">News</a></li>
                 <li id="login"><a href="login.html">Login</a></li>
+            </ul>
+        </div>
     </div>
-    <div id= "newsfeed">
-        <embed src="https://www.espn.com/espn/rss/nba/news" alt="newsfeed">
-        
+<div>
+</div>
+    <div id= "twitterfeed">
+        <a class="twitter-timeline" data-width="1400" data-height="500" href="https://twitter.com/marchmadness?ref_src=twsrc%5Etfw">Tweets by marchmadness</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <div>
+        <a class="twitter-timeline" data-width="1400" data-height="500" href="https://twitter.com/NCAAWBB?ref_src=twsrc%5Etfw">Tweets by NCAAWBB</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <div>
+    <a class="twitter-timeline" ata-width="1400" data-height="500" href="https://twitter.com/NCAA?ref_src=twsrc%5Etfw">Tweets by NCAA</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
 </body>
 

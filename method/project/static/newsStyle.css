@@ -7,7 +7,7 @@
 }
 #container
 {
-    height: 100vh;
+    height: 15vh;
     width: 100%;
     position: relative;
     top: 0;
@@ -235,3 +235,22 @@
     color: #2691d9;
     text-shadow: 2px 2px 4px black;
 }
+
+.boxed {
+  width: 500px;
+  height: 250px;
+  border: 2px solid white;
+  display: inline-block;
+  margin-left: 125px;
+  margin-top: 10px;
+}
+
+.bottom_boxed {
+  width: 500px;
+  height: 250px;
+  border: 2px solid white;
+  display: inline-block;
+  margin-left: 125px;
+  margin-top: 50px;
+}
+

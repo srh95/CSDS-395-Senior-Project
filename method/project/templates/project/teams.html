@@ -7,7 +7,7 @@
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <title>Method</title>
     {% load static %}
-    <link rel= "stylesheet" href="{%static 'style.css' %}">
+    <link rel= "stylesheet" href="{%static 'teamsStyle.css' %}">
 </head>
 <body>
     <div id="container">
@@ -18,12 +18,11 @@
                 <li><a href="{% url 'scores'%}">Scores</a></li>
                 <li><a href="{% url 'teams'%}">Teams</a></li>
                 <li><a href="{% url 'news'%}">News</a></li>
-                <li id="login"><a href="login.html">Login</a></li>
-
+                <li id="login"><a href="{% url 'login'%}">Login</a></li>
+            </ul>
         </div>
     </div>
-    <div id="button"><a href="createGroup.html">Create Team</a></div>
-    <div id="button"><a href="createGroup.html">Leave Team</a></div>
+    <div id="button"><a href="{% url 'createteam'%}">Create Team</a></div>
     <h2>Join Team</h2>
     <div><form>
         <label for="invite">Enter Invite Code:</label><br>
