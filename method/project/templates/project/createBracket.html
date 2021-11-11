@@ -86,7 +86,7 @@
 
 
 </form>
-{% if bracket %}
+
 
 <p> Here is your generated bracket: </p>
 
@@ -96,6 +96,38 @@
  <div class="round round-one current">
  <div class="round-details">Round 1<br/><span class="date"></span></div>
  <ul class="matchup">
+ <li class="team team-top">{{bracket.0}} <span class="score"> </span></li>
+ <li class="team team-bottom"> {{bracket.1}}<span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">{{bracket.2}} <span class="score"> </span></li>
+ <li class="team team-bottom">{{bracket.3}} <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+     <ul class="matchup">
  <li class="team team-top">{{bracket.0}} <span class="score"> </span></li>
  <li class="team team-bottom"> {{bracket.1}}<span class="score"> </span></li>
  </ul>
@@ -147,6 +179,22 @@
  <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
  <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
  </ul>
+     <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
  </div> <!-- END ROUND TWO -->
 
  <div class="round round-three">
@@ -159,8 +207,27 @@
  <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
  <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
  </ul>
+     <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
  </div> <!-- END ROUND THREE -->
  </div>
+
+  <div class="round round-four">
+ <div class="round-details">Round 4<br/><span class="date">March 22</span></div>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
+ <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+ </ul>
 
  <div class="champion">
  <div class="semis-l">
@@ -256,24 +323,56 @@
  <li class="team team-top"> <span class="score"> </span></li>
  <li class="team team-bottom"> <span class="score"> </span></li>
  </ul>
+     <ul class="matchup">
+ <li class="team team-top">{{bracket.0}} <span class="score"> </span></li>
+ <li class="team team-bottom"> {{bracket.1}}<span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top">{{bracket.2}} <span class="score"> </span></li>
+ <li class="team team-bottom">{{bracket.3}} <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
+ <ul class="matchup">
+ <li class="team team-top"> <span class="score"> </span></li>
+ <li class="team team-bottom"> <span class="score"> </span></li>
+ </ul>
  </div> <!-- END ROUND ONE -->
  </div>
  </div>
  </section>
 
-<save_form method="post">
+<save_form method="POST">
     {% csrf_token %}
-
+ {{forms.save_form}}
     <div class="txt_field">
-        <input id="name" type="text" name = "name" required>
+        <input id="name" type="text" name="name" required>
         <label>Bracket Name</label>
     </div>
 
-    <input type="Submit" value="Save Bracket">
+    <input type="Submit" name="savebracket" value="Save Bracket">
 </save_form>
 
 
-{% endif %}
+
 
 
  </body>
