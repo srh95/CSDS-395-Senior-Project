@@ -3,33 +3,33 @@ import random
 from bs4 import BeautifulSoup
 import shutil
 import os.path
+import os
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import (
-    User, Team
+    User, Team, Bracket
 )
-from .forms import (
+from .forms import(
     RegisterForm,
-    LoginForm
+    LoginForm,
+    StatForm,
+    SaveForm,
 )
-
 
 def index(request):
     return HttpResponse("Hello world. You're at the website index.")
 
-
 def home(request):
-    return render(request, 'project/home.html')
+    return render(request,'project/home.html')
 
-
-def buildteam(request):
+def createteam(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            x = random.randomint(1000, 2000)
+            x = random.randomint(1000,2000)
             print(x)
         database = Team.objects.create(
             user_name=form.cleaned_data['name'],
@@ -40,12 +40,14 @@ def buildteam(request):
     else:
         print("Team cannot be created")
 
+
+
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             try:
-                if (User.objects.get(user_username=form.cleaned_data['username'])):
+                if(User.objects.get(user_username=form.cleaned_data['username'])):
                     messages.error(request, 'username already exists')
                     return HttpResponseRedirect('/accounts/register')
             except ObjectDoesNotExist:
@@ -66,7 +68,6 @@ def register(request):
 
     return render(request, 'project/register.html', {'form': form})
 
-
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -74,40 +75,96 @@ def login(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             try:
-                if (User.objects.get(user_username=username) is None):
+                if(User.objects.get(user_username=username) is None):
                     messages.error(request, 'Incorrect username')
                     return HttpResponseRedirect('/accounts/login/')
-                if (User.objects.get(user_username=username)):
+                if(User.objects.get(user_username=username)):
                     name = User.objects.get(user_username=username)
-                    if (name.user_password != password):
+                    if(name.user_password != password):
                         messages.error(request, 'Incorrect password')
                         return HttpResponseRedirect('/accounts/login/')
                     url = 'home/' + str(name.id)
                     return HttpResponseRedirect(url)
             except ObjectDoesNotExist:
-                messages.error(request, 'Username does not exist')
-                return HttpResponseRedirect('/accounts/login/')
+                    messages.error(request, 'Username does not exist')
+                    return HttpResponseRedirect('/accounts/login/')
     else:
         form = LoginForm()
 
     return render(request, 'project/login.html', {'form': form})
-
 
 def user_home(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/userHome.html', context)
 
-
 def news(request):
-    return render(request, 'project/News.html')
-
+    return render(request,'project/News.html')
 
 def createBracket(request, user_id):
     user = get_object_or_404(User, pk=user_id)
+    # initialize the stats
+    stat1 = []
+    stat2 = []
+    stat3 = []
+    stat4 = []
+    stat5 = []
+    # initializing the bracket
+    bracket = []
+
+    # choosing the stats
+    if request.method == 'POST' and 'stat1' in request.POST:
+        create_form = StatForm(request.POST)
+        if create_form.is_valid():
+            print("Form is valid")
+            stat1 = create_form.cleaned_data['stat1']
+            stat2 = create_form.cleaned_data['stat2']
+            stat3 = create_form.cleaned_data['stat3']
+            stat4 = create_form.cleaned_data['stat4']
+            stat5 = create_form.cleaned_data['stat5']
+
+            ordered_stats = [stat1, stat2, stat3, stat4, stat5]
+            print(stat5)
+            # establish some check to make sure no stat was chosen more than once
+            # call function that generates bracket, returns list of teams in order to fill in bracket
+            bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
+            context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket}
+    else:
+        create_form = StatForm()
+        context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket}
+
+    # naming and saving the bracket
+    if request.method == 'POST' and 'name' in request.POST:
+            save_form = SaveForm(request.POST)
+            print("saved the form")
+            if save_form.is_valid():
+                print("Form is valid")
+                print(save_form.cleaned_data['name'])
+                print(stat5)
+                print(user_id)
+                database = Bracket.objects.create(
+                    bracket_name=save_form.cleaned_data['name'],
+                    user=user,
+                    stat1=create_form.stat1,
+                    stat2=stat2,
+                    stat3=stat3,
+                    stat4=stat4,
+                    stat5=stat5,
+                )
+                database.save()
+                context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket, 'save_form': save_form}
+
+    else:
+        save_form = SaveForm()
+        context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket, 'save_form': save_form}
+
+
+    return render(request, 'project/createBracket.html', context)
+
+def myBracket(request,user_id):
+    user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/bracket.html', context)
-
 
 # method to scrape for game info
 def scoreScrape():
@@ -123,13 +180,16 @@ def scoreScrape():
 
     for img in imgs:
         filename = img.split("/")[-1]
-        dest = "/Users/sophiahall/Documents/CSDS-395-Senior-Project/method/project/static/team_img"
-        # add img to directory if it doesn't already exist
+        current_path = os.path.abspath(__file__)
+        size = len(current_path)
+        dest = current_path[:size - 8]
+        dest = dest + 'static/team_img'
         # don't download website logo
         if img == "/march-madness-live/public/assets/images/menu/mml-nav-logo.svg":
             continue
-        if os.path.isfile(dest + '/' + filename) == False:
-            r = requests.get(img, stream=True)
+        # add img to directory if it doesn't already exist
+        if os.path.isfile(dest +'/' + filename) == False:
+            r = requests.get(img, stream = True)
             if r.status_code == 200:
                 r.raw.decode_content = True
                 with open(filename, 'wb') as f:
@@ -153,9 +213,7 @@ def scoreScrape():
         for char in imgname:
             if char not in ".'":
                 img_name = img_name + char
-        imgsL.append("{% static 'team_img/" + img_name + ".svg" + "' %}")
-        # i need to replace the space with a dash and i need to remove all periods and then add .svg to the end
-    # print("Losing teams")
+        imgsL.append("{% static 'team_img/" + img_name + ".svg"+"' %}")
 
     # scrape for winning teams and their scores
     content = soup.findAll('div', {'class': "active-team"})
@@ -163,11 +221,8 @@ def scoreScrape():
     for i in content:
         header = i.find('header')
         teamW.append(header.getText())
-    # print("Winning teams")
-    # print(teamW)
 
     return teamL, teamW, imgsL
-
 
 def scores(request):
     [teamL, teamW, imgsL] = scoreScrape()
@@ -181,10 +236,6 @@ def userScores(request, user_id):
     context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
     return render(request, 'project/userScores.html', context)
 
-
 def teams(request):
     return render(request, 'project/teams.html')
 
-
-def createteam(request):
-    return render(request, 'project/createTeam.html')

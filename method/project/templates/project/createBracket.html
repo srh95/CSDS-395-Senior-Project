@@ -49,8 +49,6 @@
     <option value="Stat 5">stat 5</option>
 </select>
 
-
-
 <label for="stat3">Third Most Important Stat:</label>
 <select name="stat3" id="stat3">
     <option value="Stat 1">Stat 1</option>
@@ -78,11 +76,7 @@
     <option value="Stat 5">stat 5</option>
 </select>
 
-
-
-
-
-    <input type="Submit" value="Generate bracket">
+ <input type="Submit" value="Generate bracket">
 
 
 </form>
@@ -218,16 +212,7 @@
  </div> <!-- END ROUND THREE -->
  </div>
 
-  <div class="round round-four">
- <div class="round-details">Round 4<br/><span class="date">March 22</span></div>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
+
 
  <div class="champion">
  <div class="semis-l">
@@ -360,16 +345,15 @@
  </div>
  </section>
 
-<save_form method="POST">
+<form method="post">
     {% csrf_token %}
- {{forms.save_form}}
     <div class="txt_field">
         <input id="name" type="text" name="name" required>
         <label>Bracket Name</label>
     </div>
 
-    <input type="Submit" name="savebracket" value="Save Bracket">
-</save_form>
+    <input type="Submit" value="Save Bracket">
+</form>
 
 
 
