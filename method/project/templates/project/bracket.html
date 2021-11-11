@@ -5,7 +5,7 @@
  <link rel="stylesheet" href="text.css">
  <title>March Madness 2021 Tournament</title>
     {% load static %}
-    <link rel= "stylesheet" href="{%static 'bracketStyle.css' %}">
+
     <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
  </head>
  <body>
@@ -22,6 +22,16 @@
                 <li id="login"><a href="{% url 'home' %}">Logout</a></li>
         </div>
  </div>
+
+<h1>Here are your brackets: </h1>
+{% for bracket in brackets %}
+
+
+<p> {{bracket.bracket_name}} </p>
+
+{% endfor %}
+
+{% comment %}
 
  <header class="hero">
  <div class="hero-wrap">
@@ -210,3 +220,5 @@
  <a class="share-icon" href="#"><i class="fa fa-envelope"></i></a>
  </div>
  </section>
+
+ {% endcomment %}
