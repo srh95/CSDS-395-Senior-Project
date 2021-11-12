@@ -2,32 +2,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        .relative {
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            line-height: 150px;
+            background-color: #fff;
+            margin: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            width: 160px;
+            height: 80px;
+            padding: 10px;
+            text-align: center;
+            border: black;
+            background-color: #f44336;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #D4D419;} /* Yellow */
+.button4 {background-color: #00FF00;} /* Green */
+.divider{
+    width:70px;
+    height:auto;
+    display:inline-block;
+}
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <title>Method</title>
     {% load static %}
-    <link rel= "stylesheet" href="{%static 'style.css' %}">
+    <link rel= "stylesheet" href="{%static 'teamsStyle.css' %}">
 </head>
 <body>
     <div id="container">
         <div id="logo">Method</div>
         <div id="navbar">
             <ul>
-                <li><a href="{% url 'home'%}">Home</a></li>
-                <li><a href="{% url 'scores'%}">Scores</a></li>
-                <li><a href="{% url 'teams'%}">Teams</a></li>
-                <li><a href="{% url 'news'%}">News</a></li>
-                <li id="login"><a href="login.html">Login</a></li>
-
+                <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
+                <li><a href="/scores/{{user.id}}">Scores</a></li>
+                <li><a href="/myBracket/{{user.id}}">My Brackets</a></li>
+                <li><a href="/teams/{{user.id}}">Teams</a></li>
+                <li><a href="/news/{{user.id}}">News</a></li>
+                <li id="login"><a href="{% url 'home' %}">Logout</a></li>
+            </ul>
         </div>
     </div>
-    <div id="button"><a href="createGroup.html">Create Team</a></div>
-    <div id="button"><a href="createGroup.html">Leave Team</a></div>
-    <h2>Join Team</h2>
-    <div><form>
-        <label for="invite">Enter Invite Code:</label><br>
-        <input type="text" id="invite" name="invite"><br>
-      </form></div>
+    <div class="relative">
+        <h1>Select A Team</h1>
+            <button class="button"><span>Red Team</span></button>
+            <div class="divider"/></div>
+            <button class="button button2"><span>Blue Team</span></button>
+            <div class="divider"/></div>
+            <button class="button button3"><span>Yellow Team</span></button>
+            <div class="divider"/></div>
+            <button class="button button4"><span>Green Team</span></button>
+    </div>
 </body>
 </html>
