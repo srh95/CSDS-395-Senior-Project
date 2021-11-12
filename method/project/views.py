@@ -118,25 +118,25 @@ def createBracket(request, user_id):
     bracket = []
 
     # choosing the stats
-    if request.method == 'POST' and 'stat1' in request.POST:
-        create_form = StatForm(request.POST)
-        if create_form.is_valid():
-            print("Form is valid")
-            stat1 = create_form.cleaned_data['stat1']
-            stat2 = create_form.cleaned_data['stat2']
-            stat3 = create_form.cleaned_data['stat3']
-            stat4 = create_form.cleaned_data['stat4']
-            stat5 = create_form.cleaned_data['stat5']
+    # if request.method == 'POST' and 'stat1' in request.POST:
+    #     create_form = StatForm(request.POST)
+        # if create_form.is_valid():
+        #     print("Form is valid")
+    if request.method == 'GET' and 'stat1' in request.GET:
+        stat1 = request.GET.get('stat1')
+        stat2 = request.GET.get('stat2')
+        stat3 = request.GET.get('stat3')
+        stat4 = request.GET.get('stat4')
+        stat5 = request.GET.get('stat5')
 
-            ordered_stats = [stat1, stat2, stat3, stat4, stat5]
-            print(stat5)
+        ordered_stats = [stat1, stat2, stat3, stat4, stat5]
+        print(ordered_stats)
             # establish some check to make sure no stat was chosen more than once
             # call function that generates bracket, returns list of teams in order to fill in bracket
-            bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
-            context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket}
+        bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
+        context = {'user': user, 'user_id': user_id, 'bracket': bracket}
     else:
-        create_form = StatForm()
-        context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket}
+        context = {'user': user, 'user_id': user_id, 'bracket': bracket}
 
     # naming and saving the bracket
     if request.method == 'POST' and 'name' in request.POST:
@@ -158,14 +158,15 @@ def createBracket(request, user_id):
                     stat5=stat5,
                 )
                 database.save()
-                context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket, 'save_form': save_form}
+                context = {'user': user, 'user_id': user_id, 'bracket': bracket,
+                           'save_form': save_form}
 
     else:
         save_form = SaveForm()
-        context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket, 'save_form': save_form}
-
+        context = {'user': user, 'user_id': user_id, 'bracket': bracket, 'save_form': save_form}
 
     return render(request, 'project/createBracket.html', context)
+
 
 def myBracket(request,user_id):
     user = get_object_or_404(User, pk=user_id)

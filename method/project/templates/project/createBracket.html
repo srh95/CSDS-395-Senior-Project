@@ -27,7 +27,7 @@
         <h1> Create a March Madness bracket </h1>
 
 
-<form method="post">
+<form method="GET">
     {% csrf_token %}
 
 
@@ -76,7 +76,8 @@
     <option value="Stat 5">stat 5</option>
 </select>
 
- <input type="Submit" value="Generate bracket">
+<!-- <input type="Submit" value="Generate bracket">-->
+ <button onclick="createBracket(request)" >Submit</button>
 
 
 </form>
