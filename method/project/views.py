@@ -101,6 +101,11 @@ def user_home(request, user_id):
 def news(request):
     return render(request,'project/News.html')
 
+def userNews(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    context = {'user': user, 'user_id': user_id}
+    return render(request, 'project/userNews.html', context)
+
 def createBracket(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     # initialize the stats
@@ -238,6 +243,8 @@ def userScores(request, user_id):
     context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
     return render(request, 'project/userScores.html', context)
 
-def teams(request):
-    return render(request, 'project/teams.html')
+def teams(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    context = {'user': user, 'user_id': user_id}
+    return render(request, 'project/teams.html', context)
 
