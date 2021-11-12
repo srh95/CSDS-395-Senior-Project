@@ -29,10 +29,11 @@ urlpatterns = [
     path('accounts/register/', views.register, name='register'),
     path('accounts/login/home/<int:user_id>', views.user_home, name='userhome'),
     path('news/', views.news, name='news'),
+    path('news/<int:user_id>', views.userNews, name='usernews'),
     path('myBracket/<int:user_id>', views.myBracket, name='bracket'),
     path('createBracket/<int:user_id>', views.createBracket, name='createBracket'),
     path('scores/', views.scores, name='scores'),
     path('scores/<int:user_id>', views.userScores, name='userscores'),
-    path('teams/', views.teams, name='teams'),
+    path('teams/<int:user_id>', views.teams, name='teams'),
     path('createteam/', views.createteam, name='createteam')
 ]
