@@ -108,14 +108,6 @@ def userNews(request, user_id):
 
 def createBracket(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    # initialize the stats
-    stat1 = []
-    stat2 = []
-    stat3 = []
-    stat4 = []
-    stat5 = []
-    # initializing the bracket
-    bracket = []
 
     # choosing the stats
     if request.method == 'GET' and 'stat1' in request.GET:
@@ -126,14 +118,20 @@ def createBracket(request, user_id):
         stat5 = request.GET.get('stat5')
 
         ordered_stats = [stat1, stat2, stat3, stat4, stat5]
-        request.session['ordered_stats'] = ordered_stats
-        # establish some check to make sure no stat was chosen more than once
-        # call function that generates bracket, returns list of teams in order to fill in bracket
-        bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
-        request.session['bracket'] = bracket
-        context = {'user': user, 'user_id': user_id, 'bracket': bracket}
+        print(ordered_stats)
+        if len(set(ordered_stats)) != len(ordered_stats):
+            messages.error(request, 'Please select a different statistic for each category')
+        elif ordered_stats == []:
+            messages.error(request, 'Please select a statistic for each category')
+        else:
+            request.session['ordered_stats'] = ordered_stats
+            # establish some check to make sure no stat was chosen more than once
+            # call function that generates bracket, returns list of teams in order to fill in bracket
+            bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
+            request.session['bracket'] = bracket
+            context = {'user': user, 'user_id': user_id, 'bracket': bracket}
     else:
-        context = {'user': user, 'user_id': user_id, 'bracket': bracket}
+        context = {'user': user, 'user_id': user_id}
 
     # naming and saving the bracket
     if request.method == 'POST' and 'name' in request.POST:
@@ -161,7 +159,7 @@ def createBracket(request, user_id):
 
     else:
         save_form = SaveForm()
-        context = {'user': user, 'user_id': user_id, 'bracket': bracket, 'save_form': save_form}
+        context = {'user': user, 'user_id': user_id, 'save_form': save_form}
 
     return render(request, 'project/createBracket.html', context)
 
