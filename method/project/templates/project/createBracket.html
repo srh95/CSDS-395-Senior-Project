@@ -143,7 +143,7 @@
  <li class='game-left spacer'>&nbsp;</li>
  <li class='game-left game-bottom'>
  <span></span>
- <span> </span>
+ <span> Team</span>
  </li>
  </ul>
  <ul class='round first-four-winner'>
@@ -701,12 +701,21 @@
  </div>
  </section>
 
-
+<div class="text-box">
+<p>Enter a name and click the save button to save your bracket.</p>
+</div>
+<p>  </p>
 <form method="post">
     {% csrf_token %}
+<!-- <input type="hidden" name="stat1" value="{{ ordered_stats.0 }}">-->
+<!-- <input type="hidden" name="stat2" value="{{ ordered_stats.1 }}">-->
+<!-- <input type="hidden" name="stat3" value="{{ ordered_stats.2 }}">-->
+<!-- <input type="hidden" name="stat4" value="{{ ordered_stats.3 }}">-->
+<!--  <input type="hidden" name="stat5" value="{{ ordered_stats.4 }}">-->
+  <div class="text-box">
     <div class="txt_field">
         <input id="name" type="text" name="name" required>
-        <label>Bracket Name</label>
+        <label></label>
     </div>
 
     <input type="Submit" value="Save Bracket">

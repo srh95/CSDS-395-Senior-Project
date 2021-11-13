@@ -7,6 +7,7 @@
     {% load static %}
 
     <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
+    <link rel="stylesheet" href="{%static 'bracketStyle.css'%}">
  </head>
  <body>
 
@@ -27,198 +28,535 @@
 {% for bracket in brackets %}
 
 
-<p> {{bracket.bracket_name}} </p>
+
+<header>
+ <!--<div class='half-circle-container'>
+ <div class='half-circle top-circle'>
+ <div></div>
+ </div>
+ </div>-->
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="viewport" content="width=device-width,initial-scale=1.0">
+ <link rel="stylesheet" href="text2.css">
+ <div class='header-text'>
+ <h1>{{bracket.bracket_name}}
+ </h1>
+ </div>
+
+ Selected Stats: Most Important: {{bracket.stat1}} Second Most Important: {{bracket.stat2}}
+ Third Most Important: {{bracket.stat3}} Fourth Most Important: {{bracket.stat4}} Fifth Most Important: {{bracket.stat5}}
+
+ <div class='tournament tournament-header'>
+ <ul class='round'>
+ <li>First Round</li>
+ <li>Mar 19-20</li>
+ </ul>
+ <ul class='round'>
+ <li>Second Round</li>
+ <li>Mar 21-22</li>
+ </ul>
+ <ul class='round'>
+ <li>Sweet 16</li>
+ <li>Mar 27-28</li>
+ </ul>
+ <ul class='round'>
+ <li>Elite 8</li>
+ <li>Mar 24-26</li>
+ </ul>
+ <ul class='round'>
+ <li>Final 4</li>
+ <li>Apr 1 at Indianpolis, IN</li>
+ </ul>
+ <ul class='round'>
+ </ul>
+ <ul class='round'>
+ <li>National Championship</li>
+ <li>Apr 5 at Indianapolis, IN</li>
+ </ul>
+ <ul class='round'>
+ </ul>
+ <ul class='round'>
+ <li>Final 4</li>
+ <li>Apr 3 at Indianapolis, IN</li>
+ </ul>
+ <ul class='round'>
+ <li>Elite 8</li>
+ <li>Mar 29-30</li>
+ </ul>
+ <ul class='round'>
+ <li>Sweet 16</li>
+ <li>Mar 27-28</li>
+ </ul>
+ <ul class='round'>
+ <li>Second Round</li>
+ <li>Mar 21-22</li>
+ </ul>
+ <ul class='round'>
+ <li>First Round</li>
+ <li>Mar 19-20</li>
+ </ul>
+ </div>
+ <div class='tournament'>
+ <ul class='round seed'>
+ <li class='spacer'>&hellip;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{bracket.0}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> {{bracket.1}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{bracket.2}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> &hellip;</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> &hellip;</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> &hellip;</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-1'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'> ...</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'> </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'> </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'> </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-2'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-3'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer region region-right'>East</li>
+ <li class='game-left game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer region region-right'>West</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-4'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'> </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round semi-final'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round finals'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game final'> </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round semi-final'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-4'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-3'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer region region-left'>Midwest</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer region region-left'>South</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-2'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-1'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> &hellip;</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round seed'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> &hellip;</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> &hellip;</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> &hellip;</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>Team</span>
+ <span><span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ </div>
+ </section>
+
+
 
 {% endfor %}
 
-{% comment %}
-
- <header class="hero">
- <div class="hero-wrap">
- <p class="intro" id="intro"></p>
- <h1 id="headline">Method</h1>
- <p class="year"><i class="fa fa-star"></i> 2022 <i class="fa fa-star"></i></p>
- <p>NCAA March Madness Tournament 2022</p>
- </div>
- </header>
 
 
- <section id="bracket">
- <div class="container">
- <div class="split split-one">
- <div class="round round-one current">
- <div class="round-details">Round 1<br/><span class="date"></span></div>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- </div> <!-- END ROUND ONE -->
-
- <div class="round round-two">
- <div class="round-details">Round 2<br/><span class="date"> </span></div>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- </div> <!-- END ROUND TWO -->
-
- <div class="round round-three">
- <div class="round-details">Round 3<br/><span class="date">March 22</span></div>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- </div> <!-- END ROUND THREE -->
- </div>
-
- <div class="champion">
- <div class="semis-l">
- <div class="round-details">west semifinals <br/><span class="date">March 26-28</span></div>
- <ul class ="matchup championship">
- <li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
- </ul>
- </div>
- <div class="final">
- <i class="fa fa-trophy"></i>
- <div class="round-details">championship <br/><span class="date">March 30 - Apr. 1</span></div>
- <ul class ="matchup championship">
- <li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
- </ul>
- </div>
- <div class="semis-r">
- <div class="round-details">east semifinals <br/><span class="date">March 26-28</span></div>
- <ul class ="matchup championship">
- <li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
- </ul>
- </div>
- </div>
-
-
- <div class="split split-two">
-
-
- <div class="round round-three">
- <div class="round-details">Round 3<br/><span class="date">March 22</span></div>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- </div> <!-- END ROUND THREE -->
-
- <div class="round round-two">
- <div class="round-details">Round 2<br/><span class="date">March 18</span></div>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
- <li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
- </ul>
- </div> <!-- END ROUND TWO -->
- <div class="round round-one current">
- <div class="round-details">Round 1<br/><span class="date"> </span></div>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- <ul class="matchup">
- <li class="team team-top"> <span class="score"> </span></li>
- <li class="team team-bottom"> <span class="score"> </span></li>
- </ul>
- </div> <!-- END ROUND ONE -->
- </div>
- </div>
- </section>
- <section class="share">
- <div class="share-wrap">
- <a class="share-icon" href="https://twitter.com/_joebeason"><i class="fa fa-twitter"></i></a>
- <a class="share-icon" href="#"><i class="fa fa-facebook"></i></a>
- <a class="share-icon" href="#"><i class="fa fa-envelope"></i></a>
- </div>
- </section>
-
- {% endcomment %}

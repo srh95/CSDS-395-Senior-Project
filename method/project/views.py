@@ -118,10 +118,6 @@ def createBracket(request, user_id):
     bracket = []
 
     # choosing the stats
-    # if request.method == 'POST' and 'stat1' in request.POST:
-    #     create_form = StatForm(request.POST)
-        # if create_form.is_valid():
-        #     print("Form is valid")
     if request.method == 'GET' and 'stat1' in request.GET:
         stat1 = request.GET.get('stat1')
         stat2 = request.GET.get('stat2')
@@ -130,42 +126,66 @@ def createBracket(request, user_id):
         stat5 = request.GET.get('stat5')
 
         ordered_stats = [stat1, stat2, stat3, stat4, stat5]
-        print(ordered_stats)
-            # establish some check to make sure no stat was chosen more than once
-            # call function that generates bracket, returns list of teams in order to fill in bracket
+        request.session['ordered_stats'] = ordered_stats
+        # establish some check to make sure no stat was chosen more than once
+        # call function that generates bracket, returns list of teams in order to fill in bracket
         bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
+        request.session['bracket'] = bracket
         context = {'user': user, 'user_id': user_id, 'bracket': bracket}
     else:
         context = {'user': user, 'user_id': user_id, 'bracket': bracket}
 
     # naming and saving the bracket
     if request.method == 'POST' and 'name' in request.POST:
-            save_form = SaveForm(request.POST)
-            print("saved the form")
-            if save_form.is_valid():
-                print("Form is valid")
-                print(save_form.cleaned_data['name'])
-                print(stat5)
-                print(user_id)
-                database = Bracket.objects.create(
-                    bracket_name=save_form.cleaned_data['name'],
-                    user=user,
-                    bracket=bracket,
-                    stat1=stat1,
-                    stat2=stat2,
-                    stat3=stat3,
-                    stat4=stat4,
-                    stat5=stat5,
-                )
-                database.save()
-                context = {'user': user, 'user_id': user_id, 'bracket': bracket,
-                           'save_form': save_form}
+        save_form = SaveForm(request.POST)
+        if save_form.is_valid():
+            bracket = request.session.get('bracket')
+            stats = request.session.get('ordered_stats')
+            stat1 = stats[0]
+            stat2 = stats[1]
+            stat3 = stats[2]
+            stat4 = stats[3]
+            stat5 = stats[4]
+            database = Bracket.objects.create(
+                bracket_name=save_form.cleaned_data['name'],
+                user=user,
+                bracket=bracket,
+                stat1=stat1,
+                stat2=stat2,
+                stat3=stat3,
+                stat4=stat4,
+                stat5=stat5,
+            )
+            database.save()
+            context = {'user': user, 'user_id': user_id, 'bracket': bracket, 'save_form': save_form}
 
     else:
         save_form = SaveForm()
         context = {'user': user, 'user_id': user_id, 'bracket': bracket, 'save_form': save_form}
 
     return render(request, 'project/createBracket.html', context)
+
+# def createBracket(request, user_id):
+#     user = get_object_or_404(User, pk=user_id)
+#     if request.method == 'GET' and 'stat1' in request.GET:
+#
+#         stat1 = request.GET.get('stat1')
+#         stat2 = request.GET.get('stat2')
+#         stat3 = request.GET.get('stat3')
+#         stat4 = request.GET.get('stat4')
+#         stat5 = request.GET.get('stat5')
+#
+#         ordered_stats = [stat1, stat2, stat3, stat4, stat5]
+#         print(ordered_stats)
+#         # establish some check to make sure no stat was chosen more than once
+#         # call function that generates bracket, returns list of teams in order to fill in bracket
+#         bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
+#     else:
+#         context = {'user': user, 'user_id': user_id}
+
+def saveBracket(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+
 
 
 def myBracket(request,user_id):
