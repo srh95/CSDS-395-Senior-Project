@@ -8,6 +8,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+import json
 
 from .models import (
     User, Team, Bracket
@@ -163,32 +164,23 @@ def createBracket(request, user_id):
 
     return render(request, 'project/createBracket.html', context)
 
-# def createBracket(request, user_id):
-#     user = get_object_or_404(User, pk=user_id)
-#     if request.method == 'GET' and 'stat1' in request.GET:
-#
-#         stat1 = request.GET.get('stat1')
-#         stat2 = request.GET.get('stat2')
-#         stat3 = request.GET.get('stat3')
-#         stat4 = request.GET.get('stat4')
-#         stat5 = request.GET.get('stat5')
-#
-#         ordered_stats = [stat1, stat2, stat3, stat4, stat5]
-#         print(ordered_stats)
-#         # establish some check to make sure no stat was chosen more than once
-#         # call function that generates bracket, returns list of teams in order to fill in bracket
-#         bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
-#     else:
-#         context = {'user': user, 'user_id': user_id}
-
-def saveBracket(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
-
-
-
 def myBracket(request,user_id):
+    # scoring- split the list of winning teams into lists for each round
+    # bracket is a list of teams- every 2 teams played a game against each other
+    # split the bracket list up into lists for each round as well
+    # for every team in bracket list we check if the name is in the winning teams list
+    # if it is, then that team's name can be bolded on the bracket
+    # idk how bracket scoring works so tbd if we can do that
     user = get_object_or_404(User, pk=user_id)
     brackets = Bracket.objects.filter(user__pk=user_id)
+    teamW = request.session.get('teamW')
+    # separate list of winning teams into lists for each round
+    round_1 = teamW[8:72]
+    round_2 = teamW[72:104]
+    sweet_16 = teamW[104:120]
+    elite_8 = teamW[120:128]
+    final_4 = teamW[128:132]
+    championship = teamW[132:134]
     context = {'user': user, 'user_id': user_id, 'brackets': brackets}
     return render(request, 'project/bracket.html', context)
 
@@ -232,14 +224,15 @@ def scoreScrape():
     for i in content:
         header = i.find('header')
         info = header.getText()
-        img_info = header.getText()
+        #img_info = header.getText()
         teamL.append(info)
-        imgname = info.replace(" ", "-")
-        img_name = ""
-        for char in imgname:
-            if char not in ".'":
-                img_name = img_name + char
-        imgsL.append("{% static 'team_img/" + img_name + ".svg"+"' %}")
+        # imgname = info.replace(" ", "-")
+        # img_name = ""
+        # for char in imgname:
+        #     if char not in ".'":
+        #         img_name = img_name + char
+        # imgsL.append("{% static 'team_img/" + img_name + ".svg"+"' %}")
+        # imgsL.append(img_name)
 
     # scrape for winning teams and their scores
     content = soup.findAll('div', {'class': "active-team"})
@@ -252,12 +245,13 @@ def scoreScrape():
 
 def scores(request):
     [teamL, teamW, imgsL] = scoreScrape()
-    context = {'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
+    context = {'teamL': teamL, 'teamW': teamW, 'img_name': json.dumps(imgsL)}
     return render(request, 'project/scores.html', context)
 
 
 def userScores(request, user_id):
     [teamL, teamW, imgsL] = scoreScrape()
+    request.session['teamW'] = teamW
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
     return render(request, 'project/userScores.html', context)
