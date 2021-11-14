@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
+    <link rel="stylesheet" href="{%static 'bracketStyle.css'%}">
+ </head>
+ <body>
+
+<div id="container">
+        <div id="logo">Method</div>
+        <div id="navbar">
+            <ul>
+                <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
+                <li><a href="/scores/{{user.id}}">Scores</a></li>
+                <li><a href="/teams/{{user.id}}">Teams</a></li>
+                <li><a href="/myBracket/{{user.id}}">MyBracket</a></li>
+                <li><a href="{% url 'news'%}">News</a></li>
+                <li id="login"><a href="{% url 'home' %}">Logout</a></li>
+        </div>
+
+     </div>
+
+        <h1> Create a March Madness bracket </h1>
+
+
+<form method="post">
+    {% csrf_token %}
+
+
+    <label for="stat1">Most Important Stat:</label>
+<select name="stat1" id="stat1">
+    <option value="Stat 1">Stat 1</option>
+  <option value="Stat 2">Stat 2</option>
+  <option value="Stat 3">Stat 3</option>
+  <option value="Stat 4">Stat 4</option>
+    <option value="Stat 5">stat 5</option>
+</select>
+
+    <label for="stat2">Second Most Important Stat:</label>
+<select name="stat2" id="stat2">
+    <option value="Stat 1">Stat 1</option>
+  <option value="Stat 2">Stat 2</option>
+  <option value="Stat 3">Stat 3</option>
+  <option value="Stat 4">Stat 4</option>
+    <option value="Stat 5">stat 5</option>
+</select>
+
+<label for="stat3">Third Most Important Stat:</label>
+<select name="stat3" id="stat3">
+    <option value="Stat 1">Stat 1</option>
+  <option value="Stat 2">Stat 2</option>
+  <option value="Stat 3">Stat 3</option>
+  <option value="Stat 4">Stat 4</option>
+    <option value="Stat 5">stat 5</option>
+</select>
+
+<label for="stat4">Fourth Most Important Stat:</label>
+<select name="stat4" id="stat4">
+    <option value="Stat 1">Stat 1</option>
+  <option value="Stat 2">Stat 2</option>
+  <option value="Stat 3">Stat 3</option>
+  <option value="Stat 4">Stat 4</option>
+    <option value="Stat 5">stat 5</option>
+</select>
+
+<label for="stat5">Fifth Most Important Stat:</label>
+<select name="stat5" id="stat5">
+    <option value="Stat 1">Stat 1</option>
+  <option value="Stat 2">Stat 2</option>
+  <option value="Stat 3">Stat 3</option>
+  <option value="Stat 4">Stat 4</option>
+    <option value="Stat 5">stat 5</option>
+</select>
+
+ <input type="Submit" value="Generate bracket">
+
+
+</form>
+
+
+<p> Here is your generated bracket: </p>
+
+ <header>
+ <!--<div class='half-circle-container'>
+ <div class='half-circle top-circle'>
+ <div></div>
+ </div>
+ </div>-->
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="viewport" content="width=device-width,initial-scale=1.0">
+ <link rel="stylesheet" href="text2.css">
+ <div class='header-text'>
+ <h1>METHOD - 2021 March Madness Brackets
+ </h1>
+ </div>
+
+ <div class='half-circle-container'>
+
+
+ <div class='half-circle bottom-circle'>
+
+ <div>
+
+ </div>
+
+
+ </div>
+
+ </div>
+ </header>
+ <section>
+ <div class='body-first-child tournament first-four'>
+ <ul class='round seed'>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ </ul>
+ <ul class='round first-four-winner'>
+ <li class='game-left game-top'>
+ <span></span>
+ </li>
+ </ul>
+ <ul class='round'>
+ <li class='region region-left'>West</li>
+ </ul>
+ <ul class='round seed'>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ </ul>
+ <ul class='round first-four-winner'>
+ <li class='game-left game-top'>
+ <span> </span>
+ </li>
+ </ul>
+ <ul class='round'>
+ <li class='region region-left'>East</li>
+ </ul>
+ <ul class='round'></ul>
+ <ul class='round'>
+ <li class='region region-right'>Midwest</li>
+ </ul>
+ <ul class='round first-four-winner'>
+ <li class='game-right game-top'>
+ <span> </span>
+ </li>
+ </ul>
+ <ul class='round seed'>
+ <li class='game-right game-top'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>
+ <span> &hellip;</span>
+ <span></span>
+ </li>
+ </ul>
+ <ul class='round'>
+ <li class='region region-right'>South</li>
+ </ul>
+ <ul class='round first-four-winner'>
+ <li class='game-right game-top'>
+ <span> </span>
+ </li>
+ </ul>
+ <ul class='round seed'>
+ <li class='game-right game-top'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ </ul>
+ </div>
+ <div class='tournament tournament-header'>
+ <ul class='round'>
+ <li>First Round</li>
+ <li>Mar 19-20</li>
+ </ul>
+ <ul class='round'>
+ <li>Second Round</li>
+ <li>Mar 21-22</li>
+ </ul>
+ <ul class='round'>
+ <li>Sweet 16</li>
+ <li>Mar 27-28</li>
+ </ul>
+ <ul class='round'>
+ <li>Elite 8</li>
+ <li>Mar 24-26</li>
+ </ul>
+ <ul class='round'>
+ <li>Final 4</li>
+ <li>Apr 1 at Indianpolis, IN</li>
+ </ul>
+ <ul class='round'>
+ </ul>
+ <ul class='round'>
+ <li>National Championship</li>
+ <li>Apr 5 at Indianapolis, IN</li>
+ </ul>
+ <ul class='round'>
+ </ul>
+ <ul class='round'>
+ <li>Final 4</li>
+ <li>Apr 3 at Indianapolis, IN</li>
+ </ul>
+ <ul class='round'>
+ <li>Elite 8</li>
+ <li>Mar 29-30</li>
+ </ul>
+ <ul class='round'>
+ <li>Sweet 16</li>
+ <li>Mar 27-28</li>
+ </ul>
+ <ul class='round'>
+ <li>Second Round</li>
+ <li>Mar 21-22</li>
+ </ul>
+ <ul class='round'>
+ <li>First Round</li>
+ <li>Mar 19-20</li>
+ </ul>
+ </div>
+ <div class='tournament'>
+ <ul class='round seed'>
+ <li class='spacer'>&hellip;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{bracket.0}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> {{bracket.1}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{bracket.2}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> &hellip;</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> &hellip;</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> &hellip;</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span> </span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-1'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'> ...</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'> </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'> </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'> </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-2'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-3'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer region region-right'>East</li>
+ <li class='game-left game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='game-left spacer region region-right'>West</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-4'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'> </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round semi-final'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round finals'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game final'> </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round semi-final'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-4'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-3'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer region region-left'>Midwest</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer region region-left'>South</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-2'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-1'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'> </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> &hellip;</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'></li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'> </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'></li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round seed'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> &hellip;</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> &hellip;</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> &hellip;</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span> </span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span></span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>Team</span>
+ <span><span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ </div>
+ </section>
+
+
+<form method="post">
+    {% csrf_token %}
+    <div class="txt_field">
+        <input id="name" type="text" name="name" required>
+        <label>Bracket Name</label>
+    </div>
+
+    <input type="Submit" value="Save Bracket">
+</form>
+
+
+
+
+
+ </body>
+</html>

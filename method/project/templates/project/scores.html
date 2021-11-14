@@ -68,7 +68,6 @@ font-weight: normal;
             <ul>
                 <li><a href="{% url 'home'%}">Home</a></li>
                 <li><a href="{% url 'scores'%}">Scores</a></li>
-                <li><a href="{% url 'teams'%}">Teams</a></li>
                 <li><a href="{% url 'news'%}">News</a></li>
                 <li id="login"><a href="/accounts/login/">Login</a></li>
         </div>
@@ -80,10 +79,13 @@ font-weight: normal;
 <button class="tablink" onclick="openPage('elite', this, '#7BB4DA')">Elite 8</button>
 <button class="tablink" onclick="openPage('final', this, '#7BB4DA')">Final Four/Championship</button>
 
-<script>
+<script language="JavaScript">
     function createSRC(img_name) {
         return "method/project/static/team_img";
     }
+const a1 = "{% static 'team_img/colgate.svg'%}";
+const image = document.getElementById("img_nam");
+image.src = a1;
 </script>
 
 <script></script>
@@ -91,8 +93,9 @@ font-weight: normal;
 <div id="first" class="tabcontent">
     <div class="boxed">
         <div class="teams">
-            <img src="{% static 'team_img/virginia-tech.svg'%}" alt="name" height="87" width="100" />
+            <img alt="name" height="87" width="100" id="img_nam" />
             {{teamL.8}} {{teamL.9}}
+
             <p><img src="{% static 'team_img/florida.svg'%}" alt="name" height="87" width="100" />
             <b>{{teamW.8}} {{teamW.9}}</b></p>
         </div>
