@@ -8,6 +8,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+import json
 
 from .models import (
     User, Bracket, Group, Pin
@@ -117,68 +118,78 @@ def userNews(request, user_id):
 
 def createBracket(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    # initialize the stats
-    stat1 = []
-    stat2 = []
-    stat3 = []
-    stat4 = []
-    stat5 = []
-    # initializing the bracket
-    bracket = []
 
     # choosing the stats
-    if request.method == 'POST' and 'stat1' in request.POST:
-        create_form = StatForm(request.POST)
-        if create_form.is_valid():
-            print("Form is valid")
-            stat1 = create_form.cleaned_data['stat1']
-            stat2 = create_form.cleaned_data['stat2']
-            stat3 = create_form.cleaned_data['stat3']
-            stat4 = create_form.cleaned_data['stat4']
-            stat5 = create_form.cleaned_data['stat5']
+    if request.method == 'GET' and 'stat1' in request.GET:
+        stat1 = request.GET.get('stat1')
+        stat2 = request.GET.get('stat2')
+        stat3 = request.GET.get('stat3')
+        stat4 = request.GET.get('stat4')
+        stat5 = request.GET.get('stat5')
 
-            ordered_stats = [stat1, stat2, stat3, stat4, stat5]
-            print(stat5)
+        ordered_stats = [stat1, stat2, stat3, stat4, stat5]
+        print(ordered_stats)
+        if len(set(ordered_stats)) != len(ordered_stats):
+            messages.error(request, 'Please select a different statistic for each category')
+        elif ordered_stats == []:
+            messages.error(request, 'Please select a statistic for each category')
+        else:
+            request.session['ordered_stats'] = ordered_stats
             # establish some check to make sure no stat was chosen more than once
             # call function that generates bracket, returns list of teams in order to fill in bracket
             bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
-            context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket}
+            request.session['bracket'] = bracket
+            context = {'user': user, 'user_id': user_id, 'bracket': bracket}
     else:
-        create_form = StatForm()
-        context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket}
+        context = {'user': user, 'user_id': user_id}
 
     # naming and saving the bracket
     if request.method == 'POST' and 'name' in request.POST:
-            save_form = SaveForm(request.POST)
-            print("saved the form")
-            if save_form.is_valid():
-                print("Form is valid")
-                print(save_form.cleaned_data['name'])
-                print(stat5)
-                print(user_id)
-                database = Bracket.objects.create(
-                    bracket_name=save_form.cleaned_data['name'],
-                    user=user,
-                    bracket=bracket,
-                    stat1=stat1,
-                    stat2=stat2,
-                    stat3=stat3,
-                    stat4=stat4,
-                    stat5=stat5,
-                )
-                database.save()
-                context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket, 'save_form': save_form}
+        save_form = SaveForm(request.POST)
+        if save_form.is_valid():
+            bracket = request.session.get('bracket')
+            stats = request.session.get('ordered_stats')
+            stat1 = stats[0]
+            stat2 = stats[1]
+            stat3 = stats[2]
+            stat4 = stats[3]
+            stat5 = stats[4]
+            database = Bracket.objects.create(
+                bracket_name=save_form.cleaned_data['name'],
+                user=user,
+                bracket=bracket,
+                stat1=stat1,
+                stat2=stat2,
+                stat3=stat3,
+                stat4=stat4,
+                stat5=stat5,
+            )
+            database.save()
+            context = {'user': user, 'user_id': user_id, 'bracket': bracket, 'save_form': save_form}
 
     else:
         save_form = SaveForm()
-        context = {'user': user, 'user_id': user_id, 'form': create_form, 'bracket': bracket, 'save_form': save_form}
-
+        context = {'user': user, 'user_id': user_id, 'save_form': save_form}
 
     return render(request, 'project/createBracket.html', context)
 
 def myBracket(request,user_id):
+    # scoring- split the list of winning teams into lists for each round
+    # bracket is a list of teams- every 2 teams played a game against each other
+    # split the bracket list up into lists for each round as well
+    # for every team in bracket list we check if the name is in the winning teams list
+    # if it is, then that team's name can be bolded on the bracket
+    # idk how bracket scoring works so tbd if we can do that
     user = get_object_or_404(User, pk=user_id)
     brackets = Bracket.objects.filter(user__pk=user_id)
+    teamW = request.session.get('teamW')
+    # separate list of winning teams into lists for each round
+    round_1 = teamW[8:72]
+    round_2 = teamW[72:104]
+    sweet_16 = teamW[104:120]
+    elite_8 = teamW[120:128]
+    final_4 = teamW[128:132]
+    championship = teamW[132:134]
     context = {'user': user, 'user_id': user_id, 'brackets': brackets}
     return render(request, 'project/bracket.html', context)
 
@@ -222,14 +233,15 @@ def scoreScrape():
     for i in content:
         header = i.find('header')
         info = header.getText()
-        img_info = header.getText()
+        #img_info = header.getText()
         teamL.append(info)
-        imgname = info.replace(" ", "-")
-        img_name = ""
-        for char in imgname:
-            if char not in ".'":
-                img_name = img_name + char
-        imgsL.append("{% static 'team_img/" + img_name + ".svg"+"' %}")
+        # imgname = info.replace(" ", "-")
+        # img_name = ""
+        # for char in imgname:
+        #     if char not in ".'":
+        #         img_name = img_name + char
+        # imgsL.append("{% static 'team_img/" + img_name + ".svg"+"' %}")
+        # imgsL.append(img_name)
 
     # scrape for winning teams and their scores
     content = soup.findAll('div', {'class': "active-team"})
@@ -242,12 +254,13 @@ def scoreScrape():
 
 def scores(request):
     [teamL, teamW, imgsL] = scoreScrape()
-    context = {'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
+    context = {'teamL': teamL, 'teamW': teamW, 'img_name': json.dumps(imgsL)}
     return render(request, 'project/scores.html', context)
 
 
 def userScores(request, user_id):
     [teamL, teamW, imgsL] = scoreScrape()
+    request.session['teamW'] = teamW
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
     return render(request, 'project/userScores.html', context)

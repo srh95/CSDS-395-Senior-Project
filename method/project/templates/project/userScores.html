@@ -77,44 +77,47 @@ body, html {
 <button class="tablink" onclick="openPage('elite', this, '#7BB4DA')">Elite 8</button>
 <button class="tablink" onclick="openPage('final', this, '#7BB4DA')">Final Four/Championship</button>
 
-<script>
-    function createSRC(img_name) {
-        return "method/project/static/team_img";
-    }
+{%comment%}
+<script type="text/javascript">
+var myList = {{ img_name|safe }};
+onload = function(){
+var vara = myList[9];
+document.getElementById('1').setAttribute('src',vara.toString())
+}
 </script>
+{%endcomment%}
 
-<script></script>
 
 <div id="first" class="tabcontent">
     <div class="boxed">
         <div class="teams">
-            <img src="{% static 'team_img/virginia-tech.svg'%}" alt="name" height="87" width="100" />
+            <img id="1" src = "{% static 'team_img/virginia-tech.svg'%}" alt="name" height="70" width="83" />
             {{teamL.8}} {{teamL.9}}
-            <p><img src="{% static 'team_img/florida.svg'%}" alt="name" height="87" width="100" />
+            <p><img id="2" src="{% static 'team_img/florida.svg'%}" alt="name" height="70" width="83" />
             <b>{{teamW.8}} {{teamW.9}}</b></p>
         </div>
     </div>
     <div class="boxed">
         <div class="teams">
-            <img src="{% static 'team_img/colgate.svg'%}" alt="name" height="87" width="100" />
+            <img src="{% static 'team_img/colgate.svg'%}" alt="name" height="70" width="83" />
         {{teamL.10}} {{teamL.11}}
-            <p><img src="{% static 'team_img/arkansas.svg'%}" alt="name" height="87" width="100" />
+            <p><img src="{% static 'team_img/arkansas.svg'%}" alt="name" height="70" width="83" />
                 <b>{{teamW.10}} {{teamW.11}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-            <img src="{% static 'team_img/drexel.svg'%}" alt="name" height="87" width="100" />
+            <img src="{% static 'team_img/drexel.svg'%}" alt="name" height="70" width="83" />
         {{teamL.12}} {{teamL.13}}
-        <p><img src="{% static 'team_img/illinois.svg'%}" alt="name" height="87" width="100" />
+        <p><img src="{% static 'team_img/illinois.svg'%}" alt="name" height="70" width="83" />
             <b>{{teamW.12}} {{teamW.13}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
-            <img src="{% static 'team_img/utah-st.svg'%}" alt="name" height="87" width="100" />
+            <img src="{% static 'team_img/utah-st.svg'%}" alt="name" height="70" width="83" />
        {{teamL.14}} {{teamL.15}}
-            <p><img src="{% static 'team_img/texas-tech.svg'%}" alt="name" height="87" width="100" />
+            <p><img src="{% static 'team_img/texas-tech.svg'%}" alt="name" height="70" width="83" />
                 <b>{{teamW.14}} {{teamW.15}}</b></p>
         </div>
     </div>
