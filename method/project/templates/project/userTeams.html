@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method</title>
+    {% load static %}
+    <link rel= "stylesheet" href="{%static 'style.css' %}">
+</head>
+<body>
+    <div id="container">
+        <div id="logo">Method</div>
+        <div id="navbar">
+            <ul>
+                <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
+                <li><a href="/scores/{{user.id}}">Scores</a></li>
+                <li><a href="/myBracket/{{user.id}}">My Brackets</a></li>
+                <li><a href="/teams/{{user.id}}">Teams</a></li>
+                <li><a href="/news/{{user.id}}">News</a></li>
+                <li id="login"><a href="{% url 'home' %}">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h1>Welcome to Team, {{group.name}}!</h1>
+    </div>
+</body>
+</html>

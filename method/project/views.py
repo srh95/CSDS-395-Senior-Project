@@ -11,7 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 import json
 
 from .models import (
-    User, Team, Bracket
+    User, Bracket, Group, Pin
 )
 from .forms import(
     RegisterForm,
@@ -98,6 +98,15 @@ def user_home(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/userHome.html', context)
+
+def createteam(request):
+    return render(request,'project/createTeam.html')
+
+def jointeam(request):
+    return render(request, 'project/jointeam.html')
+
+def userteam(request):
+    return render(request, 'project/userTeams.html')
 
 def news(request):
     return render(request,'project/News.html')

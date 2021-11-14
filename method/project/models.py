@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 
+
 class User(models.Model):
     user_name = models.CharField(max_length=200)
     user_username = models.CharField(max_length=30)  # username is their email
@@ -8,11 +9,6 @@ class User(models.Model):
 
     def __str__(self):
         return self.user_name
-
-class Team(models.Model):
-    teamname = models.CharField(max_length=200)
-    user_username = models.CharField(max_length=30)
-    teamid = models.CharField(max_length=8)
 
 class Bracket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -24,11 +20,16 @@ class Bracket(models.Model):
     stat4 = models.CharField(max_length=50)
     stat5 = models.CharField(max_length=50)
 
-class Groups(models.Model):
-    red_group, created = Group.objects.get_or_create(name = 'Red')
-    blue_group, created = Group.objects.get_or_create(name = 'Blue')
-    yellow_group, created = Group.objects.get_or_create(name = 'Yellow')
-    green_group, created = Group.objects.get_or_create(name = 'Green')
-
     def __str__(self):
         return self.bracket_name
+
+
+class Group(models.Model):
+    name = models.CharField(max_length=16)
+    grouppin = models.IntegerField(unique=True)
+    members = models.ManyToManyField(User, related_name='members', blank=True)
+
+
+class Pin(models.Model):
+    pin = models.IntegerField(unique=True)
+    attached_group = models.ForeignKey(Group, on_delete=models.CASCADE)

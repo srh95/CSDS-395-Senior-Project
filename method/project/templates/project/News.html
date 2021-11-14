@@ -2,6 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+   .column {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}</style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
@@ -22,15 +34,17 @@
         </div>
     </div>
 <div>
-</div>
-    <div id= "twitterfeed">
+    <div class="row">
+  <div class="column">
+      <div id= "twitterfeed">
         <a class="twitter-timeline" data-width="1400" data-height="500" href="https://twitter.com/marchmadness?ref_src=twsrc%5Etfw">Tweets by marchmadness</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
-    <div>
-        <a class="twitter-timeline" data-width="1400" data-height="500" href="https://twitter.com/NCAAWBB?ref_src=twsrc%5Etfw">Tweets by NCAAWBB</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </div>
-    <div>
-    <a class="twitter-timeline" ata-width="1400" data-height="500" href="https://twitter.com/NCAA?ref_src=twsrc%5Etfw">Tweets by NCAA</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
+  <div class="column">
+
+  </div>
+  <div class="column">
+  </div>
     </div>
 </body>
 

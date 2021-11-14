@@ -35,5 +35,7 @@ urlpatterns = [
     path('scores/', views.scores, name='scores'),
     path('scores/<int:user_id>', views.userScores, name='userscores'),
     path('teams/<int:user_id>', views.teams, name='teams'),
-    path('createteam/', views.createteam, name='createteam')
+    path('createteam/', views.createteam, name='createteam'),
+    path('jointeam/', views.jointeam, name = 'jointeam'),
+    path('userteams/', views.userteam, name = 'userteams')
 ]
