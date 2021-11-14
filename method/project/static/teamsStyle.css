@@ -254,3 +254,55 @@
   margin-top: 50px;
 }
 
+.relative {
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            line-height: 150px;
+            background-color: #fff;
+            margin: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            width: 160px;
+            height: 80px;
+            padding: 10px;
+            text-align: center;
+            border: black;
+            background-color: #165397;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.divider{
+    width:100px;
+    height:auto;
+    display:inline-block;
+}

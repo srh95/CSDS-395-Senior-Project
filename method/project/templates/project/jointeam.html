@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="center">
-            <h1>Create Team</h1>
+            <h1>Join Team</h1>
             <form method="post">
                 {% csrf_token %}
 
@@ -21,11 +21,7 @@
                     <input id="pin1" type="number" name="pin1" maxlength="4" required>
                     <label>Pin</label>
                 </div>
-                <div class="txt_field">
-                    <input id="pin2" type="number" name="pin2" maxlength="4" required>
-                    <label>Confirm Pin</label>
-                </div>
-                <input type="submit" value="Create Team">
+                <input type="submit" value="Join Team">
 
                 {% if messages %}
                     {% for message in messages %}
@@ -34,7 +30,7 @@
                 {% endif %}
 
                 <div class="signup_link">
-                    <a href="{% url 'jointeam' %}">What to join an existing team? Click Here</a>
+                    <a href="{% url 'createteam' %}">What to create your own team? Click Here</a>
                 </div>
                 <div class="signup_link">
                     <a href="/teams/{{user.id}}">Cancel</a>

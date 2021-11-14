@@ -14,12 +14,12 @@
 
         .button {
             display: inline-block;
-            width: 160px;
-            height: 80px;
+            width: 240px;
+            height: 120px;
             padding: 10px;
             text-align: center;
             border: black;
-            background-color: #f44336;
+            background-color: #165397;
             color: #fff;
             cursor: pointer;
             font-weight: bold;
@@ -49,11 +49,9 @@
   opacity: 1;
   right: 0;
 }
-.button2 {background-color: #008CBA;} /* Blue */
-.button3 {background-color: #D4D419;} /* Yellow */
-.button4 {background-color: #00FF00;} /* Green */
+
 .divider{
-    width:70px;
+    width:100px;
     height:auto;
     display:inline-block;
 }
@@ -79,15 +77,15 @@
             </ul>
         </div>
     </div>
+    <div id="button"><a href="{% url 'userteams'%}">user teams</a></div>
     <div class="relative">
-        <h1>Select A Team</h1>
-            <button class="button"><span>Red Team</span></button>
-            <div class="divider"/></div>
-            <button class="button button2"><span>Blue Team</span></button>
-            <div class="divider"/></div>
-            <button class="button button3"><span>Yellow Team</span></button>
-            <div class="divider"/></div>
-            <button class="button button4"><span>Green Team</span></button>
-    </div>
+        <h1>Select One</h1>
+            <a href="{% url 'createteam'%}">
+                <button class="button"><span>Create Team</span></button>
+            </a>
+            <div class="divider"/> </div>
+            <a href="{% url 'jointeam'%}">
+                <button class="button"><span>Join Team</span></button>
+            </a>
 </body>
 </html>
