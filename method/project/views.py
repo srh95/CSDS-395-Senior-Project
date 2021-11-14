@@ -8,6 +8,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+import string
 
 from .models import (
     User, Team, Bracket
@@ -17,6 +18,7 @@ from .forms import(
     LoginForm,
     StatForm,
     SaveForm,
+    TeamForm
 )
 
 def index(request):
@@ -25,20 +27,41 @@ def index(request):
 def home(request):
     return render(request,'project/home.html')
 
-def createteam(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            x = random.randomint(1000,2000)
-            print(x)
+def createTeam(request, user_id):
+    # need to make it so a user cant create a team if team attribute is not null/empty
+    # need to allow people to join team
+    # need to check to see if team is at cpacity, if it is dont allow them to join
+    # implement leave team function
+    # some way to check that the team ids are unique
+    # display the team name and team member names on the teams page is a user belongs to a team \
+    # if not just have create team or join team buttons
+    user = get_object_or_404(User, pk=user_id)
+    if request.method == 'GET' and 'team_name' in request.GET:
+        S = 10  # number of characters in the string.
+        # call random.choices() string module to find the string in Uppercase + numeric data.
+        ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
+        print("The randomly generated string is : " + str(ran))  # print the random data
+        team_id = str(ran)
         database = Team.objects.create(
-            user_name=form.cleaned_data['name'],
-            user_username=form.cleaned_data['username'],
-            user_password=form.cleaned_data['password1']
+            team_id = team_id,
+            team_name = request.GET.get('team_name'),
+            num_members = request.GET.get('num_members')
         )
         database.save()
+        team_obj = get_object_or_404(Team, team_id=team_id)
+        User.objects.filter(id=user_id).update(team=team_obj)
+        url = '/teams/' + str(user_id)
+        return HttpResponseRedirect(url)
+
     else:
-        print("Team cannot be created")
+        context = {'user': user, 'user_id': user_id}
+        return render(request, 'project/createTeam.html', context)
+
+def joinTeam(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    context = {'user': user, 'user_id': user_id}
+    return render(request, 'project/teams.html', context)
+
 
 
 
@@ -266,4 +289,6 @@ def teams(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/teams.html', context)
+
+
 

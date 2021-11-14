@@ -11,8 +11,8 @@ class LoginForm(forms.Form):
     password = forms.CharField(label='Name', max_length=50, required=True)
 
 class TeamForm(forms.Form):
-    teamname = forms.CharField(label="teamname", max_length=50, required=True)
-    teamid = forms.IntegerField(label="teamid", required=True)
+    team_name = forms.CharField(label="team_name", max_length=50, required=True)
+    num_members = forms.CharField(label="num_members", max_length=1, required=True)
 
 class StatForm(forms.Form):
     stat1 = forms.CharField(label="stat1", max_length=50, required=True)

@@ -63,7 +63,7 @@
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <title>Method</title>
     {% load static %}
-    <link rel= "stylesheet" href="{%static 'teamsStyle.css' %}">
+    <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
 </head>
 <body>
     <div id="container">
@@ -79,15 +79,14 @@
             </ul>
         </div>
     </div>
-    <div class="relative">
-        <h1>Select A Team</h1>
-            <button class="button"><span>Red Team</span></button>
-            <div class="divider"/></div>
-            <button class="button button2"><span>Blue Team</span></button>
-            <div class="divider"/></div>
-            <button class="button button3"><span>Yellow Team</span></button>
-            <div class="divider"/></div>
-            <button class="button button4"><span>Green Team</span></button>
-    </div>
+<div class="text-box">
+<button id="create" onclick="location.href='/createTeam/{{user.id}}'"</a>Create a Team</button>
+</div>
+
+<div class="text-box">
+<button id="join" onclick="location.href='/joinTeam/{{user.id}}'"</a>Join a Team</button>
+</div>
+
+
 </body>
 </html>
