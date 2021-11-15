@@ -117,10 +117,14 @@ def userNews(request, user_id):
     return render(request, 'project/userNews.html', context)
 
 def createBracket(request, user_id):
+    # only generate the bracket if the stats are put in
+    # if a bracket is generated make the save button show up
+    # delete the request sessions when a bracket is saved
     user = get_object_or_404(User, pk=user_id)
-
+    ordered_stats = []
     # choosing the stats
     if request.method == 'GET' and 'stat1' in request.GET:
+        print("is this running")
         stat1 = request.GET.get('stat1')
         stat2 = request.GET.get('stat2')
         stat3 = request.GET.get('stat3')
@@ -131,9 +135,11 @@ def createBracket(request, user_id):
         print(ordered_stats)
         if len(set(ordered_stats)) != len(ordered_stats):
             messages.error(request, 'Please select a different statistic for each category')
-        elif ordered_stats == []:
+        elif len(ordered_stats) == 0:
+            print("length is 0 ")
             messages.error(request, 'Please select a statistic for each category')
         else:
+            print("the else statement executed")
             request.session['ordered_stats'] = ordered_stats
             # establish some check to make sure no stat was chosen more than once
             # call function that generates bracket, returns list of teams in order to fill in bracket
@@ -148,6 +154,7 @@ def createBracket(request, user_id):
         save_form = SaveForm(request.POST)
         if save_form.is_valid():
             bracket = request.session.get('bracket')
+            # note to myself- it allows you to save a bracket without selecting stats, not good :(
             stats = request.session.get('ordered_stats')
             stat1 = stats[0]
             stat2 = stats[1]
@@ -165,6 +172,8 @@ def createBracket(request, user_id):
                 stat5=stat5,
             )
             database.save()
+            del request.session['ordered_stats']
+            del request.session['bracket']
             context = {'user': user, 'user_id': user_id, 'bracket': bracket, 'save_form': save_form}
 
     else:
