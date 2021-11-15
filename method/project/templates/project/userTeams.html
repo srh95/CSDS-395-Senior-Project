@@ -6,7 +6,7 @@
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <title>Method</title>
     {% load static %}
-    <link rel= "stylesheet" href="{%static 'style.css' %}">
+    <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
 </head>
 <body>
     <div id="container">
@@ -23,7 +23,8 @@
         </div>
     </div>
     <div>
-        <h1>Welcome to Team, {{group.name}}!</h1>
+        <h1>You are part of team, {{user.team.team_name}}!</h1>
+        <h1> Invite others to join, use code {{user.team.team_id}}</h1>
     </div>
 </body>
 </html>

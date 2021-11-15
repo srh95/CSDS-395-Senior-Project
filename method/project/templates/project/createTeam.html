@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
+        <style>
+            .button {
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            padding: 10px;
+            text-align: center;
+            border: black;
+            background-color: #165397;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+.divider{
+    width:100px;
+    height:50px;
+    display:inline-block;
+}
+        </style>
         <meta charset="UTF-8">
         <title>Create Team Page</title>
         {% load static %}
@@ -9,14 +28,12 @@
     <body>
         <div class="center">
             <h1>Create Team</h1>
-            <form method="GET">
+            <form method="GET" >
                 {% csrf_token %}
-
                 <div class="txt_field">
                     <input id="team_name" type="text" name="team_name" required>
                     <label>Team Name</label>
                 </div>
-
                 <div class="number">
                     <label>Number of Members</label>
                     <select name="num_members" id="num_members">
@@ -26,16 +43,14 @@
                         <option value="five">5</option>
                       </select>
                 </div>
-<!--                <input type="submit" value="Create Team">-->
-                <button onclick="createTeam(request)" >Submit</button>
-
-
-
-                <div class="signup_link">
-                    <div id="button">
-                    </div>
+                <div class="divider"> </div>
+                <button class = "button", onclick="createTeam(request)" >Submit</button>
+                 <div class="signup_link">
+                    <a href="/jointeam/{{user.id}}">What to join an existing team? Click Here</a>
                 </div>
-
+                <div class="signup_link">
+                    <a href="/teams/{{user.id}}">Cancel</a>
+                </div>
             </form>
         </div>
 

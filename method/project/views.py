@@ -19,6 +19,7 @@ from .forms import(
     LoginForm,
     StatForm,
     SaveForm,
+    TeamForm
 )
 
 def index(request):
@@ -29,13 +30,11 @@ def home(request):
 
 def createTeam(request, user_id):
     # need to make it so a user cant create a team if team attribute is not null/empty
-    # need to allow people to join team
-    # need to check to see if team is at capacity, if it is dont allow them to join
-    # implement leave team function
     # some way to check that the team ids are unique
     # display the team name and team member names on the teams page is a user belongs to a team \
     # if not just have create team or join team buttons
     user = get_object_or_404(User, pk=user_id)
+    form = TeamForm(request.POST)
     if request.method == 'GET' and 'team_name' in request.GET:
         s = 10  # number of characters in the string.
         ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=s))
@@ -46,6 +45,7 @@ def createTeam(request, user_id):
             num_members = request.GET.get('num_members')
         )
         database.save()
+        print(team_id)
         team_obj = get_object_or_404(Team, team_id=team_id)
         User.objects.filter(id=user_id).update(team=team_obj)
         url = '/teams/' + str(user_id)
@@ -56,6 +56,9 @@ def createTeam(request, user_id):
         return render(request, 'project/createTeam.html', context)
 
 def joinTeam(request, user_id):
+    # need to allow people to join team
+    # implement leave team function
+    # need to check to see if team is at capacity, if it is dont allow them to join
     user = get_object_or_404(User, pk=user_id)
     if request.method == 'GET' and 'join_code' in request.GET:
         code = request.GET.get('join_code')
@@ -66,8 +69,6 @@ def joinTeam(request, user_id):
     else:
         context = {'user': user, 'user_id': user_id}
         return render(request, 'project/joinTeam.html', context)
-
-
 
 def register(request):
     if request.method == 'POST':
@@ -132,6 +133,11 @@ def userNews(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/userNews.html', context)
+
+def userTeams(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    context = {'user': user, 'user_id': user_id}
+    return render(request, 'project/userTeams.html', context)
 
 def createBracket(request, user_id):
     # only generate the bracket if the stats are put in

@@ -19,7 +19,7 @@
             padding: 10px;
             text-align: center;
             border: black;
-            background-color: #f44336;
+            background-color: #165397;
             color: #fff;
             cursor: pointer;
             font-weight: bold;
@@ -49,12 +49,10 @@
   opacity: 1;
   right: 0;
 }
-.button2 {background-color: #008CBA;} /* Blue */
-.button3 {background-color: #D4D419;} /* Yellow */
-.button4 {background-color: #00FF00;} /* Green */
+
 .divider{
     width:70px;
-    height:auto;
+    height:80px;
     display:inline-block;
 }
     </style>
@@ -79,14 +77,12 @@
             </ul>
         </div>
     </div>
-<div class="text-box">
-<button id="create" onclick="location.href='/createTeam/{{user.id}}'"</a>Create a Team</button>
+    <div class = "divider"/></div>
+<div class="relative">
+    <button class = "button" id="create" onclick="location.href='/createTeam/{{user.id}}'"><span>Create a Team</span></button>
+        <div class = "divider"/></div>
+    <button class = "button" id="join" onclick="location.href='/joinTeam/{{user.id}}'"><span>Join a Team</span></button>
 </div>
-
-<div class="text-box">
-<button id="join" onclick="location.href='/joinTeam/{{user.id}}'"</a>Join a Team</button>
-</div>
-
-
+    <button class = "button" id="userteam" onclick="location.href='teams/teams/userTeams/{{user.id}}'"><span>User Team Test</span></button>
 </body>
 </html>
