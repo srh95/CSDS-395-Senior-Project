@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create Team Page</title>
+        {% load static %}
+        <link rel= "stylesheet" href="{%static 'style1.css' %}">
+    </head>
+    <body>
+        <div class="center">
+            <h1>Create Team</h1>
+            <form method="GET">
+                {% csrf_token %}
+
+                <div class="txt_field">
+                    <input id="join_code" type="text" name="join_code" required>
+                    <label>Enter Join Code</label>
+                </div>
+<!--                <input type="submit" value="Create Team">-->
+                <button onclick="joinTeam(request)" >Submit</button>
+
+
+
+                <div class="signup_link">
+                    <div id="button">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </body>
+</html>

@@ -59,8 +59,15 @@ def createTeam(request, user_id):
 
 def joinTeam(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    context = {'user': user, 'user_id': user_id}
-    return render(request, 'project/teams.html', context)
+    if request.method == 'GET' and 'join_code' in request.GET:
+        code = request.GET.get('join_code')
+        team_obj = get_object_or_404(Team, team_id=code)
+        User.objects.filter(id=user_id).update(team=team_obj)
+        url = '/teams/' + str(user_id)
+        return HttpResponseRedirect(url)
+    else:
+        context = {'user': user, 'user_id': user_id}
+        return render(request, 'project/joinTeam.html', context)
 
 
 
