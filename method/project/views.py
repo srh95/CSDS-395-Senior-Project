@@ -9,9 +9,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 import json
+import string
 
 from .models import (
-    User, Bracket, Group, Pin
+    User, Bracket, Team
 )
 from .forms import(
     RegisterForm,
@@ -26,20 +27,45 @@ def index(request):
 def home(request):
     return render(request,'project/home.html')
 
-def createteam(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            x = random.randomint(1000,2000)
-            print(x)
+def createTeam(request, user_id):
+    # need to make it so a user cant create a team if team attribute is not null/empty
+    # need to allow people to join team
+    # need to check to see if team is at capacity, if it is dont allow them to join
+    # implement leave team function
+    # some way to check that the team ids are unique
+    # display the team name and team member names on the teams page is a user belongs to a team \
+    # if not just have create team or join team buttons
+    user = get_object_or_404(User, pk=user_id)
+    if request.method == 'GET' and 'team_name' in request.GET:
+        s = 10  # number of characters in the string.
+        ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=s))
+        team_id = str(ran)
         database = Team.objects.create(
-            user_name=form.cleaned_data['name'],
-            user_username=form.cleaned_data['username'],
-            user_password=form.cleaned_data['password1']
+            team_id = team_id,
+            team_name = request.GET.get('team_name'),
+            num_members = request.GET.get('num_members')
         )
         database.save()
+        team_obj = get_object_or_404(Team, team_id=team_id)
+        User.objects.filter(id=user_id).update(team=team_obj)
+        url = '/teams/' + str(user_id)
+        return HttpResponseRedirect(url)
+
     else:
-        print("Team cannot be created")
+        context = {'user': user, 'user_id': user_id}
+        return render(request, 'project/createTeam.html', context)
+
+def joinTeam(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.method == 'GET' and 'join_code' in request.GET:
+        code = request.GET.get('join_code')
+        team_obj = get_object_or_404(Team, team_id=code)
+        User.objects.filter(id=user_id).update(team=team_obj)
+        url = '/teams/' + str(user_id)
+        return HttpResponseRedirect(url)
+    else:
+        context = {'user': user, 'user_id': user_id}
+        return render(request, 'project/joinTeam.html', context)
 
 
 
@@ -98,15 +124,6 @@ def user_home(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/userHome.html', context)
-
-def createteam(request):
-    return render(request,'project/createTeam.html')
-
-def jointeam(request):
-    return render(request, 'project/jointeam.html')
-
-def userteam(request):
-    return render(request, 'project/userTeams.html')
 
 def news(request):
     return render(request,'project/News.html')

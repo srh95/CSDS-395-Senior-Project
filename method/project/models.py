@@ -1,14 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 
+class Team(models.Model):
+    team_id = models.CharField(max_length=8)
+    team_name = models.CharField(max_length=200)
+    num_members = models.CharField(max_length=2)
+
 
 class User(models.Model):
     user_name = models.CharField(max_length=200)
     user_username = models.CharField(max_length=30)  # username is their email
     user_password = models.CharField(max_length=50)
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.user_name
+
 
 class Bracket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -22,14 +29,3 @@ class Bracket(models.Model):
 
     def __str__(self):
         return self.bracket_name
-
-
-class Group(models.Model):
-    name = models.CharField(max_length=16)
-    grouppin = models.IntegerField(unique=True)
-    members = models.ManyToManyField(User, related_name='members', blank=True)
-
-
-class Pin(models.Model):
-    pin = models.IntegerField(unique=True)
-    attached_group = models.ForeignKey(Group, on_delete=models.CASCADE)

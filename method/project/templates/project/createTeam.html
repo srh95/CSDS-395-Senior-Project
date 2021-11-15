@@ -2,47 +2,42 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>Login Page</title>
+        <title>Create Team Page</title>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'style1.css'%}">
+        <link rel= "stylesheet" href="{%static 'style1.css' %}">
     </head>
     <body>
         <div class="center">
             <h1>Create Team</h1>
-            <form method="post">
+            <form method="GET">
                 {% csrf_token %}
 
-                {% block content %}
                 <div class="txt_field">
-                    <input id="teamname" type="text" name = "name" maxlength="8" required>
+                    <input id="team_name" type="text" name="team_name" required>
                     <label>Team Name</label>
                 </div>
-                <div class="txt_field">
-                    <input id="pin1" type="number" name="pin1" maxlength="4" required>
-                    <label>Pin</label>
-                </div>
-                <div class="txt_field">
-                    <input id="pin2" type="number" name="pin2" maxlength="4" required>
-                    <label>Confirm Pin</label>
-                </div>
-                <input type="submit" value="Create Team">
 
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-                    {% endfor %}
-                {% endif %}
+                <div class="number">
+                    <label>Number of Members</label>
+                    <select name="num_members" id="num_members">
+                        <option value="two">2</option>
+                        <option value="three">3</option>
+                        <option value="four">4</option>
+                        <option value="five">5</option>
+                      </select>
+                </div>
+<!--                <input type="submit" value="Create Team">-->
+                <button onclick="createTeam(request)" >Submit</button>
+
+
 
                 <div class="signup_link">
-                    <a href="{% url 'jointeam' %}">What to join an existing team? Click Here</a>
+                    <div id="button">
+                    </div>
                 </div>
-                <div class="signup_link">
-                    <a href="/teams/{{user.id}}">Cancel</a>
-                </div>
-                {% endblock %}
+
             </form>
         </div>
 
     </body>
 </html>
-
