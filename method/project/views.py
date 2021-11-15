@@ -30,17 +30,15 @@ def home(request):
 def createTeam(request, user_id):
     # need to make it so a user cant create a team if team attribute is not null/empty
     # need to allow people to join team
-    # need to check to see if team is at cpacity, if it is dont allow them to join
+    # need to check to see if team is at capacity, if it is dont allow them to join
     # implement leave team function
     # some way to check that the team ids are unique
     # display the team name and team member names on the teams page is a user belongs to a team \
     # if not just have create team or join team buttons
     user = get_object_or_404(User, pk=user_id)
     if request.method == 'GET' and 'team_name' in request.GET:
-        S = 10  # number of characters in the string.
-        # call random.choices() string module to find the string in Uppercase + numeric data.
-        ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
-        print("The randomly generated string is : " + str(ran))  # print the random data
+        s = 10  # number of characters in the string.
+        ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=s))
         team_id = str(ran)
         database = Team.objects.create(
             team_id = team_id,
