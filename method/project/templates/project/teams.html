@@ -78,11 +78,14 @@
         </div>
     </div>
     <div class = "divider"/></div>
+    <div class = "relative">
+         <button class = "button" id="userteam" onclick="location.href='/userTeams/{{user.id}}'"><span>View My Team</span></button>
+    </div>
 <div class="relative">
     <button class = "button" id="create" onclick="location.href='/createTeam/{{user.id}}'"><span>Create a Team</span></button>
         <div class = "divider"/></div>
     <button class = "button" id="join" onclick="location.href='/joinTeam/{{user.id}}'"><span>Join a Team</span></button>
 </div>
-    <button class = "button" id="userteam" onclick="location.href='teams/teams/userTeams/{{user.id}}'"><span>User Team Test</span></button>
+
 </body>
 </html>

@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
+        <style>
+            .button {
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            padding: 10px;
+            text-align: center;
+            border: black;
+            background-color: #165397;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+.divider{
+    width:100px;
+    height:50px;
+    display:inline-block;
+}
+        </style>
         <meta charset="UTF-8">
-        <title>Login Page</title>
+        <title>Join Team Page</title>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'style1.css'%}">
+        <link rel= "stylesheet" href="{%static 'style1.css' %}">
     </head>
     <body>
         <div class="center">
             <h1>Join Team</h1>
-            <form method="post">
+            <form method="GET" >
                 {% csrf_token %}
-
-                {% block content %}
                 <div class="txt_field">
-                    <input id="teamname" type="text" name = "name" maxlength="8" required>
-                    <label>Team Name</label>
+                    <input id="join_code" type="text" name="join_code" required>
+                    <label>Join Code</label>
                 </div>
-                <div class="txt_field">
-                    <input id="pin1" type="number" name="pin1" maxlength="4" required>
-                    <label>Pin</label>
-                </div>
-                <input type="submit" value="Join Team">
-
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-                    {% endfor %}
-                {% endif %}
-
-                <div class="signup_link">
-                    <a href="{% url 'createteam' %}">What to create your own team? Click Here</a>
-                </div>
+                <div class="divider"> </div>
+                <button class = "button", onclick="joinTeam(request)" >Submit</button>
                 <div class="signup_link">
                     <a href="/teams/{{user.id}}">Cancel</a>
                 </div>
-                {% endblock %}
             </form>
         </div>
 
     </body>
 </html>
-

@@ -14,19 +14,24 @@ import string
 from .models import (
     User, Bracket, Team
 )
-from .forms import(
+from .forms import (
     RegisterForm,
     LoginForm,
     StatForm,
     SaveForm,
-    TeamForm
+    TeamForm,
+    JoinTeamForm
 )
+
 
 def index(request):
     return HttpResponse("Hello world. You're at the website index.")
 
+
 def home(request):
-    return render(request,'project/home.html')
+    return render(request, 'project/home.html')
+
+
 
 def createTeam(request, user_id):
     # need to make it so a user cant create a team if team attribute is not null/empty
@@ -40,9 +45,9 @@ def createTeam(request, user_id):
         ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=s))
         team_id = str(ran)
         database = Team.objects.create(
-            team_id = team_id,
-            team_name = request.GET.get('team_name'),
-            num_members = request.GET.get('num_members')
+            team_id=team_id,
+            team_name=request.GET.get('team_name'),
+            num_members=request.GET.get('num_members')
         )
         database.save()
         print(team_id)
@@ -55,27 +60,33 @@ def createTeam(request, user_id):
         context = {'user': user, 'user_id': user_id}
         return render(request, 'project/createTeam.html', context)
 
+
 def joinTeam(request, user_id):
     # need to allow people to join team
     # implement leave team function
     # need to check to see if team is at capacity, if it is dont allow them to join
     user = get_object_or_404(User, pk=user_id)
+    form = JoinTeamForm(request.POST)
+    code = request.GET.get('join_code')
+    print(code)
     if request.method == 'GET' and 'join_code' in request.GET:
         code = request.GET.get('join_code')
         team_obj = get_object_or_404(Team, team_id=code)
         User.objects.filter(id=user_id).update(team=team_obj)
         url = '/teams/' + str(user_id)
+        print('success')
         return HttpResponseRedirect(url)
     else:
         context = {'user': user, 'user_id': user_id}
         return render(request, 'project/joinTeam.html', context)
+
 
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             try:
-                if(User.objects.get(user_username=form.cleaned_data['username'])):
+                if (User.objects.get(user_username=form.cleaned_data['username'])):
                     messages.error(request, 'username already exists')
                     return HttpResponseRedirect('/accounts/register')
             except ObjectDoesNotExist:
@@ -96,6 +107,7 @@ def register(request):
 
     return render(request, 'project/register.html', {'form': form})
 
+
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -103,41 +115,46 @@ def login(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             try:
-                if(User.objects.get(user_username=username) is None):
+                if (User.objects.get(user_username=username) is None):
                     messages.error(request, 'Incorrect username')
                     return HttpResponseRedirect('/accounts/login/')
-                if(User.objects.get(user_username=username)):
+                if (User.objects.get(user_username=username)):
                     name = User.objects.get(user_username=username)
-                    if(name.user_password != password):
+                    if (name.user_password != password):
                         messages.error(request, 'Incorrect password')
                         return HttpResponseRedirect('/accounts/login/')
                     url = 'home/' + str(name.id)
                     return HttpResponseRedirect(url)
             except ObjectDoesNotExist:
-                    messages.error(request, 'Username does not exist')
-                    return HttpResponseRedirect('/accounts/login/')
+                messages.error(request, 'Username does not exist')
+                return HttpResponseRedirect('/accounts/login/')
     else:
         form = LoginForm()
 
     return render(request, 'project/login.html', {'form': form})
+
 
 def user_home(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/userHome.html', context)
 
+
 def news(request):
-    return render(request,'project/News.html')
+    return render(request, 'project/News.html')
+
 
 def userNews(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/userNews.html', context)
 
+
 def userTeams(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/userTeams.html', context)
+
 
 def createBracket(request, user_id):
     # only generate the bracket if the stats are put in
@@ -205,7 +222,8 @@ def createBracket(request, user_id):
 
     return render(request, 'project/createBracket.html', context)
 
-def myBracket(request,user_id):
+
+def myBracket(request, user_id):
     # scoring- split the list of winning teams into lists for each round
     # bracket is a list of teams- every 2 teams played a game against each other
     # split the bracket list up into lists for each round as well
@@ -224,6 +242,7 @@ def myBracket(request,user_id):
     championship = teamW[132:134]
     context = {'user': user, 'user_id': user_id, 'brackets': brackets}
     return render(request, 'project/bracket.html', context)
+
 
 # method to scrape for game info
 def scoreScrape():
@@ -247,8 +266,8 @@ def scoreScrape():
         if img == "/march-madness-live/public/assets/images/menu/mml-nav-logo.svg":
             continue
         # add img to directory if it doesn't already exist
-        if os.path.isfile(dest +'/' + filename) == False:
-            r = requests.get(img, stream = True)
+        if os.path.isfile(dest + '/' + filename) == False:
+            r = requests.get(img, stream=True)
             if r.status_code == 200:
                 r.raw.decode_content = True
                 with open(filename, 'wb') as f:
@@ -265,7 +284,7 @@ def scoreScrape():
     for i in content:
         header = i.find('header')
         info = header.getText()
-        #img_info = header.getText()
+        # img_info = header.getText()
         teamL.append(info)
         # imgname = info.replace(" ", "-")
         # img_name = ""
@@ -284,6 +303,7 @@ def scoreScrape():
 
     return teamL, teamW, imgsL
 
+
 def scores(request):
     [teamL, teamW, imgsL] = scoreScrape()
     context = {'teamL': teamL, 'teamW': teamW, 'img_name': json.dumps(imgsL)}
@@ -297,8 +317,8 @@ def userScores(request, user_id):
     context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
     return render(request, 'project/userScores.html', context)
 
+
 def teams(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
     return render(request, 'project/teams.html', context)
-
