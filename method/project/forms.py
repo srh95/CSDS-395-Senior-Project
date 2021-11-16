@@ -14,6 +14,9 @@ class TeamForm(forms.Form):
     team_name = forms.CharField(label="team_name", max_length=50, required=True)
     num_members = forms.CharField(label="num_members", max_length=1, required=True)
 
+class JoinTeamForm(forms.Form):
+    code = forms.CharField(label="code", max_length=10, required=True)
+
 class StatForm(forms.Form):
     stat1 = forms.CharField(label="stat1", max_length=50, required=True)
     stat2 = forms.CharField(label="stat2", max_length=50, required=True)
