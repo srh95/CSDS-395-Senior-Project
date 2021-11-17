@@ -1,11 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, AbstractBaseUser
 
 class Team(models.Model):
-    team_id = models.CharField(max_length=8)
+    team_id = models.CharField(max_length=10)
     team_name = models.CharField(max_length=200)
     num_members = models.CharField(max_length=2)
 
+    def __str__(self):
+        return self.team_name
 
 class User(models.Model):
     user_name = models.CharField(max_length=200)
@@ -15,7 +17,6 @@ class User(models.Model):
 
     def __str__(self):
         return self.user_name
-
 
 class Bracket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
