@@ -14,6 +14,7 @@ import string
 from .models import (
     User, Bracket, Team
 )
+
 from .forms import (
     RegisterForm,
     LoginForm,
@@ -23,15 +24,12 @@ from .forms import (
     JoinTeamForm
 )
 
-
 def index(request):
     return HttpResponse("Hello world. You're at the website index.")
 
 
 def home(request):
     return render(request, 'project/home.html')
-
-
 
 def createTeam(request, user_id):
     # need to make it so a user cant create a team if team attribute is not null/empty
