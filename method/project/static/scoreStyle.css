@@ -254,6 +254,15 @@
   margin-top: 50px;
 }
 
+.champion {
+  width: 500px;
+  height: 250px;
+  border: 2px solid white;
+  display: inline-block;
+  margin-left: 125px;
+  margin-top: 50px;
+}
+
 .circular_image {
   width: 200px;
   height: 200px;
