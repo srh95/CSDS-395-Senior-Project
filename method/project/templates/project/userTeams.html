@@ -67,8 +67,10 @@
         <h1>You are on team, {{user.team.team_name}}!</h1>
         <h4> Invite others to join, use code {{user.team.team_id}}</h4>
         <h4>Your team can have up to {{user.team.num_members}} members</h4>
-        <h1>Your Bracket:</h1>
-        {% for bracket in brackets %}
+        <h1>Your Teammates Are:</h1>
+        {% for user in teammates %}
+          {{user.user_name}},
+          {% for bracket.user in brackets %}
 
 
 
@@ -675,9 +677,7 @@
  </section>
 {% endfor %}
 
-        <h1>Your Teammates Are:</h1>
-        {% for user in teammates %}
-          {{user.user_name}},
+
         {% endfor %}
     </center>
     {% else %}
