@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 import json
 import string
+from django.views.generic.list import ListView
 
 from .models import (
     User, Bracket, Team
@@ -45,9 +46,9 @@ def createTeam(request, user_id):
         database = Team.objects.create(
             team_id=team_id,
             team_name=request.GET.get('team_name'),
-            num_members=request.GET.get('num_members')
+            num_members=request.GET.get('num_member45utj gb s')
         )
-        database.save()
+        database.save(),
         print(team_id)
         team_obj = get_object_or_404(Team, team_id=team_id)
         User.objects.filter(id=user_id).update(team=team_obj)
@@ -66,7 +67,7 @@ def joinTeam(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     form = JoinTeamForm(request.POST)
     code = request.GET.get('join_code')
-    print(code)
+    team_obj = get_object_or_404(Team, team_id=code)
     if request.method == 'GET' and 'join_code' in request.GET:
         code = request.GET.get('join_code')
         team_obj = get_object_or_404(Team, team_id=code)
@@ -78,6 +79,18 @@ def joinTeam(request, user_id):
         context = {'user': user, 'user_id': user_id}
         return render(request, 'project/joinTeam.html', context)
 
+def leaveTeam(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    code = null
+    if request.method == 'GET':
+        team_obj = get_object_or_404(Team, team_id=code)
+        User.objects.filter(id=user_id).update(team=team_obj)
+        print('success')
+        url = '/teams/' + str(user_id)
+        return HttpResponseRedirect(url)
+    else:
+        context = {'user': user, 'user_id': user_id}
+        return render(request, 'project/joinTeam.html', context)
 
 def register(request):
     if request.method == 'POST':
@@ -150,8 +163,15 @@ def userNews(request, user_id):
 
 def userTeams(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    context = {'user': user, 'user_id': user_id}
-    return render(request, 'project/userTeams.html', context)
+    brackets = Bracket.objects.filter(user__pk=user_id)
+    if user.team:
+        team_obj = get_object_or_404(Team, team_id=user.team.team_id)
+        teammates = User.objects.filter(team = team_obj)
+        context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'teammates': teammates}
+        return render(request, 'project/userTeams.html', context)
+    else:
+        context = {'user': user, 'user_id': user_id}
+        return render(request, 'project/userTeams.html', context)
 
 
 def createBracket(request, user_id):
@@ -219,7 +239,6 @@ def createBracket(request, user_id):
         context = {'user': user, 'user_id': user_id, 'save_form': save_form}
 
     return render(request, 'project/createBracket.html', context)
-
 
 def myBracket(request, user_id):
     # scoring- split the list of winning teams into lists for each round
