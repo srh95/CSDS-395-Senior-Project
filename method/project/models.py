@@ -1,28 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import User, Group
-
+from django.contrib.auth.models import User, Group, AbstractBaseUser
 
 class Team(models.Model):
     team_id = models.CharField(max_length=10)
     team_name = models.CharField(max_length=200)
     num_members = models.CharField(max_length=2)
 
-
     def __str__(self):
         return self.team_name
-
-class Bracket(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    bracket_name = models.CharField(max_length=50)
-    bracket = models.JSONField(default=list, blank=True, null=True)
-    stat1 = models.CharField(max_length=50)
-    stat2 = models.CharField(max_length=50)
-    stat3 = models.CharField(max_length=50)
-    stat4 = models.CharField(max_length=50)
-    stat5 = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.bracket_name
 
 class User(models.Model):
     user_name = models.CharField(max_length=200)
@@ -33,8 +18,11 @@ class User(models.Model):
     def __str__(self):
         return self.user_name
 
-class UserBracketProfiles(models.Model):
+class Bracket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    bracket_name = models.CharField(max_length=50)
     bracket = models.JSONField(default=list, blank=True, null=True)
+    stat1 = models.CharField(max_length=50)
+
     def __str__(self):
-        return self.user.user_username
+        return self.bracket_name
