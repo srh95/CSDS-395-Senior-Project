@@ -46,11 +46,8 @@ body, html {
  font-size:40px;
  font-weight: normal;
 }
-.scores {
-font-family: sans-serif;
-font-size:40px;
-font-weight: normal;
-
+.moved {
+  transform: translate(2px);
 }
 
 #first {background-color: #7BB4DA;}
@@ -93,8 +90,8 @@ image.src = a1;
 <div id="first" class="tabcontent">
     <div class="boxed">
         <div class="teams">
-            <img alt="name" height="87" width="100" id="img_nam" />
-            {{teamL.8}} {{teamL.9}}
+            <img src="{% static 'team_img/virginia-tech.svg'%}" height="87" width="100" id="img_nam" />
+            {{teamL.8}} <div class=moved"> {{teamL.9}}</div>
 
             <p><img src="{% static 'team_img/florida.svg'%}" alt="name" height="87" width="100" />
             <b>{{teamW.8}} {{teamW.9}}</b></p>
@@ -126,170 +123,198 @@ image.src = a1;
     </div>
       <div class="bottom_boxed">
           <div class="teams">
+              <img src="{% static 'team_img/ohio-st.svg'%}" alt="name" height="87" width="100" />
             {{teamL.16}} {{teamL.17}}
-              <p><b>{{teamW.16}} {{teamW.17}}</b></p>
+              <p><img src="{% static 'team_img/oral-roberts.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.16}} {{teamW.17}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/hartford.svg'%}" alt="name" height="87" width="100" />
             {{teamL.18}} {{teamL.19}}
-            <p><b>{{teamW.18}} {{teamW.19}}</b></p>
+            <p><img src="{% static 'team_img/baylor.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.18}} {{teamW.19}}</b></p>
           </div>
     </div>
         <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/georgia-tech.svg'%}" alt="name" height="87" width="100" />
             {{teamL.20}} {{teamL.21}}
-            <p><b>{{teamW.20}} {{teamW.21}}</b></p>
+            <p><img src="{% static 'team_img/loyola-chicago.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.20}} {{teamW.21}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/tennessee.svg'%}" alt="name" height="87" width="100" />
             {{teamL.22}} {{teamL.23}}
-            <p><b>{{teamW.22}} {{teamW.23}}</b></p>
+            <p><img src="{% static 'team_img/oregon-st.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.22}} {{teamW.23}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/liberty.svg'%}" alt="name" height="87" width="100" />
             {{teamL.24}} {{teamL.25}}
-            <p><b>{{teamW.24}} {{teamW.25}}</b></p>
+            <p><img src="{% static 'team_img/oklahoma-st.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.24}} {{teamW.25}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/north-carolina.svg'%}" alt="name" height="87" width="100" />
             {{teamL.26}} {{teamL.27}}
-            <p><b>{{teamW.26}} {{teamW.27}}</b></p>
+            <p><img src="{% static 'team_img/wisconsin.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.26}} {{teamW.27}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/cleveland-st.svg'%}" alt="name" height="87" width="100" />
             {{teamL.28}} {{teamL.29}}
-            <p><b>{{teamW.28}} {{teamW.29}}</b></p>
+            <p><img src="{% static 'team_img/houston.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.28}} {{teamW.29}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/purdue.svg'%}" alt="name" height="87" width="100" />
             {{teamL.30}} {{teamL.31}}
-            <p><b>{{teamW.30}} {{teamW.31}}</b></p>
+            <p><img src="{% static 'team_img/north-texas.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.30}} {{teamW.31}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/clemson.svg'%}" alt="name" height="87" width="100" />
             {{teamL.32}} {{teamL.33}}
-            <p><b>{{teamW.32}} {{teamW.33}}</b></p>
+            <p><img src="{% static 'team_img/rutgers.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.32}} {{teamW.33}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/san-diego-st.svg'%}" alt="name" height="87" width="100" />
             {{teamL.34}} {{teamL.35}}
-            <p><b>{{teamW.34}} {{teamW.35}}</b></p>
+            <p><img src="{% static 'team_img/syracuse.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.34}} {{teamW.35}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/winthrop.svg'%}" alt="name" height="87" width="100" />
         {{teamL.36}} {{teamL.37}}
-            <p><b>{{teamW.36}} {{teamW.37}}</b></p>
+            <p><img src="{% static 'team_img/villanova.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.36}} {{teamW.37}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/morehead-st.svg'%}" alt="name" height="87" width="100" />
             {{teamL.38}} {{teamL.39}}
-            <p><b>{{teamW.38}} {{teamW.39}}</b></p>
+            <p><img src="{% static 'team_img/west-virginia.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.38}} {{teamW.39}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
        <div class="teams">
+           <img src="{% static 'team_img/georgetown.svg'%}" alt="name" height="87" width="100" />
             {{teamL.40}} {{teamL.41}}
-            <p><b>{{teamW.40}} {{teamW.41}}</b></p>
+            <p><img src="{% static 'team_img/colorado.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.40}} {{teamW.41}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/unc-greensboro.svg'%}" alt="name" height="87" width="100" />
             {{teamL.42}} {{teamL.43}}
-            <p><b>{{teamW.42}} {{teamW.43}}</b></p>
+            <p><img src="{% static 'team_img/florida-st.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.42}} {{teamW.43}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/eastern-wash.svg'%}" alt="name" height="87" width="100" />
             {{teamL.44}} {{teamL.45}}
-            <p><b>{{teamW.44}} {{teamW.45}}</b></p>
+            <p><img src="{% static 'team_img/kansas.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.44}} {{teamW.45}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/st-bonaventure.svg'%}" alt="name" height="87" width="100" />
         {{teamL.46}} {{teamL.47}}
-            <p><b>{{teamW.46}} {{teamW.47}}</b></p>
+            <p><img src="{% static 'team_img/LSU.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.46}} {{teamW.47}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/texas-southern.svg'%}" alt="name" height="87" width="100" />
         {{teamL.48}} {{teamL.49}}
-            <p><b>{{teamW.48}} {{teamW.49}}</b></p>
+            <p><img src="{% static 'team_img/michigan.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.48}} {{teamW.49}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/uc-santa-barbara.svg'%}" alt="name" height="87" width="100" />
         {{teamL.50}} {{teamL.51}}
-            <p><b>{{teamW.50}} {{teamW.51}}</b></p>
+            <p><img src="{% static 'team_img/creighton.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.50}} {{teamW.51}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/iona.svg'%}" alt="name" height="87" width="100" />
         {{teamL.52}} {{teamL.53}}
-            <p><b>{{teamW.52}} {{teamW.53}}</b></p>
+            <p><img src="{% static 'team_img/alabama.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.52}} {{teamW.53}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/drake.svg'%}" alt="name" height="87" width="100" />
         {{teamL.54}} {{teamL.55}}
-            <p><b>{{teamW.54}} {{teamW.55}}</b></p>
+            <p><img src="{% static 'team_img/southern-california.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.54}} {{teamW.55}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/grand-canyon.svg'%}" alt="name" height="87" width="100" />
         {{teamL.56}} {{teamL.57}}
-            <p><b>{{teamW.56}} {{teamW.57}}</b></p>
+            <p><img src="{% static 'team_img/iowa.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.56}} {{teamW.57}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/uconn.svg'%}" alt="name" height="87" width="100" />
        {{teamL.58}} {{teamL.59}}
-            <p><b>{{teamW.58}} {{teamW.59}}</b></p>
+            <p><img src="{% static 'team_img/maryland.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.58}} {{teamW.59}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/virginia.svg'%}" alt="name" height="87" width="100" />
         {{teamL.60}} {{teamL.61}}
-            <p><b>{{teamW.60}} {{teamW.61}}</b></p>
+            <p><img src="{% static 'team_img/ohio.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.60}} {{teamW.61}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/missouri.svg'%}" alt="name" height="87" width="100" />
        {{teamL.62}} {{teamL.63}}
-            <p><b>{{teamW.62}} {{teamW.63}}</b></p>
+            <p><img src="{% static 'team_img/oklahoma.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.62}} {{teamW.63}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/norfolk-st.svg'%}" alt="name" height="87" width="100" />
         {{teamL.64}} {{teamL.65}}
-            <p><b>{{teamW.64}} {{teamW.65}}</b></p>
+            <p><img src="{% static 'team_img/gonzaga.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.64}} {{teamW.65}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/BYU.svg'%}" alt="name" height="87" width="100" />
         {{teamL.66}} {{teamL.67}}
-            <p><b>{{teamW.66}} {{teamW.67}}</b></p>
+            <p><img src="{% static 'team_img/UCLA.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.66}} {{teamW.67}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/VCU.svg'%}" alt="name" height="87" width="100" />
        {{teamL.68}} {{teamL.69}}
-            <p><b>{{teamW.68}} {{teamW.69}}</b></p>
+            <p><img src="{% static 'team_img/oregon.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.68}} {{teamW.69}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/texas.svg'%}" alt="name" height="87" width="100" />
         {{teamL.70}} {{teamL.71}}
-            <p><b>{{teamW.70}} {{teamW.71}}</b></p>
+            <p><img src="{% static 'team_img/abilene-christian.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.70}} {{teamW.71}}</b></p>
         </div>
     </div>
 
@@ -298,98 +323,114 @@ image.src = a1;
 <div id="second" class="tabcontent">
   <div class="boxed">
         <div class="teams">
+            <img src="{% static 'team_img/illinois.svg'%}" alt="name" height="87" width="100" />
         {{teamL.72}} {{teamL.73}}
-            <p><b>{{teamW.72}} {{teamW.73}}</b></p>
+            <p><img src="{% static 'team_img/loyola-chicago.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.72}} {{teamW.73}}</b></p>
         </div>
     </div>
 <div class="boxed">
         <div class="teams">
+            <img src="{% static 'team_img/wisconsin.svg'%}" alt="name" height="87" width="100" />
         {{teamL.74}} {{teamL.75}}
-            <p><b>{{teamW.74}} {{teamW.75}}</b></p>
+            <p><img src="{% static 'team_img/baylor.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.74}} {{teamW.75}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/west-virginia.svg'%}" alt="name" height="87" width="100" />
         {{teamL.76}} {{teamL.77}}
-            <p><b>{{teamW.76}} {{teamW.77}}</b></p>
+            <p><img src="{% static 'team_img/syracuse.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.76}} {{teamW.77}}</b></p>
         </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/texas-tech.svg'%}" alt="name" height="87" width="100" />
         {{teamL.78}} {{teamL.79}}
-            <p><b>{{teamW.78}} {{teamW.79}}</b></p>
+            <p><img src="{% static 'team_img/arkansas.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.78}} {{teamW.79}}</b></p>
         </div>
     </div>
       <div class="bottom_boxed">
           <div class="teams">
+              <img src="{% static 'team_img/rutgers.svg'%}" alt="name" height="87" width="100" />
         {{teamL.80}} {{teamL.81}}
-            <p><b>{{teamW.80}} {{teamW.81}}</b></p>
+            <p><img src="{% static 'team_img/houston.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.80}} {{teamW.81}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/florida.svg'%}" alt="name" height="87" width="100" />
         {{teamL.82}} {{teamL.83}}
-            <p><b>{{teamW.82}} {{teamW.83}}</b></p>
+            <p><img src="{% static 'team_img/oral-roberts.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.82}} {{teamW.83}}</b></p>
           </div>
     </div>
         <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/north-texas.svg'%}" alt="name" height="87" width="100" />
         {{teamL.84}} {{teamL.85}}
-            <p><b>{{teamW.84}} {{teamW.85}}</b></p>
+            <p><img src="{% static 'team_img/villanova.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.84}} {{teamW.85}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/oklahoma-st.svg'%}" alt="name" height="87" width="100" />
         {{teamL.86}} {{teamL.87}}
-            <p><b>{{teamW.86}} {{teamW.87}}</b></p>
+            <p><img src="{% static 'team_img/oregon-st.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.86}} {{teamW.87}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/iowa.svg'%}" alt="name" height="87" width="100" />
       {{teamL.88}} {{teamL.89}}
-            <p><b>{{teamW.88}} {{teamW.89}}</b></p>
+            <p><img src="{% static 'team_img/oregon.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.88}} {{teamW.89}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/oklahoma.svg'%}" alt="name" height="87" width="100" />
        {{teamL.90}} {{teamL.91}}
-            <p><b>{{teamW.90}} {{teamW.91}}</b></p>
+            <p><img src="{% static 'team_img/gonzaga.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.90}} {{teamW.91}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/abilene-christian.svg'%}" alt="name" height="87" width="100" />
         {{teamL.92}} {{teamL.93}}
-            <p><b>{{teamW.92}} {{teamW.93}}</b></p>
+            <p><img src="{% static 'team_img/ucla.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.92}} {{teamW.93}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/ohio.svg'%}" alt="name" height="87" width="100" />
         {{teamL.94}} {{teamL.95}}
-            <p><b>{{teamW.94}} {{teamW.95}}</b></p>
+            <p><img src="{% static 'team_img/creighton.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.94}} {{teamW.95}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/LSU.svg'%}" alt="name" height="87" width="100" />
        {{teamL.96}} {{teamL.97}}
-            <p><b>{{teamW.96}} {{teamW.97}}</b></p>
+            <p><img src="{% static 'team_img/michigan.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.96}} {{teamW.97}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/colorado.svg'%}" alt="name" height="87" width="100" />
         {{teamL.98}} {{teamL.99}}
-            <p><b>{{teamW.98}} {{teamW.99}}</b></p>
+            <p><img src="{% static 'team_img/oregon-st.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.98}} {{teamW.99}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/maryland.svg'%}" alt="name" height="87" width="100" />
         {{teamL.100}} {{teamL.101}}
-            <p><b>{{teamW.100}} {{teamW.101}}</b></p>
+            <p><img src="{% static 'team_img/alabama.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.100}} {{teamW.101}}</b></p>
           </div>
     </div>
     <div class="bottom_boxed">
         <div class="teams">
+            <img src="{% static 'team_img/kansas.svg'%}" alt="name" height="87" width="100" />
         {{teamL.102}} {{teamL.103}}
-            <p><b>{{teamW.102}} {{teamW.103}}</b></p>
+            <p><img src="{% static 'team_img/southern-california.svg'%}" alt="name" height="87" width="100" /><b>{{teamW.102}} {{teamW.103}}</b></p>
           </div>
     </div>
 </div>
@@ -487,7 +528,7 @@ image.src = a1;
         </div>
     </div>
     <h3>Championship results</h3>
-    <div class="bottom_boxed">
+    <div class="champion">
         <div class="teams">
         {{teamL.132}} {{teamL.133}}
             <p><b>{{teamW.132}} {{teamW.133}}</b></p>
