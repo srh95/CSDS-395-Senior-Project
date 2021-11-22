@@ -159,31 +159,16 @@ def createBracket(request, user_id):
     # if a bracket is generated make the save button show up
     # delete the request sessions when a bracket is saved
     user = get_object_or_404(User, pk=user_id)
-    ordered_stats = []
     # choosing the stats
     if request.method == 'GET' and 'stat1' in request.GET:
-        print("is this running")
         stat1 = request.GET.get('stat1')
-        stat2 = request.GET.get('stat2')
-        stat3 = request.GET.get('stat3')
-        stat4 = request.GET.get('stat4')
-        stat5 = request.GET.get('stat5')
 
-        ordered_stats = [stat1, stat2, stat3, stat4, stat5]
-        print(ordered_stats)
-        if len(set(ordered_stats)) != len(ordered_stats):
-            messages.error(request, 'Please select a different statistic for each category')
-        elif len(ordered_stats) == 0:
-            print("length is 0 ")
-            messages.error(request, 'Please select a statistic for each category')
-        else:
-            print("the else statement executed")
-            request.session['ordered_stats'] = ordered_stats
-            # establish some check to make sure no stat was chosen more than once
-            # call function that generates bracket, returns list of teams in order to fill in bracket
-            bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
-            request.session['bracket'] = bracket
-            context = {'user': user, 'user_id': user_id, 'bracket': bracket}
+        request.session['stat1'] = stat1
+        # establish some check to make sure no stat was chosen more than once
+        # call function that generates bracket, returns list of teams in order to fill in bracket
+        bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
+        request.session['bracket'] = bracket
+        context = {'user': user, 'user_id': user_id, 'bracket': bracket}
     else:
         context = {'user': user, 'user_id': user_id}
 
@@ -193,24 +178,15 @@ def createBracket(request, user_id):
         if save_form.is_valid():
             bracket = request.session.get('bracket')
             # note to myself- it allows you to save a bracket without selecting stats, not good :(
-            stats = request.session.get('ordered_stats')
-            stat1 = stats[0]
-            stat2 = stats[1]
-            stat3 = stats[2]
-            stat4 = stats[3]
-            stat5 = stats[4]
+            stat1 = request.session.get('stat1')
             database = Bracket.objects.create(
                 bracket_name=save_form.cleaned_data['name'],
                 user=user,
                 bracket=bracket,
-                stat1=stat1,
-                stat2=stat2,
-                stat3=stat3,
-                stat4=stat4,
-                stat5=stat5,
+                stat1=stat1
             )
             database.save()
-            del request.session['ordered_stats']
+            del request.session['stat1']
             del request.session['bracket']
             context = {'user': user, 'user_id': user_id, 'bracket': bracket, 'save_form': save_form}
 
@@ -230,6 +206,15 @@ def myBracket(request, user_id):
     # idk how bracket scoring works so tbd if we can do that
     user = get_object_or_404(User, pk=user_id)
     brackets = Bracket.objects.filter(user__pk=user_id)
+
+    for bracket in brackets:
+        print(bracket.id)
+
+    if request.method == 'GET' and 'bracket_id' in request.GET:
+        bid = request.GET.get('bracket_id')
+        Bracket.objects.filter(id=bid).delete()
+        brackets = Bracket.objects.filter(user__pk=user_id)
+
     teamW = request.session.get('teamW')
     # separate list of winning teams into lists for each round
     round_1 = teamW[8:72]
@@ -240,6 +225,12 @@ def myBracket(request, user_id):
     championship = teamW[132:134]
     context = {'user': user, 'user_id': user_id, 'brackets': brackets}
     return render(request, 'project/bracket.html', context)
+
+def deleteBracket(request, bracket_id):
+    if request.method == 'GET':
+        Bracket.objects.filter(id=bracket_id).delete()
+
+
 
 
 # method to scrape for game info

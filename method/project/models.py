@@ -23,10 +23,6 @@ class Bracket(models.Model):
     bracket_name = models.CharField(max_length=50)
     bracket = models.JSONField(default=list, blank=True, null=True)
     stat1 = models.CharField(max_length=50)
-    stat2 = models.CharField(max_length=50)
-    stat3 = models.CharField(max_length=50)
-    stat4 = models.CharField(max_length=50)
-    stat5 = models.CharField(max_length=50)
 
     def __str__(self):
         return self.bracket_name
