@@ -30,8 +30,7 @@
 
 
 
- Selected Stats: Most Important: {{bracket.stat1}} Second Most Important: {{bracket.stat2}}
- Third Most Important: {{bracket.stat3}} Fourth Most Important: {{bracket.stat4}} Fifth Most Important: {{bracket.stat5}}
+ Stat used to generate bracket: {{bracket.stat1}}
 
  <header>
 
@@ -632,6 +631,12 @@
  </div>
  </section>
 </body>
+
+<form method="GET">
+   <input type="hidden" id="bracket_id" name="bracket_id" value={{bracket.id}}>
+  <button onclick="deleteBracket(request)">Remove</button>
+
+</form>
 
 {% endfor %}
 
