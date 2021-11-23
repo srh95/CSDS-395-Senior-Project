@@ -180,15 +180,43 @@ def createBracket(request, user_id):
     # delete the request sessions when a bracket is saved
     user = get_object_or_404(User, pk=user_id)
     # choosing the stats
-    if request.method == 'GET' and 'stat1' in request.GET:
+    if request.method == 'GET' and 'stat1' in request.GET and 'stat2' in request.GET \
+            and 'stat3' in request.GET and 'stat4' in request.GET and 'stat5' in request.GET:
+        print("code executed")
         stat1 = request.GET.get('stat1')
+        stat2 = request.GET.get('stat2')
+        stat3 = request.GET.get('stat3')
+        stat4 = request.GET.get('stat4')
+        stat5 = request.GET.get('stat5')
 
         request.session['stat1'] = stat1
-        # establish some check to make sure no stat was chosen more than once
-        # call function that generates bracket, returns list of teams in order to fill in bracket
-        bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
-        request.session['bracket'] = bracket
-        context = {'user': user, 'user_id': user_id, 'bracket': bracket}
+        request.session['stat2'] = stat2
+        request.session['stat3'] = stat3
+        request.session['stat4'] = stat4
+        request.session['stat5'] = stat5
+
+        ordered_stats = [stat1, stat2, stat3, stat4, stat5]
+        # remove none's from the list
+        valueToBeRemoved = "None"
+
+        try:
+            while True:
+                ordered_stats.remove(valueToBeRemoved)
+        except ValueError:
+            pass
+
+        print(ordered_stats)
+
+        if len(set(ordered_stats)) != len(ordered_stats):
+            messages.error(request, 'Please select a different statistic for each category')
+        else:
+            # pass ordered_stats into function
+
+            # establish some check to make sure no stat was chosen more than once
+            # call function that generates bracket, returns list of teams in order to fill in bracket
+            bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
+            request.session['bracket'] = bracket
+            context = {'user': user, 'user_id': user_id, 'bracket': bracket}
     else:
         context = {'user': user, 'user_id': user_id}
 
@@ -199,14 +227,23 @@ def createBracket(request, user_id):
             bracket = request.session.get('bracket')
             # note to myself- it allows you to save a bracket without selecting stats, not good :(
             stat1 = request.session.get('stat1')
+            stat2 = request.session.get('stat2')
+            stat3 = request.session.get('stat3')
+            stat4 = request.session.get('stat4')
+            stat5 = request.session.get('stat5')
+            stats = [stat1, stat2, stat3, stat4, stat5]
             database = Bracket.objects.create(
                 bracket_name=save_form.cleaned_data['name'],
                 user=user,
                 bracket=bracket,
-                stat1=stat1
+                stats=stats
             )
             database.save()
             del request.session['stat1']
+            del request.session['stat2']
+            del request.session['stat3']
+            del request.session['stat4']
+            del request.session['stat5']
             del request.session['bracket']
             context = {'user': user, 'user_id': user_id, 'bracket': bracket, 'save_form': save_form}
 
