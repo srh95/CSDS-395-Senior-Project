@@ -16,79 +16,175 @@
             <ul>
                 <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
                 <li><a href="/scores/{{user.id}}">Scores</a></li>
+             <li><a href="/myBracket/{{user.id}}">My Brackets</a></li>
                 <li><a href="/teams/{{user.id}}">Teams</a></li>
-                <li><a href="/myBracket/{{user.id}}">MyBracket</a></li>
                 <li><a href="/news/{{user.id}}">News</a></li>
                 <li id="login"><a href="{% url 'home' %}">Logout</a></li>
         </div>
 
      </div>
-
+<div class="text-box">
         <h1> Create a March Madness bracket </h1>
+       <p>Choose up to 5 statistics to use to generate your bracket. Note: the statistics should be chosen in order of importance.</p>
+</div>
 
 
 <form method="GET">
     {% csrf_token %}
-
-
-    <label for="stat1">Choose a statistic to base bracket generation off of:</label>
+<div class="text-box">
+    <label for="stat1"></label>
 <select name="stat1" id="stat1" required>
  <option value="none" selected disabled hidden>
           Select an Option
-    <option value="Stat 1">Stat 1</option>
-  <option value="Stat 2">Stat 2</option>
-  <option value="Stat 3">Stat 3</option>
-  <option value="Stat 4">Stat 4</option>
-    <option value="Stat 5">stat 5</option>
+ <option value="G">Games</option>
+  <option value="MP">Minutes Played Per Game</option>
+  <option value="FG">Field Goals Per Game</option>
+  <option value="FGA">Field Goal Attempts Per Game</option>
+    <option value="FG%">Field Goal Percentage</option>
+  <option value="2P">2-Point Field Goals Per Game</option>
+  <option value="2PA">2-Point Field Goal Attempts Per Game</option>
+  <option value="2P%">2-Point Field Goal Percentage</option>
+  <option value="3P">3-Point Field Goals Per Game</option>
+  <option value="3PA">3-Point Field Goal Attempts Per Game</option>
+  <option value="3P%">3-Point Field Goal Percentage</option>
+    <option value="FT">Free Throws Per Game</option>
+  <option value="FTA">Free Throw Attempts Per Game</option>
+  <option value="FT%">Free Throw Percentage</option>
+  <option value="ORB">Offensive Rebounds Per Game</option>
+  <option value="DRB">Defensive Rebounds Per Game</option>
+    <option value="TRB">Total Rebounds Per Game</option>
+  <option value="AST">Assists Per Game</option>
+  <option value="STL">Steals Per Game</option>
+  <option value="BLK">Blocks Per Game</option>
+    <option value="TOV">Turnovers Per Game</option>
+    <option value="PF">Personal Fouls Per Game</option>
+    <option value="PTS">Points Per Game</option>
 </select>
-
+</div>
+ <div class="text-box">
  <select name="stat2" id="stat2" required>
  <option value="none" selected disabled hidden>
           Select an Option
-    <option value="Stat 1">Stat 1</option>
-  <option value="Stat 2">Stat 2</option>
-  <option value="Stat 3">Stat 3</option>
-  <option value="Stat 4">Stat 4</option>
-    <option value="Stat 5">stat 5</option>
-   <option value="None">None</option>
+ <option value="G">Games</option>
+  <option value="MP">Minutes Played Per Game</option>
+  <option value="FG">Field Goals Per Game</option>
+  <option value="FGA">Field Goal Attempts Per Game</option>
+    <option value="FG%">Field Goal Percentage</option>
+  <option value="2P">2-Point Field Goals Per Game</option>
+  <option value="2PA">2-Point Field Goal Attempts Per Game</option>
+  <option value="2P%">2-Point Field Goal Percentage</option>
+  <option value="3P">3-Point Field Goals Per Game</option>
+  <option value="3PA">3-Point Field Goal Attempts Per Game</option>
+  <option value="3P%">3-Point Field Goal Percentage</option>
+    <option value="FT">Free Throws Per Game</option>
+  <option value="FTA">Free Throw Attempts Per Game</option>
+  <option value="FT%">Free Throw Percentage</option>
+  <option value="ORB">Offensive Rebounds Per Game</option>
+  <option value="DRB">Defensive Rebounds Per Game</option>
+    <option value="TRB">Total Rebounds Per Game</option>
+  <option value="AST">Assists Per Game</option>
+  <option value="STL">Steals Per Game</option>
+  <option value="BLK">Blocks Per Game</option>
+    <option value="TOV">Turnovers Per Game</option>
+    <option value="PF">Personal Fouls Per Game</option>
+    <option value="PTS">Points Per Game</option>
+  <option value="None">None</option>
 </select>
-
+ </div>
+ <div class="text-box">
  <select name="stat3" id="stat3" required>
  <option value="none" selected disabled hidden>
           Select an Option
-    <option value="Stat 1">Stat 1</option>
-  <option value="Stat 2">Stat 2</option>
-  <option value="Stat 3">Stat 3</option>
-  <option value="Stat 4">Stat 4</option>
-    <option value="Stat 5">stat 5</option>
-  <option value="None">None</option>
+    <option value="G">Games</option>
+  <option value="MP">Minutes Played Per Game</option>
+  <option value="FG">Field Goals Per Game</option>
+  <option value="FGA">Field Goal Attempts Per Game</option>
+    <option value="FG%">Field Goal Percentage</option>
+  <option value="2P">2-Point Field Goals Per Game</option>
+  <option value="2PA">2-Point Field Goal Attempts Per Game</option>
+  <option value="2P%">2-Point Field Goal Percentage</option>
+  <option value="3P">3-Point Field Goals Per Game</option>
+  <option value="3PA">3-Point Field Goal Attempts Per Game</option>
+  <option value="3P%">3-Point Field Goal Percentage</option>
+    <option value="FT">Free Throws Per Game</option>
+  <option value="FTA">Free Throw Attempts Per Game</option>
+  <option value="FT%">Free Throw Percentage</option>
+  <option value="ORB">Offensive Rebounds Per Game</option>
+  <option value="DRB">Defensive Rebounds Per Game</option>
+    <option value="TRB">Total Rebounds Per Game</option>
+  <option value="AST">Assists Per Game</option>
+  <option value="STL">Steals Per Game</option>
+  <option value="BLK">Blocks Per Game</option>
+    <option value="TOV">Turnovers Per Game</option>
+    <option value="PF">Personal Fouls Per Game</option>
+    <option value="PTS">Points Per Game</option>
+   <option value="None">None</option>
 </select>
-
+ </div>
+ <div class="text-box">
  <select name="stat4" id="stat4" required>
  <option value="none" selected disabled hidden>
           Select an Option
-    <option value="Stat 1">Stat 1</option>
-  <option value="Stat 2">Stat 2</option>
-  <option value="Stat 3">Stat 3</option>
-  <option value="Stat 4">Stat 4</option>
-    <option value="Stat 5">stat 5</option>
-   <option value="None">None</option>
-</select>
-
+   <option value="G">Games</option>
+  <option value="MP">Minutes Played Per Game</option>
+  <option value="FG">Field Goals Per Game</option>
+  <option value="FGA">Field Goal Attempts Per Game</option>
+    <option value="FG%">Field Goal Percentage</option>
+  <option value="2P">2-Point Field Goals Per Game</option>
+  <option value="2PA">2-Point Field Goal Attempts Per Game</option>
+  <option value="2P%">2-Point Field Goal Percentage</option>
+  <option value="3P">3-Point Field Goals Per Game</option>
+  <option value="3PA">3-Point Field Goal Attempts Per Game</option>
+  <option value="3P%">3-Point Field Goal Percentage</option>
+    <option value="FT">Free Throws Per Game</option>
+  <option value="FTA">Free Throw Attempts Per Game</option>
+  <option value="FT%">Free Throw Percentage</option>
+  <option value="ORB">Offensive Rebounds Per Game</option>
+  <option value="DRB">Defensive Rebounds Per Game</option>
+    <option value="TRB">Total Rebounds Per Game</option>
+  <option value="AST">Assists Per Game</option>
+  <option value="STL">Steals Per Game</option>
+  <option value="BLK">Blocks Per Game</option>
+    <option value="TOV">Turnovers Per Game</option>
+    <option value="PF">Personal Fouls Per Game</option>
+    <option value="PTS">Points Per Game</option>
+  <option value="None">None</option>
+ </select>
+ </div>
+ <div class="text-box">
  <select name="stat5" id="stat5" required>
  <option value="none" selected disabled hidden>
           Select an Option
-    <option value="Stat 1">Stat 1</option>
-  <option value="Stat 2">Stat 2</option>
-  <option value="Stat 3">Stat 3</option>
-  <option value="Stat 4">Stat 4</option>
-    <option value="Stat 5">stat 5</option>
-   <option value="None">None</option>
+ <option value="G">Games</option>
+  <option value="MP">Minutes Played Per Game</option>
+  <option value="FG">Field Goals Per Game</option>
+  <option value="FGA">Field Goal Attempts Per Game</option>
+    <option value="FG%">Field Goal Percentage</option>
+  <option value="2P">2-Point Field Goals Per Game</option>
+  <option value="2PA">2-Point Field Goal Attempts Per Game</option>
+  <option value="2P%">2-Point Field Goal Percentage</option>
+  <option value="3P">3-Point Field Goals Per Game</option>
+  <option value="3PA">3-Point Field Goal Attempts Per Game</option>
+  <option value="3P%">3-Point Field Goal Percentage</option>
+    <option value="FT">Free Throws Per Game</option>
+  <option value="FTA">Free Throw Attempts Per Game</option>
+  <option value="FT%">Free Throw Percentage</option>
+  <option value="ORB">Offensive Rebounds Per Game</option>
+  <option value="DRB">Defensive Rebounds Per Game</option>
+    <option value="TRB">Total Rebounds Per Game</option>
+  <option value="AST">Assists Per Game</option>
+  <option value="STL">Steals Per Game</option>
+  <option value="BLK">Blocks Per Game</option>
+    <option value="TOV">Turnovers Per Game</option>
+    <option value="PF">Personal Fouls Per Game</option>
+    <option value="PTS">Points Per Game</option>
+  <option value="None">None</option>
 </select>
-
+ </div>
+<div class="text-box">
 <!-- <input type="Submit" value="Generate bracket">-->
- <button onclick="createBracket(request)" >Submit</button>
-
+ <button onclick="createBracket(request)" style="height:25px; width:75px">Submit </button>
+</div>
 
 </form>
 
@@ -97,13 +193,13 @@
 <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
 {% endfor %}
 {% endif %}
+</div>
 
  <body>
  <header>
 
  <div class='header-text'>
  <h1>Generated Bracket</h1>
- <link rel ="stylesheet" href="text2.css">
  </div>
  <div class='half-circle-container'>
  <div class='half-circle bottom-circle'>
