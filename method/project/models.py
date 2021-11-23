@@ -22,7 +22,9 @@ class Bracket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     bracket_name = models.CharField(max_length=50)
     bracket = models.JSONField(default=list, blank=True, null=True)
-    stat1 = models.CharField(max_length=50)
+    stats = models.JSONField(default=list, blank=True, null=True)
+
+
 
     def __str__(self):
         return self.bracket_name
