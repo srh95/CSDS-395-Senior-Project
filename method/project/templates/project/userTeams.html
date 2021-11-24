@@ -70,14 +70,10 @@
         <h1>Your Teammates Are:</h1>
         {% for user in teammates %}
           {{user.user_name}},
-          {% for bracket.user in brackets %}
-
-
-
- Selected Stats: Most Important: {{bracket.stat1}} Second Most Important: {{bracket.stat2}}
- Third Most Important: {{bracket.stat3}} Fourth Most Important: {{bracket.stat4}} Fifth Most Important: {{bracket.stat5}}
-
- <header>
+          {% for bracket in brackets %}
+          Selected Stats: Most Important: {{bracket.stat1}} Second Most Important: {{bracket.stat2}}
+          Third Most Important: {{bracket.stat3}} Fourth Most Important: {{bracket.stat4}} Fifth Most Important: {{bracket.stat5}}
+          <header>
 
  <div class='header-text'>
  <h1>{{bracket.bracket_name}}</h1>
@@ -89,7 +85,7 @@
  </div>
  </div>
  </header>
- <section>
+          <section>
  <div class='body-first-child tournament first-four'>
  <ul class='round seed'>
  <li class='game-left game-top'>
@@ -675,7 +671,7 @@
  </ul>
  </div>
  </section>
-{% endfor %}
+          {% endfor %}
 
 
         {% endfor %}

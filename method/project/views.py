@@ -25,12 +25,14 @@ from .forms import (
     JoinTeamForm
 )
 
+
 def index(request):
     return HttpResponse("Hello world. You're at the website index.")
 
 
 def home(request):
     return render(request, 'project/home.html')
+
 
 def createTeam(request, user_id):
     # need to make it so a user cant create a team if team attribute is not null/empty
@@ -46,7 +48,7 @@ def createTeam(request, user_id):
         database = Team.objects.create(
             team_id=team_id,
             team_name=request.GET.get('team_name'),
-            num_members=request.GET.get('num_member45utj gb s')
+            num_members=request.GET.get('num_members')
         )
         database.save(),
         print(team_id)
@@ -66,18 +68,25 @@ def joinTeam(request, user_id):
     # need to check to see if team is at capacity, if it is dont allow them to join
     user = get_object_or_404(User, pk=user_id)
     form = JoinTeamForm(request.POST)
-    code = request.GET.get('join_code')
-    team_obj = get_object_or_404(Team, team_id=code)
+    #Gets All the Brackets Of the Current User
+    brackets = Bracket.objects.filter(user__pk=user_id)
+    print(brackets)
+    context = {'user': user, 'brackets': brackets}
     if request.method == 'GET' and 'join_code' in request.GET:
         code = request.GET.get('join_code')
+        favbracket = request.GET.get('enteredbracket')
         team_obj = get_object_or_404(Team, team_id=code)
+        favbracket_obj = get_object_or_404(Bracket, bracket_name=favbracket)
+        print(favbracket_obj.bracket_name)
         User.objects.filter(id=user_id).update(team=team_obj)
+        User.objects.filter(id=user_id).update(favbracket = favbracket_obj)
         url = '/teams/' + str(user_id)
         print('success')
         return HttpResponseRedirect(url)
     else:
-        context = {'user': user, 'user_id': user_id}
+        context = {'user': user, 'user_id': user_id, 'brackets': brackets}
         return render(request, 'project/joinTeam.html', context)
+
 
 def leaveTeam(request, user_id):
     user = get_object_or_404(User, pk=user_id)
@@ -91,6 +100,7 @@ def leaveTeam(request, user_id):
     else:
         context = {'user': user, 'user_id': user_id}
         return render(request, 'project/joinTeam.html', context)
+
 
 def register(request):
     if request.method == 'POST':
@@ -166,7 +176,7 @@ def userTeams(request, user_id):
     brackets = Bracket.objects.filter(user__pk=user_id)
     if user.team:
         team_obj = get_object_or_404(Team, team_id=user.team.team_id)
-        teammates = User.objects.filter(team = team_obj)
+        teammates = User.objects.filter(team=team_obj)
         context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'teammates': teammates}
         return render(request, 'project/userTeams.html', context)
     else:
@@ -216,6 +226,7 @@ def createBracket(request, user_id):
 
     return render(request, 'project/createBracket.html', context)
 
+
 def myBracket(request, user_id):
     # scoring- split the list of winning teams into lists for each round
     # bracket is a list of teams- every 2 teams played a game against each other
@@ -245,11 +256,10 @@ def myBracket(request, user_id):
     context = {'user': user, 'user_id': user_id, 'brackets': brackets}
     return render(request, 'project/bracket.html', context)
 
+
 def deleteBracket(request, bracket_id):
     if request.method == 'GET':
         Bracket.objects.filter(id=bracket_id).delete()
-
-
 
 
 # method to scrape for game info

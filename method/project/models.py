@@ -9,14 +9,6 @@ class Team(models.Model):
     def __str__(self):
         return self.team_name
 
-class User(models.Model):
-    user_name = models.CharField(max_length=200)
-    user_username = models.CharField(max_length=30)  # username is their email
-    user_password = models.CharField(max_length=50)
-    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True)
-
-    def __str__(self):
-        return self.user_name
 
 class Bracket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -26,3 +18,13 @@ class Bracket(models.Model):
 
     def __str__(self):
         return self.bracket_name
+
+
+class User(models.Model):
+    user_name = models.CharField(max_length=200)
+    user_username = models.CharField(max_length=30)  # username is their email
+    user_password = models.CharField(max_length=50)
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True)
+    favbracket = models.ForeignKey(Bracket, on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
+    def __str__(self):
+        return self.user_name
