@@ -79,7 +79,7 @@ def joinTeam(request, user_id):
         favbracket_obj = get_object_or_404(Bracket, bracket_name=favbracket)
         print(favbracket_obj.bracket_name)
         User.objects.filter(id=user_id).update(team=team_obj)
-        User.objects.filter(id=user_id).update(favbracket = favbracket_obj)
+        User.objects.filter(id=user_id).update(favbracket=favbracket_obj)
         url = '/teams/' + str(user_id)
         print('success')
         return HttpResponseRedirect(url)
