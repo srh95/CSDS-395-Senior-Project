@@ -34,6 +34,14 @@
                     <input id="join_code" type="text" name="join_code" required>
                     <label>Join Code</label>
                 </div>
+                <div class="bracket">
+                    <label>Select Bracket to Use</label>
+                    <select id = "enteredbracket" type="text" name="enteredbracket" required>
+                         {% for bracket in brackets %}
+                        <option>{{ bracket.bracket_name }}</option>
+                         {% endfor %}
+                    </select>
+                </div>
                 <div class="divider"> </div>
                 <button class = "button", onclick="joinTeam(request)" >Submit</button>
                 <div class="signup_link">

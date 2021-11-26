@@ -14,7 +14,7 @@ class User(models.Model):
     user_username = models.CharField(max_length=30)  # username is their email
     user_password = models.CharField(max_length=50)
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True)
-
+    favbracket = models.CharField(max_length=30)
     def __str__(self):
         return self.user_name
 
@@ -28,3 +28,4 @@ class Bracket(models.Model):
 
     def __str__(self):
         return self.bracket_name
+
