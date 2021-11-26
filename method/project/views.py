@@ -70,16 +70,16 @@ def joinTeam(request, user_id):
     form = JoinTeamForm(request.POST)
     #Gets All the Brackets Of the Current User
     brackets = Bracket.objects.filter(user__pk=user_id)
-    print(brackets)
+    # print(brackets)
     context = {'user': user, 'brackets': brackets}
     if request.method == 'GET' and 'join_code' in request.GET:
         code = request.GET.get('join_code')
         favbracket = request.GET.get('enteredbracket')
         team_obj = get_object_or_404(Team, team_id=code)
         favbracket_obj = get_object_or_404(Bracket, bracket_name=favbracket)
-        print(favbracket_obj.bracket_name)
+        favbracketname = favbracket_obj.bracket_name
         User.objects.filter(id=user_id).update(team=team_obj)
-        User.objects.filter(id=user_id).update(favbracket=favbracket_obj)
+        User.objects.filter(id=user_id).update(favbracket=favbracketname)
         url = '/teams/' + str(user_id)
         print('success')
         return HttpResponseRedirect(url)
@@ -173,7 +173,9 @@ def userNews(request, user_id):
 
 def userTeams(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    brackets = Bracket.objects.filter(user__pk=user_id)
+    favbracketname = user.favbracket
+    brackets = Bracket.objects.filter(bracket_name=favbracketname)
+    print(brackets)
     if user.team:
         team_obj = get_object_or_404(Team, team_id=user.team.team_id)
         teammates = User.objects.filter(team=team_obj)
@@ -192,7 +194,6 @@ def createBracket(request, user_id):
     # choosing the stats
     if request.method == 'GET' and 'stat1' in request.GET:
         stat1 = request.GET.get('stat1')
-
         request.session['stat1'] = stat1
         # establish some check to make sure no stat was chosen more than once
         # call function that generates bracket, returns list of teams in order to fill in bracket
@@ -235,6 +236,7 @@ def myBracket(request, user_id):
     # if it is, then that team's name can be bolded on the bracket
     # idk how bracket scoring works so tbd if we can do that
     user = get_object_or_404(User, pk=user_id)
+    print(user.user_username)
     brackets = Bracket.objects.filter(user__pk=user_id)
 
     for bracket in brackets:

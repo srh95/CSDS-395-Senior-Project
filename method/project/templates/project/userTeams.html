@@ -69,8 +69,8 @@
         <h4>Your team can have up to {{user.team.num_members}} members</h4>
         <h1>Your Teammates Are:</h1>
         {% for user in teammates %}
-          {{user.user_name}},
-          {% for bracket in brackets %}
+          {{user.user_name}}, {{user.favbracket}},
+          {% for user.bracket in brackets %}
           Selected Stats: Most Important: {{bracket.stat1}} Second Most Important: {{bracket.stat2}}
           Third Most Important: {{bracket.stat3}} Fourth Most Important: {{bracket.stat4}} Fifth Most Important: {{bracket.stat5}}
           <header>
