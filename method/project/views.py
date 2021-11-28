@@ -44,7 +44,14 @@ def createTeam(request, user_id):
     # if not just have create team or join team buttons
     user = get_object_or_404(User, pk=user_id)
     form = TeamForm(request.POST)
+    brackets = Bracket.objects.filter(user__pk=user_id)
+    context = {'user': user, 'brackets': brackets}
     if request.method == 'GET' and 'team_name' in request.GET:
+        formteam_name = request.GET.get('team_name')
+        if (Team.objects.get(team_name=formteam_name)):
+            messages.error(request, 'Team name is taken')
+            url = '/createTeam/' + str(user_id)
+            return HttpResponseRedirect(url)
         s = 10  # number of characters in the string.
         ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=s))
         team_id = str(ran)
@@ -57,28 +64,33 @@ def createTeam(request, user_id):
         print(team_id)
         team_obj = get_object_or_404(Team, team_id=team_id)
         User.objects.filter(id=user_id).update(team=team_obj)
+        favbracket = request.GET.get('enteredbracket')
+        favbracket_obj = get_object_or_404(Bracket, bracket_name=favbracket)
+        favbracketname = favbracket_obj.bracket_name
+        User.objects.filter(id=user_id).update(favbracket=favbracketname)
         url = '/teams/' + str(user_id)
         return HttpResponseRedirect(url)
 
     else:
-        context = {'user': user, 'user_id': user_id}
+        context = {'user': user, 'user_id': user_id,'brackets': brackets, 'form': form}
         return render(request, 'project/createTeam.html', context)
 
 
 def joinTeam(request, user_id):
-    # need to allow people to join team
-    # implement leave team function
     # need to check to see if team is at capacity, if it is dont allow them to join
     user = get_object_or_404(User, pk=user_id)
     form = JoinTeamForm(request.POST)
-    #Gets All the Brackets Of the Current User
     brackets = Bracket.objects.filter(user__pk=user_id)
-    # print(brackets)
     context = {'user': user, 'brackets': brackets}
     if request.method == 'GET' and 'join_code' in request.GET:
         code = request.GET.get('join_code')
-        favbracket = request.GET.get('enteredbracket')
         team_obj = get_object_or_404(Team, team_id=code)
+        teammates = User.objects.filter(team=team_obj)
+        if (len(teammates) == team_obj.num_members):
+            messages.error(request, 'Team is Full')
+            url = '/joinTeam/' + str(user_id)
+            return HttpResponseRedirect(url)
+        favbracket = request.GET.get('enteredbracket')
         favbracket_obj = get_object_or_404(Bracket, bracket_name=favbracket)
         favbracketname = favbracket_obj.bracket_name
         User.objects.filter(id=user_id).update(team=team_obj)
@@ -87,23 +99,22 @@ def joinTeam(request, user_id):
         print('success')
         return HttpResponseRedirect(url)
     else:
-        context = {'user': user, 'user_id': user_id, 'brackets': brackets}
+        form = JoinTeamForm()
+        context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'form': form}
         return render(request, 'project/joinTeam.html', context)
 
 
 def leaveTeam(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    code = null
+    # team = get_object_or_404(Team, team_id=user.team.team_id)
     if request.method == 'GET':
-        team_obj = get_object_or_404(Team, team_id=code)
-        User.objects.filter(id=user_id).update(team=team_obj)
-        print('success')
+        User.objects.filter(id=user_id).update(team=None)
         url = '/teams/' + str(user_id)
+        print('success')
         return HttpResponseRedirect(url)
     else:
         context = {'user': user, 'user_id': user_id}
         return render(request, 'project/joinTeam.html', context)
-
 
 def register(request):
     if request.method == 'POST':

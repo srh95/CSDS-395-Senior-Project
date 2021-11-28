@@ -64,7 +64,8 @@
     </div>
     {% if user.team_id %}
     <center>
-        <h1>You are on team, {{user.team.team_name}}!</h1>
+        <h2>You are on team</h2>
+        <h1> {{user.team.team_name}}</h1>
         <h4> Invite others to join, use code {{user.team.team_id}}</h4>
         <h4>Your team can have up to {{user.team.num_members}} members</h4>
         <h1>Your Teammates Are:</h1>
@@ -74,7 +75,6 @@
           Selected Stats: Most Important: {{bracket.stat1}} Second Most Important: {{bracket.stat2}}
           Third Most Important: {{bracket.stat3}} Fourth Most Important: {{bracket.stat4}} Fifth Most Important: {{bracket.stat5}}
           <header>
-
  <div class='header-text'>
  <h1>{{bracket.bracket_name}}</h1>
  <link rel ="stylesheet" href="text2.css">

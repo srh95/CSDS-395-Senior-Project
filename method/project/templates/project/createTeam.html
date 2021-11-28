@@ -37,11 +37,20 @@
                 <div class="number">
                     <label>Number of Members</label>
                     <select name="num_members" id="num_members">
-                        <option value="two">2</option>
-                        <option value="three">3</option>
-                        <option value="four">4</option>
-                        <option value="five">5</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
                       </select>
+                </div>
+                 <div class="divider"> </div>
+                <div class="bracket">
+                    <label>Select Bracket to Use</label>
+                    <select id = "enteredbracket" type="text" name="enteredbracket" required>
+                         {% for bracket in brackets %}
+                        <option>{{ bracket.bracket_name }}</option>
+                         {% endfor %}
+                    </select>
                 </div>
                 <div class="divider"> </div>
                 <button class = "button", onclick="createTeam(request)" >Submit</button>
@@ -51,6 +60,13 @@
                 <div class="signup_link">
                     <a href="/teams/{{user.id}}">Cancel</a>
                 </div>
+                <center>
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+                    {% endfor %}
+                {% endif %}
+                </center>
             </form>
         </div>
 
