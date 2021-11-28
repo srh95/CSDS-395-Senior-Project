@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Group, AbstractBaseUser
 class Team(models.Model):
     team_id = models.CharField(max_length=10)
     team_name = models.CharField(max_length=200)
-    num_members = models.CharField(max_length=2)
+    num_members = models.IntegerField()
 
     def __str__(self):
         return self.team_name

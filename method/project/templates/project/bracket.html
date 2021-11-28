@@ -24,10 +24,9 @@
             </ul>
         </div>
  </div>
-
+{% if brackets %}
 <h1>Here are your brackets: </h1>
 {% for bracket in brackets %}
-
 
 
  Stat used to generate bracket: {{bracket.stat1}}
@@ -640,5 +639,8 @@
 
 {% endfor %}
 
-
+{% else %}
+<center>
+ <h1> You have not created any brackets yet</h1>
+</center>
 

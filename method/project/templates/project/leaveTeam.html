@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <style>
+            .button {
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            padding: 10px;
+            text-align: center;
+            border: black;
+            background-color: #165397;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+.divider{
+    width:100px;
+    height:50px;
+    display:inline-block;
+}
+        </style>
+        <meta charset="UTF-8">
+        <title>Join Team Page</title>
+        {% load static %}
+        <link rel= "stylesheet" href="{%static 'style1.css' %}">
+    </head>
+    <body>
+        <div class="center">
+            {% if user.team %}
+            {% else %}
+                <h1> You are not on any team</h1>
+        </div>
+
+    </body>
+</html>

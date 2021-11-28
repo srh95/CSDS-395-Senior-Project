@@ -44,6 +44,11 @@
                 </div>
                 <div class="divider"> </div>
                 <button class = "button", onclick="joinTeam(request)" >Submit</button>
+                     {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+                        {% endfor %}
+                    {% endif %}
                 <div class="signup_link">
                     <a href="/teams/{{user.id}}">Cancel</a>
                 </div>
