@@ -8,6 +8,36 @@
     {% load static %}
     <link rel= "stylesheet" href="{%static 'style.css' %}">
 </head>
+<style>
+        .first-txt {
+            position: absolute;
+            bottom: 300px;
+            left: 520px;
+            color: white;
+        }
+         .second-txt {
+            position: absolute;
+            bottom: 200px;
+            left: 490px;
+            color: white;
+        }
+
+        h1{
+        font-size: 90px;
+        }
+        h2{
+        font-size: 30px;
+        }
+
+    .logo-image{
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: auto;
+
+
+}
+</style>
 <body>
     <div id="container">
         <div id="logo">Method</div>
@@ -19,9 +49,10 @@
                 <li id="login"><a href="/accounts/login/">Login</a></li>
             </ul>
         </div>
-        <div id= "image">
-            <img src="{% static 'img/i.png'%}" alt="i png">
-        </div>
+            <img src="{% static 'img/bb.png'%}" width="1500" height="900">
+            <h1 class="first-txt"> Method</h1>
+<!--            <h2 class="second-txt"> The March Madness Assistant</h2>-->
+
     </div>
     <div id="button"><a href="{% url 'login'%}">Alt Login</a></div>
 </body>
