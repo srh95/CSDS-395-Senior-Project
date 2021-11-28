@@ -242,15 +242,15 @@ def createBracket(request, user_id):
         else:
             # pass ordered_stats into function
 
-            # round_32 = next_round(bracket_2021, "2021", stat1, stat2, stat3, stat4, stat5)
-            # print("round of 32 was generated")
-            # sweet_16 = next_round(round_32, "2021", stat1, stat2, stat3, stat4, stat5)
-            # print("round of 16 was generated")
-            # elite_8 = next_round(sweet_16, "2021", stat1, stat2, stat3, stat4, stat5)
-            # final_4 = next_round(elite_8, "2021", stat1, stat2, stat3, stat4, stat5)
-            # championship = next_round(final_4, "2021", stat1, stat2, stat3, stat4, stat5)
-            # winner = compare_schools(championship[0][0], championship[0][1], "2021", stat1, stat2, stat3, stat4, stat5)
-            # print(winner)
+            round_32 = next_round_2021(bracket_2021, stat1, stat2, stat3, stat4, stat5)
+            print("round of 32 was generated")
+            sweet_16 = next_round_2021(round_32, stat1, stat2, stat3, stat4, stat5)
+            print("round of 16 was generated")
+            elite_8 = next_round_2021(sweet_16, stat1, stat2, stat3, stat4, stat5)
+            final_4 = next_round_2021(elite_8, stat1, stat2, stat3, stat4, stat5)
+            championship = next_round_2021(final_4, stat1, stat2, stat3, stat4, stat5)
+            winner = compare_schools_2021(championship[0][0], championship[0][1], stat1, stat2, stat3, stat4, stat5)
+            print(winner)
             # call function that generates bracket, returns list of teams in order to fill in bracket
             bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
             request.session['bracket'] = bracket
@@ -411,97 +411,130 @@ def get_school_teams():
    return pd.read_html('https://www.sports-reference.com/cbb/schools/')[0]['School'].to_list()
 
 
-# def get_name_link_pairs():
-# req = Request("https://www.sports-reference.com/cbb/schools/")
-# html_page = urlopen(req)
-# soup = BeautifulSoup(html_page, "lxml")
-# links = []
-# for link in soup.findAll('a'):
-#  sample_link = link.get('href')
-#  if (sample_link[0:13] == '/cbb/schools/') and (len(sample_link) > 13):
-#      links.append(link.get('href'))
-#
-# name_link_pairs = {}
-# base_link = "https://www.sports-reference.com/cbb/schools/"[:-13]
-# for link in links:
-#  #     name_link_pairs.append([link[13:-1], base_link + link])
-#  name_link_pairs.update({link[13:-1]: base_link + link})
-#
-# return name_link_pairs
-#
-# def get_school_names():
-# return get_name_link_pairs().keys()
-#
-# def get_season_links_dict(school_name):
-# if school_name not in get_school_names():
-#  print("school name is not valid")
-# else:
-#  name_link_pairs = get_name_link_pairs()
-#  req = Request(name_link_pairs[school_name])
-#  html_page = urlopen(req)
-#  soup = BeautifulSoup(html_page, "lxml")
-#
-#  base_link = '/cbb/schools/' + school_name + '/'
-#  season_links = []
-#  for link in soup.findAll('a'):
-#  #     if (sample_link[0:13] == '/cbb/schools/') and (len(sample_link) > 13):
-#      sample_link = link.get('href')
-#      if (base_link == sample_link[0:len(base_link)]) and (sample_link[-5:] == '.html') and (sample_link[-9:-5].isnumeric()):
-#  #         season_links.append('https://www.sports-reference.com/cbb/schools/' + link.get('href'))
-#          season_links.append('https://www.sports-reference.com' + link.get('href'))
-#
-#  season_links.sort()
-#
-#  season_links_dict = {}
-#
-#  for link in season_links:
-#      season_links_dict.update({link[-9:-5]: link})
-#  return season_links_dict
-#
-# def get_team_stats(school_name, year):
-# team_stats = pd.read_html(get_season_links_dict(school_name)[year])[1]
-# team_stats.set_index('Unnamed: 0', inplace=True)
-# return team_stats
-#
-# def get_school_stat_rank(school_name, year, stat_category):
-# if stat_category not in get_team_stats('rutgers', '2021').columns:
-#    print("Not a valid stat category")
-# else:
-#    return int(get_team_stats(school_name, year).loc['Rank'][stat_category][0][:-2])
-#
-# def compare_school_stats(college1, college2, year, stat_category):
-#  if get_school_stat_rank(college1, year, stat_category) < get_school_stat_rank(college2, year, stat_category):
-#      return college1
-#  else:
-#      return college2
-#
-# def compare_schools(school1, school2, year, stat1, stat2, stat3, stat4, stat5):
-#      factor1 = (1 if compare_school_stats(school1, school2, year, stat1) == school1 else -1) * 5
-#      factor2 = (1 if compare_school_stats(school1, school2, year, stat2) == school1 else -1) * 4
-#      factor3 = (1 if compare_school_stats(school1, school2, year, stat3) == school1 else -1) * 3
-#      factor4 = (1 if compare_school_stats(school1, school2, year, stat4) == school1 else -1) * 2
-#      factor5 = 1 if compare_school_stats(school1, school2, year, stat5) == school1 else -1
-#
-#      sum = factor1 + factor2 + factor3 + factor4 + factor5
-#
-#      if sum >= 0:
-#          return school1
-#      else:
-#          return school2
-#
-#
-# def next_round(bracket, year, stat1, stat2, stat3, stat4, stat5):
-#     temp_bracket = []
-#     for match in bracket:
-#         print(match)
-#     temp_bracket.append(compare_schools(match[0], match[1], year, stat1, stat2, stat3, stat4, stat5))
-#     it = iter(temp_bracket)
-#     return list(zip(it, it))
-#
-#
-# def next_round_test(bracket, year, stat1):
-# temp_bracket = []
-# for match in bracket:
-#  temp_bracket.append(compare_school_stats(match[0], match[1], year, stat1))
-# it = iter(temp_bracket)
-# return list(zip(it, it))
+def get_name_link_pairs():
+    req = Request("https://www.sports-reference.com/cbb/schools/")
+    html_page = urlopen(req)
+    soup = BeautifulSoup(html_page, "lxml")
+    links = []
+    for link in soup.findAll('a'):
+        sample_link = link.get('href')
+        if (sample_link[0:13] == '/cbb/schools/') and (len(sample_link) > 13):
+            links.append(link.get('href'))
+
+    name_link_pairs = {}
+    base_link = "https://www.sports-reference.com/cbb/schools/"[:-13]
+    for link in links:
+        #     name_link_pairs.append([link[13:-1], base_link + link])
+        name_link_pairs.update({link[13:-1]: base_link + link})
+
+    return name_link_pairs
+
+def get_school_names():
+    return get_name_link_pairs().keys()
+
+def get_season_links_dict(school_name):
+    if school_name not in get_school_names():
+        print("school name is not valid")
+    else:
+        name_link_pairs = get_name_link_pairs()
+        req = Request(name_link_pairs[school_name])
+        html_page = urlopen(req)
+        soup = BeautifulSoup(html_page, "lxml")
+
+    base_link = '/cbb/schools/' + school_name + '/'
+    season_links = []
+    for link in soup.findAll('a'):
+#     if (sample_link[0:13] == '/cbb/schools/') and (len(sample_link) > 13):
+        sample_link = link.get('href')
+        if (base_link == sample_link[0:len(base_link)]) and (sample_link[-5:] == '.html') and (sample_link[-9:-5].isnumeric()):
+#         season_links.append('https://www.sports-reference.com/cbb/schools/' + link.get('href'))
+            season_links.append('https://www.sports-reference.com' + link.get('href'))
+
+    season_links.sort()
+    season_links_dict = {}
+
+    for link in season_links:
+        season_links_dict.update({link[-9:-5]: link})
+        return season_links_dict
+
+def get_team_stats(school_name, year):
+    team_stats = pd.read_html(get_season_links_dict(school_name)[year])[1]
+    team_stats.set_index('Unnamed: 0', inplace=True)
+    return team_stats
+
+def get_team_stats_2021(school_name):
+    team_stats = pd.read_csv('bracket_2021_data.csv')[school_name]
+    return team_stats
+
+def get_school_stat_rank(school_name, year, stat_category):
+    if stat_category not in get_team_stats('rutgers', '2021').columns:
+        print("Not a valid stat category")
+    else:
+        return int(get_team_stats(school_name, year).loc['Rank'][stat_category][0][:-2])
+
+def get_school_stat_rank_2021(school_name, stat_category):
+    rank = int(pd.read_csv('bracket_2021_data.csv').at[school_name, stat_category][:-2])
+    return rank
+
+def compare_school_stats(college1, college2, year, stat_category):
+    if get_school_stat_rank(college1, year, stat_category) < get_school_stat_rank(college2, year, stat_category):
+        return college1
+    else:
+        return college2
+
+def compare_school_stats_2021(college1, college2, stat_category):
+    if get_school_stat_rank_2021(college1, stat_category) < get_school_stat_rank_2021(college2, stat_category):
+        return college1
+    else:
+        return college2
+
+
+def compare_schools(school1, school2, year, stat1, stat2, stat3, stat4, stat5):
+    factor1 = (1 if compare_school_stats(school1, school2, year, stat1) == school1 else -1) * 5
+    factor2 = (1 if compare_school_stats(school1, school2, year, stat2) == school1 else -1) * 4
+    factor3 = (1 if compare_school_stats(school1, school2, year, stat3) == school1 else -1) * 3
+    factor4 = (1 if compare_school_stats(school1, school2, year, stat4) == school1 else -1) * 2
+    factor5 = 1 if compare_school_stats(school1, school2, year, stat5) == school1 else -1
+
+    sum = factor1 + factor2 + factor3 + factor4 + factor5
+
+    if sum >= 0:
+        return school1
+    else:
+        return school2
+
+def compare_schools_2021(school1, school2, stat1, stat2, stat3, stat4, stat5):
+    factor1 = (1 if compare_school_stats_2021(school1, school2, stat1) == school1 else -1) * 5
+    factor2 = (1 if compare_school_stats_2021(school1, school2, stat2) == school1 else -1) * 4
+    factor3 = (1 if compare_school_stats_2021(school1, school2, stat3) == school1 else -1) * 3
+    factor4 = (1 if compare_school_stats_2021(school1, school2, stat4) == school1 else -1) * 2
+    factor5 = 1 if compare_school_stats_2021(school1, school2, stat5) == school1 else -1
+
+    sum = factor1 + factor2 + factor3 + factor4 + factor5
+
+    if sum >= 0:
+        return school1
+    else:
+        return school2
+
+def next_round(bracket, year, stat1, stat2, stat3, stat4, stat5):
+    temp_bracket = []
+    for match in bracket:
+        temp_bracket.append(compare_schools(match[0], match[1], year, stat1, stat2, stat3, stat4, stat5))
+    it = iter(temp_bracket)
+    return list(zip(it, it))
+
+def next_round_2021(bracket, stat1, stat2, stat3, stat4, stat5):
+    temp_bracket = []
+    for match in bracket:
+        temp_bracket.append(compare_schools_2021(match[0], match[1], stat1, stat2, stat3, stat4, stat5))
+    it = iter(temp_bracket)
+    return list(zip(it, it))
+
+
+def next_round_test(bracket, year, stat1):
+    temp_bracket = []
+    for match in bracket:
+        temp_bracket.append(compare_school_stats(match[0], match[1], year, stat1))
+    it = iter(temp_bracket)
+    return list(zip(it, it))
