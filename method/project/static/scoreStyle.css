@@ -237,7 +237,7 @@
 }
 
 .boxed {
-  width: 500px;
+  width: 570px;
   height: 250px;
   border: 2px solid white;
   display: inline-block;
@@ -246,7 +246,7 @@
 }
 
 .bottom_boxed {
-  width: 500px;
+  width: 570px;
   height: 250px;
   border: 2px solid white;
   display: inline-block;
@@ -259,7 +259,7 @@
   height: 250px;
   border: 2px solid white;
   display: inline-block;
-  margin-left: 125px;
+  margin-left: 200px;
   margin-top: 50px;
 }
 
@@ -269,11 +269,6 @@
   border-radius: 50%;
   overflow: hidden;
   background-color: blue;
-  /* commented for demo
-  float: left;
-  margin-left: 125px;
-  margin-top: 20px;
-  */
 
   /*for demo*/
   display:inline-block;
