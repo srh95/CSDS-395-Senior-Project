@@ -1,19 +1,131 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <style>
+      h1{
+        font-size: 30px;
+        color: white ;
+        text-align: center;
+        }
+   h2{
+        font-size: 30px;
+        color: #2691d9 ;
+        }
    .column {
   float: left;
   width: 33.33%;
 }
-
-/* Clear floats after the columns */
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #165397;
+    height: 100vh;
+}
+.post{
+ margin: 0;
+ padding: 0;
+ background-color: white;
+ border-radius: 25px;
+ border-color: black;
+ border: 4px solid;
+ text-align: center;
+ vertical-align: center;
+}
 .row:after {
   content: "";
   display: table;
   clear: both;
-}</style>
+}
+.divider{
+    width:100px;
+    height:30px;
+    display:inline-block;
+}
+.txt_field label{
+    pointer-events: none;
+    top: 50%;
+    left: 5px;
+    position: absolute;
+    font-size: 16px;
+    color: #adadad;
+    transform: translateY(-50%);
+    transition: .5s;
+}
+
+form .txt_field{
+    position: relative;
+    margin: 30px 0;
+}
+
+.txt_field span::before{
+    top: 40px;
+    position: absolute;
+    content: '';
+    height: 2px;
+    background: #2691d9;
+    width: 100%;
+    left: 0;
+}
+
+.txt_field input{
+    outline: none;
+    border: none;
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    background: none;
+    padding: 0 5px;
+
+}
+
+.txt_field input:focus ~ label,
+.txt_field input:valid  ~ label{
+    color: #2691d9;
+    top: -5px;
+
+}
+.pass:hover{
+    text-decoration: underline;
+}
+
+.pass{
+    margin: -5px 0 20px 5px;
+    cursor: pointer;
+    color: #a6a6a6;
+}
+.txt_field input:focus ~ span::before,
+.txt_field input:valid  ~ span::before{
+    width: 100%;
+
+}
+input[type="submit"]{
+    outline: none;
+    cursor: pointer;
+    color: #e9f4fb;
+    font-weight: 700;
+    border: 1px solid;
+    height: 50px;
+    width: 80%;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 18px;
+}
+.signup_link a{
+    color:#2691d9 ;
+    text-decoration: none;
+}
+.signup_link{
+    color: #666666;
+    font-size: 16px;
+    text-align: center;
+    margin: 30px 0;
+}
+input[type="submit"]:hover{
+    transition: .5s;
+    border-color: #2691d9;
+}
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
@@ -26,26 +138,55 @@
         <div id="logo">Method</div>
         <div id="navbar">
             <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'scores' %}">Scores</a></li>
-                <li><a href="{% url 'news' %}">News</a></li>
-                <li id="login"><a href="/accounts/login/">Login</a></li>
+                <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
+                <li><a href="/scores/{{user.id}}">Scores</a></li>
+                <li><a href="/myBracket/{{user.id}}">My Brackets</a></li>
+                <li><a href="/teams/{{user.id}}">Teams</a></li>
+                <li><a href="/news/{{user.id}}">News</a></li>
+                <li id="login"><a href="{% url 'home' %}">Log Out</a></li>
             </ul>
         </div>
     </div>
 <div>
-    <div class="row">
-  <div class="column">
-      <div id= "twitterfeed">
-        <a class="twitter-timeline" data-width="1400" data-height="500" href="https://twitter.com/marchmadness?ref_src=twsrc%5Etfw">Tweets by marchmadness</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </div>
-  </div>
-  <div class="column">
 
-  </div>
-  <div class="column">
-  </div>
+</div>
+    <div>
     </div>
+        <div class="column">
+            <h1>Create Post</h1>
+            <div class = "divider"></div>
+            <br><br><br><br><br><br><br>
+            <center>
+           <h2>Login to Create a Post</h2>
+            </center>
+        </div>
+        <div class="column">
+             <h1>Recent Posts</h1>
+            <div class = "divider"></div>
+            {% for post in allposts %}
+            <div class = "post">
+            <h5>Author: {{post.user.user_name}}</h5>
+
+                <h2 color="#2691d9">{{ post.title }}</h2>
+
+                <h4>{{ post.content}}</h4>
+            <br><br>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="column">
+            <div id= "twitterfeed1">
+                <a class="twitter-timeline" data-width="1400" data-height="500" href="https://twitter.com/marchmadness?ref_src=twsrc%5Etfw">Tweets by marchmadness</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <div id = "twitterfeed2">
+                <a class="twitter-timeline" data-width="1400" data-height="500" href="https://twitter.com/NCAAWBB?ref_src=twsrc%5Etfw">Tweets by NCAAWBB</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+             <div if = "twitterfeed3">
+                <a class="twitter-timeline" ata-width="1400" data-height="500" href="https://twitter.com/NCAA?ref_src=twsrc%5Etfw">Tweets by NCAA</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

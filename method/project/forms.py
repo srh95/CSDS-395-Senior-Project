@@ -1,6 +1,6 @@
 from django import forms
 from .models import (
-    User, Bracket, Team
+    User, Bracket, Team, Posts
 )
 
 class RegisterForm(forms.Form):
@@ -15,7 +15,8 @@ class LoginForm(forms.Form):
 
 class TeamForm(forms.Form):
     team_name = forms.CharField(label="team_name", max_length=50, required=True)
-    num_members = forms.CharField(label="num_members", max_length=1, required=True)
+    num_members = forms.IntegerField(label="num_members", required=True)
+    formbracket = forms.CharField(label="bracket_name", max_length=20, required=True)
 
 class JoinTeamForm(forms.Form):
     code = forms.CharField(label="code", max_length=10, required=True)
@@ -30,3 +31,7 @@ class StatForm(forms.Form):
 
 class SaveForm(forms.Form):
     name = forms.CharField(label='bracketname', max_length=50, required=True)
+
+class PostForm(forms.Form):
+    title = forms.CharField(label = 'title', max_length=500)
+    content = forms.CharField(label = 'content', max_length=500)
