@@ -11,22 +11,59 @@
 <style>
         .first-txt {
             position: absolute;
-            bottom: 300px;
-            left: 520px;
+            bottom: 340px;
+            left: 340px;
             color: white;
         }
          .second-txt {
             position: absolute;
-            bottom: 200px;
-            left: 490px;
+            bottom: 255px;
+            left: 400px;
             color: white;
         }
+        .third-txt {
+        position: absolute;
+        bottom: 220px;
+        left: 400px;
+        color: white;
+        }
+
+    .buttnStyle {
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: fixed;
+    left: 500px;
+    down: 10px;
+  }
+
+  #SignupBtn{
+    position: absolute;
+    left: 635px;
+    top:605px;
+    background: #165397;
+    border-radius: 4px;
+    font-family: "Arial", Impact, Charcoal, sans-serif;
+    font-weight: bold;
+    font-size:20px;
+    color: white;
+
+}
+#SignupBtn:hover{
+ background: #000;
+}
 
         h1{
-        font-size: 90px;
+        font-size: 80px;
         }
         h2{
-        font-size: 30px;
+        font-size: 10px;
+        }
+        h3{
+        font-size: 15px;
         }
 
     .logo-image{
@@ -47,15 +84,18 @@
                 <li><a href="{% url 'scores'%}">Scores</a></li>
                 <li><a href="/news/">News</a></li>
                 <li id="login"><a href="/accounts/login/">Login</a></li>
-                <li id="signup"><a href="/accounts/register/">Sign Up</a></li>
             </ul>
         </div>
             <img src="{% static 'img/bb.png'%}" width="1500" height="900">
-            <h1 class="first-txt"> Method</h1>
-
-<!--            <h2 class="second-txt"> The March Madness Assistant</h2>-->
+            <h1 class="first-txt"> Method: The March <p> Madness Assistant</p></h1>
+<!--            <h4 class="second-txt"> The March Madness Assistant</h4>-->
+            <h3 class="third-txt"><center> Method is a free tool to assist you with creating an accurate March Madness
+                <p> bracket. Our algorithm allows you to pick up to 5 season stats and provides you with
+                <p> a bracket based on those stats. Sign up to create a bracket and compete against </p>
+                     friends in the March Madness Bracket Challenge! </center></h3>
+            <button id="SignupBtn" class="buttnStyle" onclick="document.location.href = '/accounts/register/'">Sign Up</button>
 
     </div>
-    <div id="button"><a href="{% url 'login'%}">Alt Login</a></div>
+<!--    <div id="button"><a href="{% url 'login'%}">Alt Login</a></div>-->
 </body>
 </html>
