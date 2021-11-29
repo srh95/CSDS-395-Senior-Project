@@ -48,6 +48,29 @@
     <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
     <link rel="stylesheet" href="{%static 'bracketStyle.css'%}">
 </head>
+<style>
+
+        h1{
+  padding: 60px;
+  text-align: center;
+  background: #6F7378;
+  color: white;
+  font-size: 90px;
+  font-family: "Copperplate", monospace;
+        }
+
+        h2{
+        font-size: 30px;
+        color: blue;
+        font-family: "Copperplate", monospace;
+        }
+        .divider{
+    width:100px;
+    height:20px;
+    display:inline-block;
+}
+
+</style>
 <body>
     <div id="container">
         <div id="logo">Method</div>
@@ -64,19 +87,21 @@
     </div>
     {% if user.team_id %}
     <center>
-        <h2>You are on team</h2>
-        <h1> {{user.team.team_name}}</h1>
-        <h4> Invite others to join, use code {{user.team.team_id}}</h4>
-        <h4>Your team can have up to {{user.team.num_members}} members</h4>
-        <h1>Your Teammates Are:</h1>
+        <h1> Team {{user.team.team_name}} </h1>
+    </center>
+    <h4> Invite others to join, use code {{user.team.team_id}}</h4>
+    <h4>Your team can have up to {{user.team.num_members}} members, it currently has {{num_teammates}}</h4>
         {% for user in teammates %}
-          {{user.user_name}}, {{user.favbracket}},
-          {% for user.bracket in brackets %}
-          Selected Stats: Most Important: {{bracket.stat1}} Second Most Important: {{bracket.stat2}}
-          Third Most Important: {{bracket.stat3}} Fourth Most Important: {{bracket.stat4}} Fifth Most Important: {{bracket.stat5}}
+         <center>
+           <h2>
+          {{user.user_name}}
+           </h2>
+          <h4>Stats Used: {{user.favbracket.stats}}</h4>
+         </center>
+
           <header>
  <div class='header-text'>
- <h1>{{bracket.bracket_name}}</h1>
+ <h3>{{user.favbracket.bracket_name}}</h3>
  <link rel ="stylesheet" href="text2.css">
  </div>
  <div class='half-circle-container'>
@@ -671,11 +696,7 @@
  </ul>
  </div>
  </section>
-          {% endfor %}
-
-
         {% endfor %}
-    </center>
     {% else %}
     <center>
         <h1>
