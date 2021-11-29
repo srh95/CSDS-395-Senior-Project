@@ -12,7 +12,7 @@ class Team(models.Model):
 
 class User(models.Model):
     user_name = models.CharField(max_length=200)
-    user_username = models.CharField(max_length=30)  # username is their email
+    user_username = models.CharField(max_length=30)
     user_password = models.CharField(max_length=50)
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True)
     favbracket = models.ForeignKey('Bracket', on_delete=models.CASCADE, null=True, blank=True, related_name='+')
