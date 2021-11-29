@@ -433,29 +433,30 @@ def get_school_names():
     return get_name_link_pairs().keys()
 
 def get_season_links_dict(school_name):
-    if school_name not in get_school_names():
-        print("school name is not valid")
-    else:
-        name_link_pairs = get_name_link_pairs()
-        req = Request(name_link_pairs[school_name])
-        html_page = urlopen(req)
-        soup = BeautifulSoup(html_page, "lxml")
+  if school_name not in get_school_names():
+    print("school name is not valid")
+  else:
+    name_link_pairs = get_name_link_pairs()
+    req = Request(name_link_pairs[school_name])
+    html_page = urlopen(req)
+    soup = BeautifulSoup(html_page, "lxml")
 
     base_link = '/cbb/schools/' + school_name + '/'
     season_links = []
     for link in soup.findAll('a'):
-#     if (sample_link[0:13] == '/cbb/schools/') and (len(sample_link) > 13):
+    #     if (sample_link[0:13] == '/cbb/schools/') and (len(sample_link) > 13):
         sample_link = link.get('href')
         if (base_link == sample_link[0:len(base_link)]) and (sample_link[-5:] == '.html') and (sample_link[-9:-5].isnumeric()):
-#         season_links.append('https://www.sports-reference.com/cbb/schools/' + link.get('href'))
+    #         season_links.append('https://www.sports-reference.com/cbb/schools/' + link.get('href'))
             season_links.append('https://www.sports-reference.com' + link.get('href'))
 
     season_links.sort()
+
     season_links_dict = {}
 
     for link in season_links:
         season_links_dict.update({link[-9:-5]: link})
-        return season_links_dict
+    return season_links_dict
 
 def get_team_stats(school_name, year):
     team_stats = pd.read_html(get_season_links_dict(school_name)[year])[1]
