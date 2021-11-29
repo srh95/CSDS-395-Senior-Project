@@ -16,7 +16,7 @@ from urllib.request import urlopen, Request
 from django.views.generic.list import ListView
 
 from .models import (
-    User, Bracket, Team
+    User, Bracket, Team, Posts
 )
 
 from .forms import (
@@ -25,7 +25,8 @@ from .forms import (
     StatForm,
     SaveForm,
     TeamForm,
-    JoinTeamForm
+    JoinTeamForm,
+    PostForm
 )
 
 
@@ -35,6 +36,7 @@ def index(request):
 
 def home(request):
     return render(request, 'project/home.html')
+
 
 
 def createTeam(request, user_id):
@@ -48,10 +50,14 @@ def createTeam(request, user_id):
     context = {'user': user, 'brackets': brackets}
     if request.method == 'GET' and 'team_name' in request.GET:
         formteam_name = request.GET.get('team_name')
-        if (Team.objects.get(team_name=formteam_name)):
-            messages.error(request, 'Team name is taken')
-            url = '/createTeam/' + str(user_id)
-            return HttpResponseRedirect(url)
+        if form.is_valid():
+            try:
+                if (Team.objects.get(team_name=formteam_name)):
+                    messages.error(request, 'Team name is taken')
+                    url = '/createTeam/' + str(user_id)
+                    return HttpResponseRedirect(url)
+            except ObjectDoesNotExist:
+                print('no teams yet')
         s = 10  # number of characters in the string.
         ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=s))
         team_id = str(ran)
@@ -66,8 +72,7 @@ def createTeam(request, user_id):
         User.objects.filter(id=user_id).update(team=team_obj)
         favbracket = request.GET.get('enteredbracket')
         favbracket_obj = get_object_or_404(Bracket, bracket_name=favbracket)
-        favbracketname = favbracket_obj.bracket_name
-        User.objects.filter(id=user_id).update(favbracket=favbracketname)
+        User.objects.filter(id=user_id).update(favbracket=favbracket_obj)
         url = '/teams/' + str(user_id)
         return HttpResponseRedirect(url)
 
@@ -77,7 +82,6 @@ def createTeam(request, user_id):
 
 
 def joinTeam(request, user_id):
-    # need to check to see if team is at capacity, if it is dont allow them to join
     user = get_object_or_404(User, pk=user_id)
     form = JoinTeamForm(request.POST)
     brackets = Bracket.objects.filter(user__pk=user_id)
@@ -92,9 +96,8 @@ def joinTeam(request, user_id):
             return HttpResponseRedirect(url)
         favbracket = request.GET.get('enteredbracket')
         favbracket_obj = get_object_or_404(Bracket, bracket_name=favbracket)
-        favbracketname = favbracket_obj.bracket_name
         User.objects.filter(id=user_id).update(team=team_obj)
-        User.objects.filter(id=user_id).update(favbracket=favbracketname)
+        User.objects.filter(id=user_id).update(favbracket=favbracket_obj)
         url = '/teams/' + str(user_id)
         print('success')
         return HttpResponseRedirect(url)
@@ -176,14 +179,31 @@ def user_home(request, user_id):
 
 
 def news(request):
-    return render(request, 'project/News.html')
+    allposts = Posts.objects.all()
+    context = {'allposts': allposts}
+    return render(request, 'project/News.html', context)
 
 
 def userNews(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    context = {'user': user, 'user_id': user_id}
-    return render(request, 'project/userNews.html', context)
+    allposts = Posts.objects.all()
+    form = PostForm(request.POST)
+    context = {'user': user, 'user_id': user_id, 'allposts': allposts, 'form': form}
+    if request.method == 'POST' and 'content' in request.POST:
+        if form.is_valid():
+            # note to myself- it allows you to save a bracket without selecting stats, not good :(
+            database = Posts.objects.create(
+                user=user,
+                title=form.cleaned_data['title'],
+                content=form.cleaned_data['content']
+            )
+            database.save()
+            context = {'user': user, 'user_id': user_id, 'form': form, 'allposts': allposts}
+    else:
+        form = PostForm()
+        context = {'user': user, 'user_id': user_id, 'form': form, 'allposts': allposts}
 
+    return render(request, 'project/userNews.html', context)
 
 def userTeams(request, user_id):
     user = get_object_or_404(User, pk=user_id)
@@ -193,7 +213,8 @@ def userTeams(request, user_id):
     if user.team:
         team_obj = get_object_or_404(Team, team_id=user.team.team_id)
         teammates = User.objects.filter(team=team_obj)
-        context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'teammates': teammates}
+        num_teammates = len(teammates)
+        context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'teammates': teammates, 'num_teammates': num_teammates}
         return render(request, 'project/userTeams.html', context)
     else:
         context = {'user': user, 'user_id': user_id}
@@ -252,7 +273,7 @@ def createBracket(request, user_id):
             # append nones back 5-length to tell how many
         else:
             # pass ordered_stats into function
-
+            '''
             round_32 = next_round_2021(bracket_2021, stat1, stat2, stat3, stat4, stat5)
             print("round of 32 was generated")
             sweet_16 = next_round_2021(round_32, stat1, stat2, stat3, stat4, stat5)
@@ -262,6 +283,7 @@ def createBracket(request, user_id):
             championship = next_round_2021(final_4, stat1, stat2, stat3, stat4, stat5)
             winner = compare_schools_2021(championship[0][0], championship[0][1], stat1, stat2, stat3, stat4, stat5)
             print(winner)
+            '''
             # call function that generates bracket, returns list of teams in order to fill in bracket
             bracket = ["Virginia-Tech", "Colgate", "Arkansas", "Florida", "Drexel", "Illinois", "Utah St", "Texas Tech"]
             request.session['bracket'] = bracket
