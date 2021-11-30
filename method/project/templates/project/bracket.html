@@ -9,6 +9,35 @@
     <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
     <link rel="stylesheet" href="{%static 'bracketStyle.css'%}">
  </head>
+<style>
+ .buttnStyle {
+    border: none;
+    padding: 10px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+ }
+
+ #removeBtn{
+   background: #165397;
+   left: 560px;
+   border-radius: 4px;
+   font-family: "Arial", Impact, Charcoal, sans-serif;
+   font-size:15px;
+   color: white;
+   }
+   #editBtn{
+   background: #165397;
+   padding: 10px 40px;
+   left: 760px;
+   border-radius: 4px;
+   font-family: "Arial", Impact, Charcoal, sans-serif;
+   font-size:15px;
+   color: white;
+
+}
+</style>
  <body>
 
 <div id="container">
@@ -28,14 +57,11 @@
 <h1>Here are your brackets: </h1>
 {% for bracket in brackets %}
 
- Stat used to generate bracket:
-{{bracket.stats}}
-
  <header>
 
  <div class='header-text'>
- <h1>{{bracket.bracket_name}}</h1>
- <link rel ="stylesheet" href="text2.css">
+ <h1>{{bracket.bracket_name}} </h1>
+  <h4>Stats: {{bracket.stats}}</h4>
  </div>
  <div class='half-circle-container'>
  <div class='half-circle bottom-circle'>
@@ -48,17 +74,17 @@
  <ul class='round seed'>
  <li class='game-left game-top'>
  <span>16</span>
- <span>Mount St. Marys</span>
+ <span>Texas Southern</span>
  </li>
  <li class='game-left spacer'>&nbsp;</li>
  <li class='game-left game-bottom'>
  <span>16</span>
- <span>New Orleans</span>
+ <span>Mount St. Mary's</span>
  </li>
  </ul>
  <ul class='round first-four-winner'>
  <li class='game-left game-top'>
- <span>Mount St. Marys</span>
+ <span>Texas Southern</span>
  </li>
  </ul>
  <ul class='round'>
@@ -67,17 +93,17 @@
  <ul class='round seed'>
  <li class='game-left game-top'>
  <span>11</span>
- <span>Providence</span>
+ <span>Michigan St</span>
  </li>
  <li class='game-left spacer'>&nbsp;</li>
  <li class='game-left game-bottom'>
  <span>11</span>
- <span>Southern California</span>
+ <span>UCLA</span>
  </li>
  </ul>
  <ul class='round first-four-winner'>
  <li class='game-left game-top'>
- <span>Southern California</span>
+ <span>UCLA</span>
  </li>
  </ul>
  <ul class='round'>
@@ -177,465 +203,469 @@
  <ul class='round seed'>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>1</span>
- <span>Villanova</span>
+ <span></span>
+ <span>{{bracket.bracket_64.0}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>16</span>
- <span>New Orleans / Mount&hellip;</span>
+ <span></span>
+ <span>{{bracket.bracket_64.1}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>8</span>
- <span>Wisconsin</span>
+ <span></span>
+ <span>{{bracket.bracket_64.2}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>9</span>
- <span>Virginia Tech</span>
+ <span></span>
+ <span>{{bracket.bracket_64.3}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>5</span>
- <span>Virginia</span>
+ <span></span>
+ <span>{{bracket.bracket_64.4}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>12</span>
- <span>North Carolina - Wil&hellip;</span>
+ <span></span>
+ <span>{{bracket.bracket_64.5}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>4</span>
- <span>Florida</span>
+ <span></span>
+ <span>{{bracket.bracket_64.6}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>13</span>
- <span>East Tennessee State</span>
+ <span></span>
+ <span>{{bracket.bracket_64.7}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>6</span>
- <span>Southern Methodist</span>
+ <span></span>
+ <span>{{bracket.bracket_64.8}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>11</span>
- <span>Southern California &hellip;</span>
+ <span></span>
+ <span>{{bracket.bracket_64.9}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>3</span>
- <span>Baylor</span>
+ <span></span>
+ <span>{{bracket.bracket_64.10}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>14</span>
- <span>New Mexico State</span>
+ <span></span>
+ <span>{{bracket.bracket_64.11}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>7</span>
- <span>South Carolina</span>
+ <span></span>
+ <span>{{bracket.bracket_64.12}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>10</span>
- <span>Marquette</span>
+ <span></span>
+ <span>{{bracket_64.13}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>2</span>
- <span>Duke</span>
+ <span></span>
+ <span>{{bracket.bracket_64.14}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>15</span>
- <span>Troy</span>
+ <span></span>
+ <span>{{bracket.bracket_64.15}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>1</span>
- <span>Gonzaga</span>
+ <span></span>
+ <span>{{bracket.bracket_64.16}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>16</span>
- <span>South Dakota State</span>
+ <span></span>
+ <span>{{bracket.bracket_64.17}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>8</span>
- <span>NorthWestern</span>
+ <span></span>
+ <span>{{bracket.bracket_64.18}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>9</span>
- <span>Vanderbilt</span>
+ <span></span>
+ <span>{{bracket.bracket_64.19}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>5</span>
- <span>Notre Dame</span>
+ <span></span>
+ <span>{{bracket.bracket_64.20}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>12</span>
- <span>Princeton</span>
+ <span></span>
+ <span>{{bracket.bracket_64.21}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>4</span>
- <span>West Virginia</span>
+ <span></span>
+ <span>{{bracket.bracket_64.22}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>13</span>
- <span>Bucknell</span>
+ <span></span>
+ <span>{{bracket.bracket_64.23}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>6</span>
- <span>Maryland</span>
+ <span></span>
+ <span>{{bracket.bracket_64.24}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>11</span>
- <span>Xavier</span>
+ <span></span>
+ <span>{{bracket.bracket_64.25}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>3</span>
- <span>Florida State</span>
+ <span></span>
+ <span>{{bracket.bracket_64.26}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>14</span>
- <span>FLorida Gulf Coast</span>
+ <span></span>
+ <span>{{bracket.bracket_64.27}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>7</span>
- <span>Saint Marys</span>
+ <span></span>
+ <span>{{bracket.bracket_64.28}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>10</span>
- <span>Virginia Commonwealt&hellip;</span>
+ <span></span>
+ <span>{{bracket.bracket_64.29}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
- <span>2</span>
- <span>Arizona</span>
+ <span></span>
+ <span>{{bracket.bracket_64.30}}</span>
  </li>
  <li class='game-left game-bottom'>
- <span>15</span>
- <span>North Dakota</span>
+ <span></span>
+ <span>{{bracket.bracket_64.31}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round round-1'>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Villanova</li>
+ <li class='game-left game-top'>{{bracket.bracket_32.0}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>Wisconsin</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_32.1}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Virginia</li>
+ <li class='game-left game-top'>{{bracket.bracket_32.2}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>Florida</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_32.3}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Southern California ...</li>
+ <li class='game-left game-top'>{{bracket.bracket_32.4}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>Baylor</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_32.5}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Southern Carolina</li>
+ <li class='game-left game-top'>{{bracket.bracket_32.6}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>Duke</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_32.7}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Gonzaga</li>
+ <li class='game-left game-top'>{{bracket.bracket_32.8}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>NorthWestern</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_32.9}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Notre Dame</li>
+ <li class='game-left game-top'>{{bracket.bracket_32.10}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>West Virginia</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_32.11}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Xavier</li>
+ <li class='game-left game-top'>{{bracket.bracket_32.12}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>Florida State</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_32.13}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Saint Marys</li>
+ <li class='game-left game-top'>{{bracket.bracket_32.14}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>Arizona</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_32.15}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round round-2'>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Wisconsin</li>
+ <li class='game-left game-top'>{{bracket.bracket_16.0}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>Florida</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_16.1}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Baylor</li>
+ <li class='game-left game-top'>{{bracket.bracket_16.2}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>South Carolina</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_16.3}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Gonzaga</li>
+ <li class='game-left game-top'>{{bracket.bracket_16.4}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>West Virginia</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_16.5}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Xavier</li>
+ <li class='game-left game-top'>{{bracket.bracket_16.6}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>Arizona</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_16.7}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round round-3'>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Florida</li>
- <li class='game-left spacer region region-right'>East</li>
- <li class='game-left game-bottom'>South Carolina</li>
- <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Gonzaga</li>
+ <li class='game-left game-top'>{{bracket.bracket_8.0}}</li>
  <li class='game-left spacer region region-right'>West</li>
- <li class='game-left game-bottom'>Xavier</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_8.1}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{bracket.bracket_8.2}}</li>
+ <li class='game-left spacer region region-right'>East</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_8.3}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round round-4'>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>South Carolina</li>
+ <li class='game-left game-top'>{{bracket.bracket_4.0}}</li>
  <li class='game-left spacer'>&nbsp;</li>
- <li class='game-left game-bottom'>Gonzaga</li>
+ <li class='game-left game-bottom'>{{bracket.bracket_4.1}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round semi-final'>
  <li class='spacer'>&nbsp;</li>
- <li class='game-left game-top'>Gonzaga</li>
+ <li class='game-left game-top'>{{bracket.bracket_2.0}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round finals'>
  <li class='spacer'>&nbsp;</li>
- <li class='game final'>North Carolina</li>
+ <li class='game final'>{{bracket.winner.0}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round semi-final'>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>North Carolina</li>
+ <li class='game-right game-top'>{{bracket.bracket_2.1}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round round-4'>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Oregon</li>
+ <li class='game-right game-top'>{{bracket.bracket_4.2}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>North Carolina</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_4.3}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round round-3'>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Kansas</li>
- <li class='game-right spacer region region-left'>Midwest</li>
- <li class='game-right game-bottom'>Oregon</li>
- <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>North Carolina</li>
+ <li class='game-right game-top'>{{bracket.bracket_8.4}}</li>
  <li class='game-right spacer region region-left'>South</li>
- <li class='game-right game-bottom'>Kentucky</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_8.5}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{bracket.bracket_8.6}}</li>
+ <li class='game-right spacer region region-left'>Midwest</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_8.7}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round round-2'>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Kansas</li>
+ <li class='game-right game-top'>{{bracket.bracket_16.8}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Purdue</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_16.9}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Oregon</li>
+ <li class='game-right game-top'>{{bracket.bracket_16.10}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Michigan</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_16.11}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>North Carolina</li>
+ <li class='game-right game-top'>{{bracket.bracket_16.12}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Butler</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_16.13}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>UCLA</li>
+ <li class='game-right game-top'>{{bracket.bracket_16.14}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Kentucky</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_16.15}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round round-1'>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Kansas</li>
+ <li class='game-right game-top'>{{bracket.bracket_32.16}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Michigan State</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_32.17}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Iowa State</li>
+ <li class='game-right game-top'>{{bracket.bracket_32.18}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Purdue</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_32.19}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Rhode Island</li>
+ <li class='game-right game-top'>{{bracket.bracket_32.20}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Oregon</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_32.21}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Michigan</li>
+ <li class='game-right game-top'>{{bracket.bracket_32.22}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Louisville</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_32.23}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>North Carolina</li>
+ <li class='game-right game-top'>{{bracket.bracket_32.24}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Arkansas</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_32.25}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Middle Tennessee Sta&hellip;</li>
+ <li class='game-right game-top'>{{bracket.bracket_32.26}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Butler</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_32.27}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Cincinnati</li>
+ <li class='game-right game-top'>{{bracket.bracket_32.28}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>UCLA</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_32.29}}</li>
  <li class='spacer'>&nbsp;</li>
- <li class='game-right game-top'>Wichita State</li>
+ <li class='game-right game-top'>{{bracket.bracket_32.30}}</li>
  <li class='game-right spacer'>&nbsp;</li>
- <li class='game-right game-bottom'>Kentucky</li>
+ <li class='game-right game-bottom'>{{bracket.bracket_32.31}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round seed'>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Kansas</span>
- <span>1</span>
+ <span>{{bracket.bracket_64.32}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>UC Davis / North Car&hellip;</span>
- <span>16</span>
+ <span>{{bracket.bracket_64.33}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Miami</span>
- <span>8</span>
+ <span>{{bracket.bracket_64.34}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Michigan State</span>
- <span>9</span>
+ <span>{{bracket.bracket_64.35}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Iowa State</span>
- <span>5</span>
+ <span>{{bracket.bracket_64.36}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Nevada</span>
- <span>12</span>
+ <span>{{bracket.bracket_64.37}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Purdue</span>
+ <span>{{bracket.bracket_64.38}}</span>
  <span>4</span>
  </li>
  <li class='game-right game-bottom'>
- <span>Vermont</span>
- <span>13</span>
+ <span>{{bracket.bracket_64.39}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Creighton</span>
- <span>6</span>
+ <span>{{bracket.bracket_64.40}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Rhode Island</span>
- <span>11</span>
+ <span>{{bracket.bracket_64.41}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Oregon</span>
- <span>3</span>
+ <span>{{bracket.bracket_64.42}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Iona</span>
- <span>14</span>
+ <span>{{bracket.bracket_64.43}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Michigan</span>
- <span>7</span>
+ <span>{{bracket.bracket_64.44}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Oklahoma State</span>
- <span>10</span>
+ <span>{{bracket.bracket_64.45}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Louisville</span>
- <span>2</span>
+ <span>{{bracket.bracket_64.46}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Jacksonville State</span>
- <span>15</span>
+ <span>{{bracket.bracket_64.47}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>North Carolina</span>
- <span>1</span>
+ <span>{{bracket.bracket_64.48}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Texas Southern</span>
- <span>16</span>
+ <span>{{bracket.bracket_64.49}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Arkansas</span>
- <span>8</span>
+ <span>{{bracket.bracket_64.50}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Seton Hall</span>
- <span>9</span>
+ <span>{{bracket.bracket_64.51}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Minnesota</span>
- <span>5</span>
+ <span>{{bracket.bracket_64.52}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Middle Tennessee Sta&hellip;</span>
- <span>12</span>
+ <span>{{bracket.bracket_64.53}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Butler</span>
- <span>4</span>
+ <span>{{bracket.bracket_64.54}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Winthrop</span>
- <span>13</span>
+ <span>{{bracket.bracket_64.55}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Cincinnati</span>
- <span>6</span>
+ <span>{{bracket.bracket_64.56}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Wake Forest / Kansas&hellip;</span>
- <span>11</span>
+ <span>{{bracket.bracket_64.57}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>UCLA</span>
- <span>3</span>
+ <span>{{bracket.bracket_64.58}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Kent State</span>
- <span>14</span>
+ <span>{{bracket.bracket_64.59}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Dayton</span>
- <span>7</span>
+ <span>{{bracket.bracket_64.60}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Wichita State</span>
- <span>10</span>
+ <span>{{bracket.bracket_64.61}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-right game-top'>
- <span>Kentucky</span>
- <span>2</span>
+ <span>{{bracket.bracket_64.62}}</span>
+ <span></span>
  </li>
  <li class='game-right game-bottom'>
- <span>Northern Kentucky</span>
- <span>15</span>
+ <span>{{bracket.bracket_64.63}}</span>
+ <span></span>
  </li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  </div>
  </section>
+
 </body>
 
+<div class="text-box">
 <form method="GET">
    <input type="hidden" id="bracket_id" name="bracket_id" value={{bracket.id}}>
-  <button onclick="deleteBracket(request)">Remove</button>
+  <button id="removeBtn" class="buttnStyle" onclick="deleteBracket(request)">Remove</button>
+ <button id="editBtn" class="buttnStyle" onclick="editBracket(request)">Edit</button>
 
 </form>
+</div>
 
 {% endfor %}
 
