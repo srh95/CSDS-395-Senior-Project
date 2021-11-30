@@ -281,3 +281,28 @@
 .text-box{
 text-align:center
 }
+
+.buttnStyle {
+border: none;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+position: fixed;
+left: 500px;
+down: 10px;
+}
+
+#removebtn{
+position: absolute;
+left: 635px;
+top:605px;
+background: #165397;
+border-radius: 4px;
+font-family: "Arial", Impact, Charcoal, sans-serif;
+font-weight: bold;
+font-size:20px;
+color: white;
+
+}

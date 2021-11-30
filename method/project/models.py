@@ -23,7 +23,13 @@ class User(models.Model):
 class Bracket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     bracket_name = models.CharField(max_length=50)
-    bracket = models.JSONField(default=list, blank=True, null=True)
+    bracket_64 = models.JSONField(default=list, blank=True, null=True)
+    bracket_32 = models.JSONField(default=list, blank=True, null=True)
+    bracket_16 = models.JSONField(default=list, blank=True, null=True)
+    bracket_8 = models.JSONField(default=list, blank=True, null=True)
+    bracket_4 = models.JSONField(default=list, blank=True, null=True)
+    bracket_2 = models.JSONField(default=list, blank=True, null=True)
+    winner = models.JSONField(default=list, blank=True, null=True)
     stats = models.JSONField(default=list, blank=True, null=True)
 
 
