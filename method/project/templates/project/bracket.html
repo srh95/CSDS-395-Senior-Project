@@ -27,6 +27,7 @@
    font-size:15px;
    color: white;
    }
+
    #editBtn{
    background: #165397;
    padding: 10px 40px;
@@ -41,7 +42,9 @@
  <body>
 
 <div id="container">
-        <div id="logo">Method</div>
+        <div id="logo">
+            <img src="{% static 'img/logo.png'%}" width="220" height="60">
+        </div>
         <div id="navbar">
             <ul>
                 <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
@@ -661,8 +664,8 @@
 <div class="text-box">
 <form method="GET">
    <input type="hidden" id="bracket_id" name="bracket_id" value={{bracket.id}}>
-  <button id="removeBtn" class="buttnStyle" onclick="deleteBracket(request)">Remove</button>
- <button id="editBtn" class="buttnStyle" onclick="editBracket(request)">Edit</button>
+  <button onclick="deleteBracket(request)">Remove</button>
+<!-- <button id="editBtn" class="buttnStyle" onclick="editBracket(request)">Edit</button>-->
 
 </form>
 </div>

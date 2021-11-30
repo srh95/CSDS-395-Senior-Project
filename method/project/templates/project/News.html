@@ -135,15 +135,15 @@ input[type="submit"]:hover{
 </head>
 <body>
     <div id="container">
-        <div id="logo">Method</div>
+        <div id="logo">
+            <img src="{% static 'img/logo.png'%}" width="220" height="60">
+        </div>
         <div id="navbar">
             <ul>
-                <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
-                <li><a href="/scores/{{user.id}}">Scores</a></li>
-                <li><a href="/myBracket/{{user.id}}">My Brackets</a></li>
-                <li><a href="/teams/{{user.id}}">Teams</a></li>
-                <li><a href="/news/{{user.id}}">News</a></li>
-                <li id="login"><a href="{% url 'home' %}">Log Out</a></li>
+                 <li><a href="{% url 'home'%}">Home</a></li>
+                <li><a href="{% url 'scores'%}">Scores</a></li>
+                <li><a href="{% url 'news'%}">News</a></li>
+                <li id="login"><a href="/accounts/login/">Login</a></li>
             </ul>
         </div>
     </div>

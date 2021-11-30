@@ -65,20 +65,14 @@
         h3{
         font-size: 15px;
         }
-
-    .logo-image{
-    display: block;
-    width: 46px;
-    height: 46px;
-    margin: auto;
-
-
 }
 </style>
 
 <body>
     <div id="container">
-        <div id="logo">Method</div>
+        <div id="logo">
+            <img src="{% static 'img/logo.png'%}" width="220" height="60">
+        </div>
         <div id="navbar">
             <ul>
                 <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
