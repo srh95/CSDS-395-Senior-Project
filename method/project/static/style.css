@@ -235,10 +235,3 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-h2 {
-   position: relative;
-   top: 10px;
-   left: 300px;
-
-}

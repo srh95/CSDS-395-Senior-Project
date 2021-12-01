@@ -18,6 +18,7 @@ urlpatterns = [
     path('news/<int:user_id>', views.userNews, name='usernews'),
     path('myBracket/<int:user_id>', views.myBracket, name='bracket'),
     path('createBracket/<int:user_id>', views.createBracket, name='createBracket'),
+    path('editBracket/<int:user_id>/<int:bracket_id>', views.editBracket, name='edit'),
     path('scores/', views.scores, name='scores'),
     path('scores/<int:user_id>', views.userScores, name='userscores'),
     path('teams/<int:user_id>', views.teams, name='teams'),
