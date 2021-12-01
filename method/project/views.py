@@ -13,6 +13,7 @@ import string
 import re
 import pandas as pd
 from urllib.request import urlopen, Request
+import datetime
 from django.views.generic.list import ListView
 
 from .models import (
@@ -22,7 +23,6 @@ from .models import (
 from .forms import (
     RegisterForm,
     LoginForm,
-    StatForm,
     SaveForm,
     TeamForm,
     JoinTeamForm,
@@ -33,11 +33,23 @@ from .forms import (
 def index(request):
     return HttpResponse("Hello world. You're at the website index.")
 
+def isTournamentStarted():
+    # lock brackets on the day march madness begins
+    # get today's date
+    today = datetime.datetime.now()
+    # tournament start date
+    tournament = "15/3/2021 0:00"
+    tournament = datetime.datetime.strptime(tournament, "%d/%m/%Y %H:%M")
+
+    if today > tournament:
+        open = False
+    else:
+        open = True
+
+    return open
 
 def home(request):
     return render(request, 'project/home.html')
-
-
 
 def createTeam(request, user_id):
     # need to make it so a user cant create a team if team attribute is not null/empty
@@ -174,7 +186,8 @@ def login(request):
 
 def user_home(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    context = {'user': user, 'user_id': user_id}
+    create = isTournamentStarted()
+    context = {'user': user, 'user_id': user_id, 'create': create}
     return render(request, 'project/userHome.html', context)
 
 
@@ -220,6 +233,20 @@ def userTeams(request, user_id):
         context = {'user': user, 'user_id': user_id}
         return render(request, 'project/userTeams.html', context)
 
+def generate2021Teams():
+    bracket_64 = ['gonzaga', 'norfolk-state', 'oklahoma', 'missouri', 'creighton', 'california-santa-barbara',
+                  'virginia', 'ohio', 'southern-california', 'drake', 'kansas', 'eastern-washington', 'oregon',
+                  'virginia-commonwealth', 'iowa', 'grand-canyon', 'michigan', 'texas-southern', 'louisiana-state',
+                  'st-bonaventure', 'colorado', 'georgetown', 'florida-state', 'north-carolina-greensboro',
+                  'brigham-young', 'ucla', 'texas-southern', 'abilene-christian', 'connecticut', 'maryland',
+                  'alabama', 'iona', 'baylor', 'hartford', 'north-carolina', 'wisconsin', 'villanova', 'winthrop',
+                  'purdue', 'north-texas', 'texas-tech', 'utah-state', 'arkansas', 'colgate', 'florida',
+                  'virginia-tech', 'ohio-state', 'oral-roberts', 'illinois', 'drexel', 'loyola-il', 'georgia-tech',
+                  'tennessee', 'oregon-state', 'oklahoma-state', 'liberty', 'san-diego-state', 'syracuse',
+                  'west-virginia', 'morehead-state', 'clemson', 'rutgers', 'houston', 'cleveland-state']
+    it = iter(bracket_64)
+    bracket_2021 = list(zip(it, it))
+    return bracket_64, bracket_2021
 
 def createBracket(request, user_id):
     # only generate the bracket if the stats are put in
@@ -227,22 +254,10 @@ def createBracket(request, user_id):
     # delete the request sessions when a bracket is saved
     # list of first round teams
     user = get_object_or_404(User, pk=user_id)
-    bracket_64 = ['gonzaga', 'norfolk-state', 'oklahoma', 'missouri', 'creighton', 'california-santa-barbara',
-                    'virginia', 'ohio', 'southern-california', 'drake', 'kansas', 'eastern-washington', 'oregon',
-                    'virginia-commonwealth', 'iowa', 'grand-canyon', 'michigan', 'texas-southern', 'louisiana-state',
-                    'st-bonaventure', 'colorado', 'georgetown', 'florida-state', 'north-carolina-greensboro',
-                    'brigham-young', 'ucla', 'texas-southern', 'abilene-christian', 'connecticut', 'maryland',
-                    'alabama', 'iona', 'baylor', 'hartford', 'north-carolina', 'wisconsin', 'villanova', 'winthrop',
-                    'purdue', 'north-texas', 'texas-tech', 'utah-state', 'arkansas', 'colgate', 'florida',
-                    'virginia-tech', 'ohio-state', 'oral-roberts', 'illinois', 'drexel', 'loyola-il', 'georgia-tech',
-                    'tennessee', 'oregon-state', 'oklahoma-state', 'liberty', 'san-diego-state', 'syracuse',
-                    'west-virginia', 'morehead-state', 'clemson', 'rutgers', 'houston', 'cleveland-state']
-    it = iter(bracket_64)
-    bracket_2021 = list(zip(it, it))
+    bracket_64, bracket_2021 = generate2021Teams()
     # choosing the stats
     if request.method == 'GET' and 'stat1' in request.GET and 'stat2' in request.GET \
             and 'stat3' in request.GET and 'stat4' in request.GET and 'stat5' in request.GET:
-        print("code executed")
         stat1 = request.GET.get('stat1')
         stat2 = request.GET.get('stat2')
         stat3 = request.GET.get('stat3')
@@ -258,17 +273,16 @@ def createBracket(request, user_id):
         ordered_stats = [stat1, stat2, stat3, stat4, stat5]
         # remove none's from the list
         valueToBeRemoved = "None"
-
         try:
             while True:
                 ordered_stats.remove(valueToBeRemoved)
         except ValueError:
             pass
 
-        print(ordered_stats)
-
+        # check that different stat was selected for each category
         if len(set(ordered_stats)) != len(ordered_stats):
-            messages.error(request, 'Please select a different statistic for each category')
+            messages.error(request, 'Please select a distinct statistic for each category (or none) to generate a bracket')
+            context = {'user': user, 'user_id': user_id, 'bracket_64': bracket_64}
             # append nones back 5-length to tell how many
         else:
             # pass ordered_stats into function
@@ -314,6 +328,176 @@ def createBracket(request, user_id):
     if request.method == 'POST' and 'name' in request.POST:
         save_form = SaveForm(request.POST)
         if save_form.is_valid():
+            try:
+                bracket_32 = request.session.get('bracket_32')
+                bracket_16 = request.session.get('bracket_16')
+                bracket_8 = request.session.get('bracket_8')
+                bracket_4 = request.session.get('bracket_4')
+                bracket_2 = request.session.get('bracket_2')
+                winner = request.session.get('winner')
+                # note to myself- it allows you to save a bracket without selecting stats, not good :(
+                stat1 = request.session.get('stat1')
+                stat2 = request.session.get('stat2')
+                stat3 = request.session.get('stat3')
+                stat4 = request.session.get('stat4')
+                stat5 = request.session.get('stat5')
+
+                stats = [stat1, stat2, stat3, stat4, stat5]
+                database = Bracket.objects.create(
+                    bracket_name=save_form.cleaned_data['name'],
+                    user=user,
+                    bracket_64=bracket_64,
+                    bracket_32=bracket_32,
+                    bracket_16=bracket_16,
+                    bracket_8=bracket_8,
+                    bracket_4=bracket_4,
+                    bracket_2=bracket_2,
+                    winner=winner,
+                    stats=stats
+                )
+                database.save()
+                del request.session['stat1']
+                del request.session['stat2']
+                del request.session['stat3']
+                del request.session['stat4']
+                del request.session['stat5']
+                del request.session['bracket_32']
+                del request.session['bracket_16']
+                del request.session['bracket_8']
+                del request.session['bracket_4']
+                del request.session['bracket_2']
+                del request.session['winner']
+                context = {'user': user, 'user_id': user_id, 'bracket_64': bracket_64, 'save_form': save_form}
+            except:
+                messages.error(request,
+                               'You must select stats and generate a bracket before saving')
+
+
+        else:
+            save_form = SaveForm()
+            context = {'user': user, 'user_id': user_id, 'save_form': save_form, 'bracket_64': bracket_64}
+
+    return render(request, 'project/createBracket.html', context)
+
+
+def myBracket(request, user_id):
+    # scoring- split the list of winning teams into lists for each round
+    # bracket is a list of teams- every 2 teams played a game against each other
+    # split the bracket list up into lists for each round as well
+    # for every team in bracket list we check if the name is in the winning teams list
+    # if it is, then that team's name can be bolded on the bracket
+    # idk how bracket scoring works so tbd if we can do that
+    user = get_object_or_404(User, pk=user_id)
+    brackets = Bracket.objects.filter(user__pk=user_id)
+
+    # request to remove bracket
+    if request.method == 'GET' and 'bracket_id' in request.GET:
+        bid = request.GET.get('bracket_id')
+        Bracket.objects.filter(id=bid).delete()
+        brackets = Bracket.objects.filter(user__pk=user_id)
+        for bracket in brackets:
+            print(bracket.id)
+
+    # request to edit bracket
+    if request.method == 'GET' and 'bracketid' in request.GET:
+        bid = request.GET.get('bracketid')
+        editBracket(request, bid, user_id)
+
+    edit = isTournamentStarted()
+
+    # scoring stuff
+    teamW = request.session.get('teamW')
+    # separate list of winning teams into lists for each round
+    # round_1 = teamW[8:72]
+    # round_2 = teamW[72:104]
+    # sweet_16 = teamW[104:120]
+    # elite_8 = teamW[120:128]
+    # final_4 = teamW[128:132]
+    # championship = teamW[132:134]
+    context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'edit': edit}
+    return render(request, 'project/bracket.html', context)
+
+
+def editBracket(request, bracket_id, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    brackets = Bracket.objects.filter(id=bracket_id)
+
+    bracket_64, bracket_2021 = generate2021Teams()
+    # choosing the stats
+    if request.method == 'GET' and 'stat1' in request.GET and 'stat2' in request.GET \
+            and 'stat3' in request.GET and 'stat4' in request.GET and 'stat5' in request.GET:
+        stat1 = request.GET.get('stat1')
+        stat2 = request.GET.get('stat2')
+        stat3 = request.GET.get('stat3')
+        stat4 = request.GET.get('stat4')
+        stat5 = request.GET.get('stat5')
+
+        request.session['stat1'] = stat1
+        request.session['stat2'] = stat2
+        request.session['stat3'] = stat3
+        request.session['stat4'] = stat4
+        request.session['stat5'] = stat5
+
+        ordered_stats = [stat1, stat2, stat3, stat4, stat5]
+        # remove none's from the list
+        valueToBeRemoved = "None"
+
+        try:
+            while True:
+                ordered_stats.remove(valueToBeRemoved)
+        except ValueError:
+            pass
+
+        if len(set(ordered_stats)) != len(ordered_stats):
+            messages.error(request, 'Please select a different statistic for each category')
+            # append nones back 5-length to tell how many
+        else:
+            # pass ordered_stats into function
+            '''
+            round_32 = next_round_2021(bracket_2021, stat1, stat2, stat3, stat4, stat5)
+            print("round of 32 was generated")
+            sweet_16 = next_round_2021(round_32, stat1, stat2, stat3, stat4, stat5)
+            print("round of 16 was generated")
+            elite_8 = next_round_2021(sweet_16, stat1, stat2, stat3, stat4, stat5)
+            final_4 = next_round_2021(elite_8, stat1, stat2, stat3, stat4, stat5)
+            championship = next_round_2021(final_4, stat1, stat2, stat3, stat4, stat5)
+            winner = compare_schools_2021(championship[0][0], championship[0][1], stat1, stat2, stat3, stat4, stat5)
+            print(winner)
+            '''
+            bracket_32 = ['gonzaga', 'oklahoma', 'creighton', 'ohio', 'southern-california', 'eastern-washington',
+                          'oregon',
+                          'iowa', 'texas-southern', 'louisiana-state', 'georgetown', 'florida-state',
+                          'brigham-young', 'abilene-christian', 'connecticut', 'alabama', 'baylor', 'north-carolina',
+                          'winthrop', 'purdue', 'utah-state', 'colgate', 'florida', 'ohio-state', 'illinois',
+                          'georgia-tech',
+                          'tennessee', 'oklahoma-state', 'syracuse', 'west-virginia', 'rutgers', 'houston']
+            bracket_16 = ['gonzaga', 'ohio', 'eastern-washington', 'iowa', 'texas-southern', 'georgetown',
+                          'abilene-christian',
+                          'alabama', 'north-carolina', 'winthrop', 'colgate', 'ohio-state' 'illinios',
+                          'oklahoma-state', 'west-virginia', 'houston']
+            bracket_8 = ['gonzaga', 'iowa', 'texas-southern', 'alabama', 'winthrop', 'colgate', 'illinios', 'houston']
+            bracket_4 = ['iowa', 'alabama', 'colgate', 'illinois']
+            bracket_2 = ['iowa', 'colgate']
+            winner = ['colgate']
+            # call function that generates bracket, returns list of teams in order to fill in bracket
+            request.session['bracket_32'] = bracket_32
+            request.session['bracket_16'] = bracket_16
+            request.session['bracket_8'] = bracket_8
+            request.session['bracket_4'] = bracket_4
+            request.session['bracket_2'] = bracket_2
+            request.session['winner'] = winner
+
+            context = {'user': user, 'user_id': user_id, 'bracket_64': bracket_64, 'bracket_32': bracket_32,
+                       'bracket_16': bracket_16, 'bracket_8': bracket_8, 'bracket_4': bracket_4, 'bracket_2': bracket_2,
+                       'winner': winner}
+
+    else:
+        context = {'user': user, 'user_id': user_id, 'bracket_64': bracket_64}
+
+    # naming and saving the bracket
+    if request.method == 'POST' and 'name' in request.POST:
+        save_form = SaveForm(request.POST)
+        if save_form.is_valid():
             bracket_32 = request.session.get('bracket_32')
             bracket_16 = request.session.get('bracket_16')
             bracket_8 = request.session.get('bracket_8')
@@ -328,7 +512,7 @@ def createBracket(request, user_id):
             stat5 = request.session.get('stat5')
 
             stats = [stat1, stat2, stat3, stat4, stat5]
-            database = Bracket.objects.create(
+            Bracket.objects.update(
                 bracket_name=save_form.cleaned_data['name'],
                 user=user,
                 bracket_64=bracket_64,
@@ -340,7 +524,7 @@ def createBracket(request, user_id):
                 winner=winner,
                 stats=stats
             )
-            database.save()
+
             del request.session['stat1']
             del request.session['stat2']
             del request.session['stat3']
@@ -358,43 +542,8 @@ def createBracket(request, user_id):
             save_form = SaveForm()
             context = {'user': user, 'user_id': user_id, 'save_form': save_form, 'bracket_64': bracket_64}
 
-    return render(request, 'project/createBracket.html', context)
-
-
-def myBracket(request, user_id):
-    # scoring- split the list of winning teams into lists for each round
-    # bracket is a list of teams- every 2 teams played a game against each other
-    # split the bracket list up into lists for each round as well
-    # for every team in bracket list we check if the name is in the winning teams list
-    # if it is, then that team's name can be bolded on the bracket
-    # idk how bracket scoring works so tbd if we can do that
-    user = get_object_or_404(User, pk=user_id)
-    print(user.user_username)
-    brackets = Bracket.objects.filter(user__pk=user_id)
-
-    for bracket in brackets:
-        print(bracket.id)
-
-    if request.method == 'GET' and 'bracket_id' in request.GET:
-        bid = request.GET.get('bracket_id')
-        Bracket.objects.filter(id=bid).delete()
-        brackets = Bracket.objects.filter(user__pk=user_id)
-
-    teamW = request.session.get('teamW')
-    # separate list of winning teams into lists for each round
-    # round_1 = teamW[8:72]
-    # round_2 = teamW[72:104]
-    # sweet_16 = teamW[104:120]
-    # elite_8 = teamW[120:128]
-    # final_4 = teamW[128:132]
-    # championship = teamW[132:134]
     context = {'user': user, 'user_id': user_id, 'brackets': brackets}
-    return render(request, 'project/bracket.html', context)
-
-
-def deleteBracket(request, bracket_id):
-    if request.method == 'GET':
-        Bracket.objects.filter(id=bracket_id).delete()
+    return render(request, 'project/editBracket.html', context)
 
 
 # method to scrape for game info

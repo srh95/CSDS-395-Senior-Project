@@ -661,14 +661,20 @@
 
 </body>
 
+{% if edit %}
 <div class="text-box">
 <form method="GET">
    <input type="hidden" id="bracket_id" name="bracket_id" value={{bracket.id}}>
-  <button onclick="deleteBracket(request)">Remove</button>
-<!-- <button id="editBtn" class="buttnStyle" onclick="editBracket(request)">Edit</button>-->
+  <button>Remove</button>
 
 </form>
 </div>
+
+<div class="text-box">
+<!--   <input type="hidden" id="bracketid" name="bracketid" value={{bracket.id}}>-->
+   <button onclick="document.location.href='/editBracket/{{user.id}}/{{bracket.id}}'">Edit</button>
+</div>
+{% endif %}
 
 {% endfor %}
 

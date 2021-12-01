@@ -8,7 +8,7 @@
     <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
     <link rel="stylesheet" href="{%static 'bracketStyle.css'%}">
  </head>
- <div>
+ <body>
 
 <div id="container">
         <div id="logo">
@@ -25,8 +25,9 @@
         </div>
 
      </div>
+{% for bracket in brackets %}
 <div class="text-box">
-        <h1> Create a March Madness bracket </h1>
+        <h1> Edit your bracket, {{bracket.bracket_name}} </h1>
        <p>Choose up to 5 statistics to use to generate your bracket. Note: the statistics should be chosen in order of importance.</p>
 </div>
 
@@ -36,8 +37,8 @@
 <div class="text-box">
     <label for="stat1"></label>
 <select name="stat1" id="stat1" required>
- <option value="none" selected disabled hidden>
-          Select an Option
+ <option value={{bracket.stats.0}} selected disabled hidden>
+          {{bracket.stats.0}}
   <option value="FG">Field Goals Per Game</option>
   <option value="FGA">Field Goal Attempts Per Game</option>
     <option value="FG%">Field Goal Percentage</option>
@@ -63,8 +64,8 @@
 </div>
  <div class="text-box">
  <select name="stat2" id="stat2" required>
- <option value="none" selected disabled hidden>
-          Select an Option
+ <option value={{bracket.stats.1}} selected disabled hidden>
+          {{bracket.stats.1}}
   <option value="FG">Field Goals Per Game</option>
   <option value="FGA">Field Goal Attempts Per Game</option>
     <option value="FG%">Field Goal Percentage</option>
@@ -91,8 +92,8 @@
  </div>
  <div class="text-box">
  <select name="stat3" id="stat3" required>
- <option value="none" selected disabled hidden>
-          Select an Option
+ <option value={{bracket.stats.2}} selected disabled hidden>
+          {{bracket.stats.2}}
   <option value="FG">Field Goals Per Game</option>
   <option value="FGA">Field Goal Attempts Per Game</option>
     <option value="FG%">Field Goal Percentage</option>
@@ -119,8 +120,8 @@
  </div>
  <div class="text-box">
  <select name="stat4" id="stat4" required>
- <option value="none" selected disabled hidden>
-          Select an Option
+ <option value={{bracket.stats.3}} selected disabled hidden>
+          {{bracket.stats.3}}
   <option value="FG">Field Goals Per Game</option>
   <option value="FGA">Field Goal Attempts Per Game</option>
     <option value="FG%">Field Goal Percentage</option>
@@ -147,8 +148,8 @@
  </div>
  <div class="text-box">
  <select name="stat5" id="stat5" required>
- <option value="none" selected disabled hidden>
-          Select an Option
+ <option value={{bracket.stats.4}} selected disabled hidden>
+          {{bracket.stats.4}}
   <option value="FG">Field Goals Per Game</option>
   <option value="FGA">Field Goal Attempts Per Game</option>
     <option value="FG%">Field Goal Percentage</option>
@@ -177,15 +178,14 @@
 <!-- <input type="Submit" value="Generate bracket">-->
  <button onclick="createBracket(request)" style="height:25px; width:75px">Submit </button>
 </div>
+
 </form>
 
-<div class="text-box">
 {% if messages %}
 {% for message in messages %}
-<div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }} </div>
+<div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
 {% endfor %}
 {% endif %}
-</div>
 </div>
 
  <body>
@@ -789,7 +789,7 @@
 
 
 <div class="text-box">
-<p>Enter a name and click the save button to save your bracket.</p>
+<p>Enter a name and click the update button to update your bracket.</p>
 </div>
 <p>  </p>
 <form method="post">
@@ -797,17 +797,26 @@
 
   <div class="text-box">
     <div class="txt_field">
-        <input id="name" type="text" name="name" required>
+        <input id="name" type="text" name="name" value={{bracket.bracket_name}} required>
         <input id="stats" type="hidden" name="stats" value={{stats_list}}>
         <label></label>
     </div>
 
-    <input type="Submit" value="Save Bracket">
+    <input type="Submit" value="Update Bracket">
 </form>
 
+   <div class="text-box">
+       <button onclick="document.location.href='/myBracket/{{user.id}}/'">Cancel</button>
+   </div>
+
+ {% if messages %}
+{% for message in messages %}
+<div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+{% endfor %}
+{% endif %}
 
 
-
+{% endfor %}
 
 
  </body>
