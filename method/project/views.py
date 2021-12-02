@@ -676,13 +676,16 @@ def get_season_links_dict(school_name):
         season_links_dict.update({link[-9:-5]: link})
     return season_links_dict
 
+def get_2021_data():
+    return pd.read_csv('bracket_2021_data.csv').set_index('Unnamed: 0')
+
 def get_team_stats(school_name, year):
     team_stats = pd.read_html(get_season_links_dict(school_name)[year])[1]
     team_stats.set_index('Unnamed: 0', inplace=True)
     return team_stats
 
 def get_team_stats_2021(school_name):
-    team_stats = pd.read_csv('bracket_2021_data.csv')[school_name]
+    team_stats = get_2021_data.loc[['school_name']]
     return team_stats
 
 def get_school_stat_rank(school_name, year, stat_category):
@@ -692,7 +695,7 @@ def get_school_stat_rank(school_name, year, stat_category):
         return int(get_team_stats(school_name, year).loc['Rank'][stat_category][0][:-2])
 
 def get_school_stat_rank_2021(school_name, stat_category):
-    rank = int(pd.read_csv('bracket_2021_data.csv').at[school_name, stat_category][:-2])
+    rank = int(get_2021_data().at[school_name, stat_category][:-2])
     return rank
 
 def compare_school_stats(college1, college2, year, stat_category):
