@@ -33,8 +33,8 @@ from .forms import (
 def index(request):
     return HttpResponse("Hello world. You're at the website index.")
 
+# checks whether the march madness tournament has started
 def isTournamentStarted():
-    # lock brackets on the day march madness begins
     # get today's date
     today = datetime.datetime.now()
     # tournament start date
@@ -48,9 +48,11 @@ def isTournamentStarted():
 
     return open
 
+# view for home page
 def home(request):
     return render(request, 'project/home.html')
 
+# view for creating a team
 def createTeam(request, user_id):
     # need to make it so a user cant create a team if team attribute is not null/empty
     # some way to check that the team ids are unique
@@ -92,7 +94,7 @@ def createTeam(request, user_id):
         context = {'user': user, 'user_id': user_id,'brackets': brackets, 'form': form}
         return render(request, 'project/createTeam.html', context)
 
-
+# view for joining a team
 def joinTeam(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     form = JoinTeamForm(request.POST)
@@ -118,7 +120,7 @@ def joinTeam(request, user_id):
         context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'form': form}
         return render(request, 'project/joinTeam.html', context)
 
-
+# removes user from team
 def leaveTeam(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     # team = get_object_or_404(Team, team_id=user.team.team_id)
@@ -131,6 +133,7 @@ def leaveTeam(request, user_id):
         context = {'user': user, 'user_id': user_id}
         return render(request, 'project/joinTeam.html', context)
 
+# view for sign up page
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -157,7 +160,7 @@ def register(request):
 
     return render(request, 'project/register.html', {'form': form})
 
-
+# view for log in page
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -183,20 +186,20 @@ def login(request):
 
     return render(request, 'project/login.html', {'form': form})
 
-
+# view for home page when logged in
 def user_home(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     create = isTournamentStarted()
     context = {'user': user, 'user_id': user_id, 'create': create}
     return render(request, 'project/userHome.html', context)
 
-
+# view for news page
 def news(request):
     allposts = Posts.objects.all()
     context = {'allposts': allposts}
     return render(request, 'project/News.html', context)
 
-
+# view for new page when logged in
 def userNews(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     allposts = Posts.objects.all()
@@ -218,6 +221,7 @@ def userNews(request, user_id):
 
     return render(request, 'project/userNews.html', context)
 
+# view for teams page when logged in
 def userTeams(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     favbracketname = user.favbracket
@@ -233,6 +237,7 @@ def userTeams(request, user_id):
         context = {'user': user, 'user_id': user_id}
         return render(request, 'project/userTeams.html', context)
 
+# generates first round of teams for 2021
 def generate2021Teams():
     bracket_64 = ['gonzaga', 'norfolk-state', 'oklahoma', 'missouri', 'creighton', 'california-santa-barbara',
                   'virginia', 'ohio', 'southern-california', 'drake', 'kansas', 'eastern-washington', 'oregon',
@@ -250,11 +255,11 @@ def generate2021Teams():
 
 def createBracket(request, user_id):
     # only generate the bracket if the stats are put in
-    # if a bracket is generated make the save button show up
     # delete the request sessions when a bracket is saved
     # list of first round teams
     user = get_object_or_404(User, pk=user_id)
     bracket_64, bracket_2021 = generate2021Teams()
+
     # choosing the stats
     if request.method == 'GET' and 'stat1' in request.GET and 'stat2' in request.GET \
             and 'stat3' in request.GET and 'stat4' in request.GET and 'stat5' in request.GET:
@@ -263,7 +268,6 @@ def createBracket(request, user_id):
         stat3 = request.GET.get('stat3')
         stat4 = request.GET.get('stat4')
         stat5 = request.GET.get('stat5')
-
         request.session['stat1'] = stat1
         request.session['stat2'] = stat2
         request.session['stat3'] = stat3
@@ -271,6 +275,7 @@ def createBracket(request, user_id):
         request.session['stat5'] = stat5
 
         ordered_stats = [stat1, stat2, stat3, stat4, stat5]
+
         # remove none's from the list
         valueToBeRemoved = "None"
         try:
@@ -283,20 +288,27 @@ def createBracket(request, user_id):
         if len(set(ordered_stats)) != len(ordered_stats):
             messages.error(request, 'Please select a distinct statistic for each category (or none) to generate a bracket')
             context = {'user': user, 'user_id': user_id, 'bracket_64': bracket_64}
-            # append nones back 5-length to tell how many
         else:
+            # append nones back 5-length to tell how many
+            num_nones = 5-len(ordered_stats)
+            i = 0
+            while i < num_nones:
+                ordered_stats.append("None")
+                i += 1
+
             # pass ordered_stats into function
-            '''
-            round_32 = next_round_2021(bracket_2021, stat1, stat2, stat3, stat4, stat5)
-            print("round of 32 was generated")
-            sweet_16 = next_round_2021(round_32, stat1, stat2, stat3, stat4, stat5)
-            print("round of 16 was generated")
-            elite_8 = next_round_2021(sweet_16, stat1, stat2, stat3, stat4, stat5)
-            final_4 = next_round_2021(elite_8, stat1, stat2, stat3, stat4, stat5)
-            championship = next_round_2021(final_4, stat1, stat2, stat3, stat4, stat5)
-            winner = compare_schools_2021(championship[0][0], championship[0][1], stat1, stat2, stat3, stat4, stat5)
-            print(winner)
-            '''
+            print(get_2021_data().head())
+
+            # bracket_32 = next_round_2021(bracket_2021, stat1, stat2, stat3, stat4, stat5)
+            # print("round of 32 was generated")
+            # bracket_16 = next_round_2021(bracket_32, stat1, stat2, stat3, stat4, stat5)
+            # print("round of 16 was generated")
+            # bracket_8 = next_round_2021(bracket_16, stat1, stat2, stat3, stat4, stat5)
+            # bracket_4 = next_round_2021(bracket_8, stat1, stat2, stat3, stat4, stat5)
+            # bracket_2 = next_round_2021(bracket_4, stat1, stat2, stat3, stat4, stat5)
+            # winner = compare_schools_2021(bracket_2[0][0], bracket_2[0][1], stat1, stat2, stat3, stat4, stat5)
+            # print(winner)
+
             bracket_32 = ['gonzaga', 'oklahoma', 'creighton', 'ohio', 'southern-california', 'eastern-washington', 'oregon',
                     'iowa', 'texas-southern', 'louisiana-state', 'georgetown', 'florida-state',
                     'brigham-young', 'abilene-christian', 'connecticut', 'alabama', 'baylor', 'north-carolina',
@@ -309,7 +321,7 @@ def createBracket(request, user_id):
             bracket_4 = ['iowa', 'alabama', 'colgate', 'illinois']
             bracket_2 = ['iowa', 'colgate']
             winner = ['colgate']
-            # call function that generates bracket, returns list of teams in order to fill in bracket
+
             request.session['bracket_32'] = bracket_32
             request.session['bracket_16'] = bracket_16
             request.session['bracket_8'] = bracket_8
@@ -335,7 +347,7 @@ def createBracket(request, user_id):
                 bracket_4 = request.session.get('bracket_4')
                 bracket_2 = request.session.get('bracket_2')
                 winner = request.session.get('winner')
-                # note to myself- it allows you to save a bracket without selecting stats, not good :(
+                # note- it allows you to save a bracket without selecting stats, not good :(
                 stat1 = request.session.get('stat1')
                 stat2 = request.session.get('stat2')
                 stat3 = request.session.get('stat3')
@@ -372,14 +384,13 @@ def createBracket(request, user_id):
                 messages.error(request,
                                'You must select stats and generate a bracket before saving')
 
-
         else:
             save_form = SaveForm()
             context = {'user': user, 'user_id': user_id, 'save_form': save_form, 'bracket_64': bracket_64}
 
     return render(request, 'project/createBracket.html', context)
 
-
+# view for viewing user's brackets
 def myBracket(request, user_id):
     # scoring- split the list of winning teams into lists for each round
     # bracket is a list of teams- every 2 teams played a game against each other
@@ -417,7 +428,7 @@ def myBracket(request, user_id):
     context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'edit': edit}
     return render(request, 'project/bracket.html', context)
 
-
+# view for edit bracket
 def editBracket(request, bracket_id, user_id):
     user = get_object_or_404(User, pk=user_id)
     brackets = Bracket.objects.filter(id=bracket_id)
@@ -454,17 +465,17 @@ def editBracket(request, bracket_id, user_id):
             # append nones back 5-length to tell how many
         else:
             # pass ordered_stats into function
-            '''
-            round_32 = next_round_2021(bracket_2021, stat1, stat2, stat3, stat4, stat5)
-            print("round of 32 was generated")
-            sweet_16 = next_round_2021(round_32, stat1, stat2, stat3, stat4, stat5)
-            print("round of 16 was generated")
-            elite_8 = next_round_2021(sweet_16, stat1, stat2, stat3, stat4, stat5)
-            final_4 = next_round_2021(elite_8, stat1, stat2, stat3, stat4, stat5)
-            championship = next_round_2021(final_4, stat1, stat2, stat3, stat4, stat5)
-            winner = compare_schools_2021(championship[0][0], championship[0][1], stat1, stat2, stat3, stat4, stat5)
-            print(winner)
-            '''
+
+            # round_32 = next_round_2021(bracket_2021, stat1, stat2, stat3, stat4, stat5)
+            # print("round of 32 was generated")
+            # sweet_16 = next_round_2021(round_32, stat1, stat2, stat3, stat4, stat5)
+            # print("round of 16 was generated")
+            # elite_8 = next_round_2021(sweet_16, stat1, stat2, stat3, stat4, stat5)
+            # final_4 = next_round_2021(elite_8, stat1, stat2, stat3, stat4, stat5)
+            # championship = next_round_2021(final_4, stat1, stat2, stat3, stat4, stat5)
+            # winner = compare_schools_2021(championship[0][0], championship[0][1], stat1, stat2, stat3, stat4, stat5)
+            # print(winner)
+
             bracket_32 = ['gonzaga', 'oklahoma', 'creighton', 'ohio', 'southern-california', 'eastern-washington',
                           'oregon',
                           'iowa', 'texas-southern', 'louisiana-state', 'georgetown', 'florida-state',
@@ -527,7 +538,7 @@ def editBracket(request, bracket_id, user_id):
             stat5 = request.session.get('stat5')
 
             stats = [stat1, stat2, stat3, stat4, stat5]
-            Bracket.objects.filter.update(
+            Bracket.objects.filter(id=bracket_id).update(
                 bracket_name=save_form.cleaned_data['name'],
                 user=user,
                 bracket_64=bracket_64,
@@ -561,7 +572,7 @@ def editBracket(request, bracket_id, user_id):
     return render(request, 'project/editBracket.html', context)
 
 
-# method to scrape for game info
+# scrape for tournament game info
 def scoreScrape():
     url = "https://www.ncaa.com/march-madness-live/scores"
     response = requests.get(url)
@@ -620,13 +631,13 @@ def scoreScrape():
 
     return teamL, teamW, imgsL
 
-
+# view for scores page
 def scores(request):
     [teamL, teamW, imgsL] = scoreScrape()
     context = {'teamL': teamL, 'teamW': teamW, 'img_name': json.dumps(imgsL)}
     return render(request, 'project/scores.html', context)
 
-
+# view for scores page when logged in
 def userScores(request, user_id):
     [teamL, teamW, imgsL] = scoreScrape()
     request.session['teamW'] = teamW
@@ -634,7 +645,7 @@ def userScores(request, user_id):
     context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
     return render(request, 'project/userScores.html', context)
 
-
+# view for teams page
 def teams(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     context = {'user': user, 'user_id': user_id}
