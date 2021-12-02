@@ -8,23 +8,23 @@
     <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
     <link rel="stylesheet" href="{%static 'bracketStyle.css'%}">
  </head>
- <body>
+<style>
+ #backbtn{
+position: absolute;
+left: 0px;
+top:0px;
+background: #165397;
+border-radius: 4px;
+font-family: "Arial", Impact, Charcoal, sans-serif;
+font-weight: bold;
+font-size:20px;
+color: white;
+}
+</style>
+<body>
 
-<div id="container">
-        <div id="logo">
-            <img src="{% static 'img/logo.png'%}" width="220" height="60">
-        </div>
-        <div id="navbar">
-            <ul>
-                <li><a href="/accounts/login/home/{{user.id}}">Home</a></li>
-                <li><a href="/scores/{{user.id}}">Scores</a></li>
-             <li><a href="/myBracket/{{user.id}}">My Brackets</a></li>
-                <li><a href="/teams/{{user.id}}">Teams</a></li>
-                <li><a href="/news/{{user.id}}">News</a></li>
-                <li id="login"><a href="{% url 'home' %}">Logout</a></li>
-        </div>
+<button id="backbtn "class="buttnStyle" onclick="document.location.href = '/myBracket/{{user.id}}'">Back</button>
 
-     </div>
 {% for bracket in brackets %}
 <div class="text-box">
         <h1> Edit your bracket, {{bracket.bracket_name}} </h1>
@@ -33,7 +33,6 @@
 
 
 <form method="GET">
-    {% csrf_token %}
 <div class="text-box">
     <label for="stat1"></label>
 <select name="stat1" id="stat1" required>
