@@ -38,7 +38,7 @@ def isTournamentStarted():
     # get today's date
     today = datetime.datetime.now()
     # tournament start date
-    tournament = "15/3/2021 0:00"
+    tournament = "15/3/2022 0:00"
     tournament = datetime.datetime.strptime(tournament, "%d/%m/%Y %H:%M")
 
     if today > tournament:
@@ -421,6 +421,7 @@ def myBracket(request, user_id):
 def editBracket(request, bracket_id, user_id):
     user = get_object_or_404(User, pk=user_id)
     brackets = Bracket.objects.filter(id=bracket_id)
+    bracket=brackets[0]
 
     bracket_64, bracket_2021 = generate2021Teams()
     # choosing the stats
@@ -487,11 +488,25 @@ def editBracket(request, bracket_id, user_id):
             request.session['bracket_2'] = bracket_2
             request.session['winner'] = winner
 
+
             context = {'user': user, 'user_id': user_id, 'bracket_64': bracket_64, 'bracket_32': bracket_32,
                        'bracket_16': bracket_16, 'bracket_8': bracket_8, 'bracket_4': bracket_4, 'bracket_2': bracket_2,
                        'winner': winner}
 
     else:
+        # get bracket's stats
+        # assign stats to the request sessions
+        request.session['bracket_32'] = bracket.bracket_32
+        request.session['bracket_16'] = bracket.bracket_16
+        request.session['bracket_8'] = bracket.bracket_8
+        request.session['bracket_4'] = bracket.bracket_4
+        request.session['bracket_2'] = bracket.bracket_2
+        request.session['winner'] = bracket.winner
+        request.session['stat1'] = bracket.stats[0]
+        request.session['stat2'] = bracket.stats[1]
+        request.session['stat3'] = bracket.stats[2]
+        request.session['stat4'] = bracket.stats[3]
+        request.session['stat5'] = bracket.stats[4]
         context = {'user': user, 'user_id': user_id, 'bracket_64': bracket_64}
 
     # naming and saving the bracket
@@ -512,7 +527,7 @@ def editBracket(request, bracket_id, user_id):
             stat5 = request.session.get('stat5')
 
             stats = [stat1, stat2, stat3, stat4, stat5]
-            Bracket.objects.update(
+            Bracket.objects.filter.update(
                 bracket_name=save_form.cleaned_data['name'],
                 user=user,
                 bracket_64=bracket_64,
