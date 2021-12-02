@@ -297,30 +297,29 @@ def createBracket(request, user_id):
                 i += 1
 
             # pass ordered_stats into function
-            print(get_2021_data().head())
 
-            # bracket_32 = next_round_2021(bracket_2021, stat1, stat2, stat3, stat4, stat5)
-            # print("round of 32 was generated")
-            # bracket_16 = next_round_2021(bracket_32, stat1, stat2, stat3, stat4, stat5)
-            # print("round of 16 was generated")
-            # bracket_8 = next_round_2021(bracket_16, stat1, stat2, stat3, stat4, stat5)
-            # bracket_4 = next_round_2021(bracket_8, stat1, stat2, stat3, stat4, stat5)
-            # bracket_2 = next_round_2021(bracket_4, stat1, stat2, stat3, stat4, stat5)
-            # winner = compare_schools_2021(bracket_2[0][0], bracket_2[0][1], stat1, stat2, stat3, stat4, stat5)
-            # print(winner)
+            bracket_32 = next_round_2021(bracket_2021, stat1, stat2, stat3, stat4, stat5)
+            print("round of 32 was generated")
+            bracket_16 = next_round_2021(bracket_32, stat1, stat2, stat3, stat4, stat5)
+            print("round of 16 was generated")
+            bracket_8 = next_round_2021(bracket_16, stat1, stat2, stat3, stat4, stat5)
+            bracket_4 = next_round_2021(bracket_8, stat1, stat2, stat3, stat4, stat5)
+            bracket_2 = next_round_2021(bracket_4, stat1, stat2, stat3, stat4, stat5)
+            winner = compare_schools_2021(bracket_2[0][0], bracket_2[0][1], stat1, stat2, stat3, stat4, stat5)
+            print(winner)
 
-            bracket_32 = ['gonzaga', 'oklahoma', 'creighton', 'ohio', 'southern-california', 'eastern-washington', 'oregon',
-                    'iowa', 'texas-southern', 'louisiana-state', 'georgetown', 'florida-state',
-                    'brigham-young', 'abilene-christian', 'connecticut', 'alabama', 'baylor', 'north-carolina',
-                    'winthrop', 'purdue', 'utah-state', 'colgate', 'florida', 'ohio-state', 'illinois', 'georgia-tech',
-                    'tennessee', 'oklahoma-state', 'syracuse', 'west-virginia', 'rutgers', 'houston']
-            bracket_16 = ['gonzaga', 'ohio', 'eastern-washington', 'iowa', 'texas-southern', 'georgetown', 'abilene-christian',
-                          'alabama', 'north-carolina', 'winthrop', 'colgate', 'ohio-state' 'illinios',
-                          'oklahoma-state', 'west-virginia', 'houston']
-            bracket_8 = ['gonzaga', 'iowa', 'texas-southern', 'alabama', 'winthrop', 'colgate', 'illinios', 'houston']
-            bracket_4 = ['iowa', 'alabama', 'colgate', 'illinois']
-            bracket_2 = ['iowa', 'colgate']
-            winner = ['colgate']
+            # bracket_32 = ['gonzaga', 'oklahoma', 'creighton', 'ohio', 'southern-california', 'eastern-washington', 'oregon',
+            #         'iowa', 'texas-southern', 'louisiana-state', 'georgetown', 'florida-state',
+            #         'brigham-young', 'abilene-christian', 'connecticut', 'alabama', 'baylor', 'north-carolina',
+            #         'winthrop', 'purdue', 'utah-state', 'colgate', 'florida', 'ohio-state', 'illinois', 'georgia-tech',
+            #         'tennessee', 'oklahoma-state', 'syracuse', 'west-virginia', 'rutgers', 'houston']
+            # bracket_16 = ['gonzaga', 'ohio', 'eastern-washington', 'iowa', 'texas-southern', 'georgetown', 'abilene-christian',
+            #               'alabama', 'north-carolina', 'winthrop', 'colgate', 'ohio-state' 'illinios',
+            #               'oklahoma-state', 'west-virginia', 'houston']
+            # bracket_8 = ['gonzaga', 'iowa', 'texas-southern', 'alabama', 'winthrop', 'colgate', 'illinios', 'houston']
+            # bracket_4 = ['iowa', 'alabama', 'colgate', 'illinois']
+            # bracket_2 = ['iowa', 'colgate']
+            # winner = ['colgate']
 
             request.session['bracket_32'] = bracket_32
             request.session['bracket_16'] = bracket_16
