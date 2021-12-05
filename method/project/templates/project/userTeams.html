@@ -42,7 +42,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href="text.css">
     <title>Method</title>
     {% load static %}
     <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
@@ -111,7 +110,7 @@
  <h5>{{user.favbracket.bracket_name}} </h5>
   <h4>Stats: {{user.favbracket.stats}}</h4>
  </div>
- <div class='half-circle-container'>
+  <div class='half-circle-container'>
  <div class='half-circle bottom-circle'>
  <div></div>
  </div>
@@ -159,40 +158,40 @@
  </ul>
  <ul class='round'></ul>
  <ul class='round'>
- <li class='region region-right'>Midwest</li>
+ <li class='region region-right'>West</li>
  </ul>
  <ul class='round first-four-winner'>
  <li class='game-right game-top'>
- <span>UC Davis</span>
+ <span>Norfolk St.</span>
  </li>
  </ul>
  <ul class='round seed'>
  <li class='game-right game-top'>
- <span>UC Davis</span>
+ <span>Appalachian St</span>
  <span>16</span>
  </li>
  <li class='game-right spacer'>&nbsp;</li>
  <li class='game-right game-bottom'>
- <span>Northern Carolina Cent&hellip;</span>
+ <span>Norfolk St</span>
  <span>16</span>
  </li>
  </ul>
  <ul class='round'>
- <li class='region region-right'>South</li>
+ <li class='region region-right'>West</li>
  </ul>
  <ul class='round first-four-winner'>
  <li class='game-right game-top'>
- <span>Kansas State</span>
+ <span>Wichita St</span>
  </li>
  </ul>
  <ul class='round seed'>
  <li class='game-right game-top'>
- <span>Kansas State</span>
+ <span>Wichita St</span>
  <span>11</span>
  </li>
  <li class='game-right spacer'>&nbsp;</li>
  <li class='game-right game-bottom'>
- <span>Wake Forest</span>
+ <span>Drake</span>
  <span>11</span>
  </li>
  </ul>
@@ -310,7 +309,7 @@
  </li>
  <li class='game-left game-bottom'>
  <span></span>
- <span>{{user.favbracket_64.13}}</span>
+ <span>{{user.favbracket.bracket_64.13}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
@@ -337,7 +336,7 @@
  </li>
  <li class='game-left game-bottom'>
  <span></span>
- <span>{{bracket.bracket_64.19}}</span>
+ <span>{{user.favbracket.bracket_64.19}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
@@ -351,7 +350,7 @@
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
  <span></span>
- <span>{{bracket.bracket_64.22}}</span>
+ <span>{{user.favbracket.bracket_64.22}}</span>
  </li>
  <li class='game-left game-bottom'>
  <span></span>
@@ -364,7 +363,7 @@
  </li>
  <li class='game-left game-bottom'>
  <span></span>
- <span>{{bracket.bracket_64.25}}</span>
+ <span>{{user.favbracket.bracket_64.25}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
@@ -373,7 +372,7 @@
  </li>
  <li class='game-left game-bottom'>
  <span></span>
- <span>{{bracket.bracket_64.27}}</span>
+ <span>{{user.favbracket.bracket_64.27}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
@@ -382,7 +381,7 @@
  </li>
  <li class='game-left game-bottom'>
  <span></span>
- <span>{{bracket.bracket_64.29}}</span>
+ <span>{{user.favbracket.bracket_64.29}}</span>
  </li>
  <li class='spacer'>&nbsp;</li>
  <li class='game-left game-top'>
@@ -474,7 +473,7 @@
  </ul>
  <ul class='round finals'>
  <li class='spacer'>&nbsp;</li>
- <li class='game final'>{{user.favbracket.winner.0}}</li>
+ <li class='game final'>{{user.favbracket.winner}}</li>
  <li class='spacer'>&nbsp;</li>
  </ul>
  <ul class='round semi-final'>
