@@ -31,6 +31,7 @@ class Bracket(models.Model):
     bracket_2 = models.JSONField(default=list, blank=True, null=True)
     winner = models.JSONField(default=list, blank=True, null=True)
     stats = models.JSONField(default=list, blank=True, null=True)
+    score = models.IntegerField(default=0)
 
 
     def __str__(self):
