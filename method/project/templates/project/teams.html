@@ -741,11 +741,9 @@
     {% else %}
     <center>
         <h1>
-            Oops! You have not joined a team yet
+            You are not on a team
           {{user.team.team_id}}
         </h1>
-        <button class = "button" id="back" onclick="location.href='/teams/{{user.id}}'"><span>Back</span></button>
-        <button class = "button" id="entercode" onclick="location.href='/joinTeam/{{user.id}}'"><span>Enter a Join Code</span></button>
     </center>
     {% endif %}
 
