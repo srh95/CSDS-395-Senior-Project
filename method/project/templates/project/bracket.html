@@ -63,6 +63,9 @@
 
  <div class='header-text'>
  <h1>{{bracket.bracket_name}} </h1>
+  {% if not edit %}
+  <h4>{{bracket.score}}</h4>
+  {% endif %}
   <h4>Stats: {{bracket.stats}}</h4>
  </div>
   <div class='half-circle-container'>

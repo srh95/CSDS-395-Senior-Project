@@ -42,7 +42,7 @@
 
   #SignupBtn{
     position: absolute;
-    left: 620px;
+    left: 500px;
     top:500px;
     background: #165397;
     border-radius: 4px;
@@ -50,9 +50,39 @@
     font-weight: bold;
     font-size:20px;
     color: white;
-
 }
 #SignupBtn:hover{
+ background: #000;
+}
+
+  #PBtn{
+    position: absolute;
+    padding: 15px 27px;
+    left: 730px;
+    top:500px;
+    background: #165397;
+    border-radius: 4px;
+    font-family: "Arial", Impact, Charcoal, sans-serif;
+    font-weight: bold;
+    font-size:20px;
+    color: white;
+}
+#PBtn:hover{
+ background: #000;
+}
+ #PBtn2{
+    position: absolute;
+    padding: 15px 27px;
+    left: 610px;
+    top:530px;
+    background: #165397;
+    border-radius: 4px;
+    font-family: "Arial", Impact, Charcoal, sans-serif;
+    font-weight: bold;
+    font-size:20px;
+    color: white;
+}
+#PBtn2:hover{
  background: #000;
 }
 
@@ -89,8 +119,10 @@
         <h1 class="first-txt"> <center>Welcome, {{user.user_name}}!</center></h1>
         {% if create %}
         <button id="SignupBtn" class="buttnStyle" onclick="document.location.href = '/createBracket/{{user.id}}'">Create Bracket </button>
+        <button id="PBtn" class="buttnStyle" onclick="document.location.href = '/prediction/{{user.id}}'">Bracket Prediction </button>
         {% else %}
         <h4 class="second-txt">The tournament has started! Check how your brackets are doing on the "My Brackets" tab. </h4>
+        <button id="PBtn2" class="buttnStyle" onclick="document.location.href = '/prediction/{{user.id}}'">Bracket Prediction </button>
         {% endif %}
     </div>
 </body>

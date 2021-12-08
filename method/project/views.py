@@ -226,16 +226,34 @@ def userTeams(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     favbracketname = user.favbracket
     brackets = Bracket.objects.filter(bracket_name=favbracketname)
-    print(brackets)
+    edit = isTournamentStarted()
     if user.team:
         team_obj = get_object_or_404(Team, team_id=user.team.team_id)
         teammates = User.objects.filter(team=team_obj)
         num_teammates = len(teammates)
-        context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'teammates': teammates, 'num_teammates': num_teammates}
+        context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'teammates': teammates,
+                   'num_teammates': num_teammates, 'edit': edit}
         return render(request, 'project/userTeams.html', context)
     else:
         context = {'user': user, 'user_id': user_id}
         return render(request, 'project/userTeams.html', context)
+
+# view for teams page
+def teams(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    favbracketname = user.favbracket
+    brackets = Bracket.objects.filter(bracket_name=favbracketname)
+    edit = isTournamentStarted()
+    if user.team:
+        team_obj = get_object_or_404(Team, team_id=user.team.team_id)
+        teammates = User.objects.filter(team=team_obj)
+        num_teammates = len(teammates)
+        context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'teammates': teammates,
+                   'num_teammates': num_teammates, 'edit': edit}
+        return render(request, 'project/teams.html', context)
+    else:
+        context = {'user': user, 'user_id': user_id, 'edit': edit}
+    return render(request, 'project/teams.html', context)
 
 # generates first round of teams for 2021
 def generate2021Teams():
@@ -662,6 +680,37 @@ def editBracket(request, bracket_id, user_id):
 
     return render(request, 'project/editBracket.html', context)
 
+def prediction(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    bracket_64, bracket_2021 = generate2021Teams()
+
+    stat1 = "FTA"
+    stat2 = "2P"
+    stat3 = "PTS"
+    stat4 = "FT%"
+    stat5 = "3P"
+
+    list_stats = ["Free Throw Attempts", "2-Point Field Goals Per Game", "Points Per Game", "Free Throw Percentage",
+                  "3-Point Field Goals Per Game"]
+
+    # pass ordered_stats into function
+    b_32, bracket_32 = next_round_2021(bracket_2021, stat1, stat2, stat3, stat4, stat5)
+    b_16, bracket_16 = next_round_2021(b_32, stat1, stat2, stat3, stat4, stat5)
+    b_8, bracket_8 = next_round_2021(b_16, stat1, stat2, stat3, stat4, stat5)
+    b_4, bracket_4 = next_round_2021(b_8, stat1, stat2, stat3, stat4, stat5)
+    b_2, bracket_2 = next_round_2021(b_4, stat1, stat2, stat3, stat4, stat5)
+    winner = compare_schools_2021(b_2[0][0], b_2[0][1], stat1, stat2, stat3, stat4, stat5)
+
+    hideScore = isTournamentStarted()
+    score = calculateScore(bracket_32, bracket_16, bracket_8, bracket_4, bracket_2, winner)
+
+    context = {'user': user, 'user_id': user_id, 'bracket_64': bracket_64, 'bracket_32': bracket_32,
+                       'bracket_16': bracket_16, 'bracket_8': bracket_8, 'bracket_4': bracket_4, 'bracket_2': bracket_2,
+                       'winner': winner, 'list_stats': list_stats, 'score': score, 'hideScore': hideScore}
+
+    return render(request, 'project/prediction.html', context)
+
+
 
 # scrape for tournament game info
 def scoreScrape():
@@ -735,11 +784,6 @@ def userScores(request, user_id):
     context = {'user': user, 'user_id': user_id, 'teamL': teamL, 'teamW': teamW, 'img_name': imgsL}
     return render(request, 'project/userScores.html', context)
 
-# view for teams page
-def teams(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
-    context = {'user': user, 'user_id': user_id}
-    return render(request, 'project/teams.html', context)
 
 def get_school_teams():
    return pd.read_html('https://www.sports-reference.com/cbb/schools/')[0]['School'].to_list()

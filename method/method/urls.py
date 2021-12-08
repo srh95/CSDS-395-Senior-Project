@@ -25,5 +25,6 @@ urlpatterns = [
     path('createTeam/<int:user_id>', views.createTeam, name='createTeam'),
     path('joinTeam/<int:user_id>', views.joinTeam, name='joinTeam'),
     path('userTeams/<int:user_id>', views.userTeams, name='userteams'),
-    path('leaveTeam/<int:user_id>', views.leaveTeam, name='leaveTeam')
+    path('leaveTeam/<int:user_id>', views.leaveTeam, name='leaveTeam'),
+    path('prediction/<int:user_id>', views.prediction, name='prediction'),
 ]
