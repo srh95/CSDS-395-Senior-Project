@@ -8,7 +8,7 @@
             text-align: center;
             position: relative;
             line-height: 150px;
-            background-color: #fff;
+
             margin: 10px;
         }
 
@@ -50,19 +50,47 @@
   right: 0;
 }
 
-.divider{
+.divider1{
     width:70px;
     height:80px;
     display:inline-block;
 }
-    </style>
+
+ h1{
+    padding: 60px;
+    text-align: center;
+    background: #6F7378;
+    color: white;
+    font-size: 90px;
+    font-family: "Copperplate", monospace;
+ }
+
+ h2{
+    font-size: 30px;
+    color: blue;
+    font-family: "Copperplate", monospace;
+ }
+
+ h5{
+ font-size: 30px;
+    color: white;
+ }
+
+ .divider{
+   width:100px;
+   height:20px;
+   display:inline-block;
+}
+ </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <title>Method</title>
     {% load static %}
+    {% load static %}
     <link rel= "stylesheet" href="{%static 'scoreStyle.css' %}">
-</head>
+    <link rel="stylesheet" href="{%static 'bracketStyle.css'%}">
+  </head>
 <body>
     <div id="container">
         <div id="logo">
@@ -79,17 +107,652 @@
             </ul>
         </div>
     </div>
-    <div class = "divider"/></div>
+
+{% if edit %}
+
+    <div class = "divider1"/></div>
     <div class = "relative">
          <button class = "button" id="userteam" onclick="location.href='/userTeams/{{user.id}}'"><span>View My Team</span></button>
-        <div class = "divider"/></div>
+        <div class = "divider1"/></div>
         <button class = "button" id="create" onclick="location.href='/createTeam/{{user.id}}'"><span>Create a Team</span></button>
-        <div class = "divider"/></div>
+        <div class = "divider1"/></div>
     <button class = "button" id="join" onclick="location.href='/joinTeam/{{user.id}}'"><span>Join a Team</span></button>
-    </div>
 <div class="relative">
      <button class = "button" id="leave" onclick="location.href='/leaveTeam/{{user.id}}'"><span>Leave Team</span></button>
 </div>
+     </div>
+
+{% else %}
+
+{% if user.team_id %}
+    <center>
+        <h1> Team {{user.team.team_name}} </h1>
+    </center>
+    <h4>Your team has {{num_teammates}} member</h4>
+        {% for user in teammates %}
+         <center>
+           <h2>
+          {{user.user_name}}
+           </h2>
+         </center>
+
+          <header>
+ <div class='header-text'>
+ <h5>{{user.favbracket.bracket_name}} </h5>
+  {% if not edit %}
+  <h4> {{user.favbracket.score}}</h4>
+  {% endif %}
+  <h4>Stats: {{user.favbracket.stats}}</h4>
+ </div>
+  <div class='half-circle-container'>
+ <div class='half-circle bottom-circle'>
+ <div></div>
+ </div>
+ </div>
+ </header>
+ <section>
+ <div class='body-first-child tournament first-four'>
+ <ul class='round seed'>
+ <li class='game-left game-top'>
+ <span>16</span>
+ <span>Texas Southern</span>
+ </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>
+ <span>16</span>
+ <span>Mount St. Mary's</span>
+ </li>
+ </ul>
+ <ul class='round first-four-winner'>
+ <li class='game-left game-top'>
+ <span>Texas Southern</span>
+ </li>
+ </ul>
+ <ul class='round'>
+ <li class='region region-left'>East</li>
+ </ul>
+ <ul class='round seed'>
+ <li class='game-left game-top'>
+ <span>11</span>
+ <span>Michigan St</span>
+ </li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>
+ <span>11</span>
+ <span>UCLA</span>
+ </li>
+ </ul>
+ <ul class='round first-four-winner'>
+ <li class='game-left game-top'>
+ <span>UCLA</span>
+ </li>
+ </ul>
+ <ul class='round'>
+ <li class='region region-left'>East</li>
+ </ul>
+ <ul class='round'></ul>
+ <ul class='round'>
+ <li class='region region-right'>West</li>
+ </ul>
+ <ul class='round first-four-winner'>
+ <li class='game-right game-top'>
+ <span>Norfolk St.</span>
+ </li>
+ </ul>
+ <ul class='round seed'>
+ <li class='game-right game-top'>
+ <span>Appalachian St</span>
+ <span>16</span>
+ </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>
+ <span>Norfolk St</span>
+ <span>16</span>
+ </li>
+ </ul>
+ <ul class='round'>
+ <li class='region region-right'>West</li>
+ </ul>
+ <ul class='round first-four-winner'>
+ <li class='game-right game-top'>
+ <span>Wichita St</span>
+ </li>
+ </ul>
+ <ul class='round seed'>
+ <li class='game-right game-top'>
+ <span>Wichita St</span>
+ <span>11</span>
+ </li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>
+ <span>Drake</span>
+ <span>11</span>
+ </li>
+ </ul>
+ </div>
+ <div class='tournament tournament-header'>
+ <ul class='round'>
+ <li>First Round</li>
+ <li>Mar 19-20</li>
+ </ul>
+ <ul class='round'>
+ <li>Second Round</li>
+ <li>Mar 21-22</li>
+ </ul>
+ <ul class='round'>
+ <li>Sweet 16</li>
+ <li>Mar 27-28</li>
+ </ul>
+ <ul class='round'>
+ <li>Elite 8</li>
+ <li>Mar 29-30</li>
+ </ul>
+ <ul class='round'>
+ <li>Final 4</li>
+ <li>Apr 3 at Indianapolis, IN</li>
+ </ul>
+ <ul class='round'>
+ </ul>
+ <ul class='round'>
+ <li>National Championship</li>
+ <li>Apr 5 at Indianapolis, IN</li>
+ </ul>
+ <ul class='round'>
+ </ul>
+ <ul class='round'>
+ <li>Final 4</li>
+ <li>Apr 3 at Indianapolis, IN</li>
+ </ul>
+ <ul class='round'>
+ <li>Elite 8</li>
+ <li>Mar 29-30</li>
+ </ul>
+ <ul class='round'>
+ <li>Sweet 16</li>
+ <li>Mar 27-28</li>
+ </ul>
+ <ul class='round'>
+ <li>Second Round</li>
+ <li>Mar 21-22</li>
+ </ul>
+ <ul class='round'>
+ <li>First Round</li>
+ <li>Mar 19-20</li>
+ </ul>
+ </div>
+ <div class='tournament'>
+ <ul class='round seed'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.0}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.1}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.2}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.3}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.4}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.5}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.6}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.7}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.8}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.9}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.10}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.11}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.12}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.13}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.14}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.15}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.16}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.17}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.18}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.19}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.20}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.21}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.22}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.23}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.24}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.25}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.26}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.27}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.28}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.29}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.30}}</span>
+ </li>
+ <li class='game-left game-bottom'>
+ <span></span>
+ <span>{{user.favbracket.bracket_64.31}}</span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-1'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_32.0}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_32.1}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_32.2}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_32.3}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_32.4}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_32.5}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_32.6}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_32.7}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_32.8}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_32.9}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_32.10}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_32.11}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_32.12}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_32.13}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_32.14}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_32.15}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-2'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_16.0}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_16.1}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_16.2}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_16.3}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_16.4}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_16.5}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_16.6}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_16.7}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-3'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_8.0}}</li>
+ <li class='game-left spacer region region-right'>West</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_8.1}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_8.2}}</li>
+ <li class='game-left spacer region region-right'>East</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_8.3}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-4'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_4.0}}</li>
+ <li class='game-left spacer'>&nbsp;</li>
+ <li class='game-left game-bottom'>{{user.favbracket.bracket_4.1}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round semi-final'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-left game-top'>{{user.favbracket.bracket_2.0}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round finals'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game final'>{{user.favbracket.winner}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round semi-final'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_2.1}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-4'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_4.2}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_4.3}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-3'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_8.4}}</li>
+ <li class='game-right spacer region region-left'>South</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_8.5}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_8.6}}</li>
+ <li class='game-right spacer region region-left'>Midwest</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_8.7}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-2'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_16.8}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_16.9}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_16.10}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_16.11}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_16.12}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_16.13}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_16.14}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_16.15}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round round-1'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_32.16}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_32.17}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_32.18}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_32.19}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_32.20}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_32.21}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_32.22}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_32.23}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_32.24}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_32.25}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_32.26}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_32.27}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_32.28}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_32.29}}</li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>{{user.favbracket.bracket_32.30}}</li>
+ <li class='game-right spacer'>&nbsp;</li>
+ <li class='game-right game-bottom'>{{user.favbracket.bracket_32.31}}</li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ <ul class='round seed'>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.32}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.33}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.34}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.35}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.36}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.37}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.38}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.39}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.40}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.41}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.42}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.43}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.44}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.45}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.46}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.47}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.48}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.49}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.50}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.51}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.52}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.53}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.54}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.55}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.56}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.57}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.58}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.59}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.60}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.61}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ <li class='game-right game-top'>
+ <span>{{user.favbracket.bracket_64.62}}</span>
+ <span></span>
+ </li>
+ <li class='game-right game-bottom'>
+ <span>{{user.favbracket.bracket_64.63}}</span>
+ <span></span>
+ </li>
+ <li class='spacer'>&nbsp;</li>
+ </ul>
+ </div>
+
+ </section>
+        {% endfor %}
+    {% else %}
+    <center>
+        <h1>
+            Oops! You have not joined a team yet
+          {{user.team.team_id}}
+        </h1>
+        <button class = "button" id="back" onclick="location.href='/teams/{{user.id}}'"><span>Back</span></button>
+        <button class = "button" id="entercode" onclick="location.href='/joinTeam/{{user.id}}'"><span>Enter a Join Code</span></button>
+    </center>
+    {% endif %}
+
+{% endif %}
+
+
+
 
 </body>
 </html>
