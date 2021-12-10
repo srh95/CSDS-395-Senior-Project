@@ -14,6 +14,7 @@ import re
 import pandas as pd
 from urllib.request import urlopen, Request
 import datetime
+from itertools import combinations
 from django.views.generic.list import ListView
 
 from .models import (
@@ -102,19 +103,27 @@ def joinTeam(request, user_id):
     context = {'user': user, 'brackets': brackets}
     if request.method == 'GET' and 'join_code' in request.GET:
         code = request.GET.get('join_code')
-        team_obj = get_object_or_404(Team, team_id=code)
-        teammates = User.objects.filter(team=team_obj)
-        if (len(teammates) == team_obj.num_members):
-            messages.error(request, 'Team is Full')
+        try:
+            team_obj = Team.objects.get(team_id=code)
+            teammates = User.objects.filter(team=team_obj)
+
+
+            if (len(teammates) == team_obj.num_members):
+                messages.error(request, 'Team is Full')
+                url = '/joinTeam/' + str(user_id)
+                return HttpResponseRedirect(url)
+            favbracket = request.GET.get('enteredbracket')
+            favbracket_obj = get_object_or_404(Bracket, bracket_name=favbracket)
+            User.objects.filter(id=user_id).update(team=team_obj)
+            User.objects.filter(id=user_id).update(favbracket=favbracket_obj)
+            url = '/teams/' + str(user_id)
+            print('success')
+            return HttpResponseRedirect(url)
+
+        except ObjectDoesNotExist:
+            messages.error(request, 'This join code is invalid.')
             url = '/joinTeam/' + str(user_id)
             return HttpResponseRedirect(url)
-        favbracket = request.GET.get('enteredbracket')
-        favbracket_obj = get_object_or_404(Bracket, bracket_name=favbracket)
-        User.objects.filter(id=user_id).update(team=team_obj)
-        User.objects.filter(id=user_id).update(favbracket=favbracket_obj)
-        url = '/teams/' + str(user_id)
-        print('success')
-        return HttpResponseRedirect(url)
     else:
         form = JoinTeamForm()
         context = {'user': user, 'user_id': user_id, 'brackets': brackets, 'form': form}
@@ -321,6 +330,8 @@ def createBracket(request, user_id):
             b_4, bracket_4 = next_round_2021(b_8, stat1, stat2, stat3, stat4, stat5)
             b_2, bracket_2 = next_round_2021(b_4, stat1, stat2, stat3, stat4, stat5)
             winner = compare_schools_2021(b_2[0][0], b_2[0][1], stat1, stat2, stat3, stat4, stat5)
+            print(b_32)
+
 
             request.session['bracket_32'] = bracket_32
             request.session['bracket_16'] = bracket_16
