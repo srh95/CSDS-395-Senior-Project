@@ -39,7 +39,7 @@ def isTournamentStarted():
     # get today's date
     today = datetime.datetime.now()
     # tournament start date
-    tournament = "15/3/2021 0:00"
+    tournament = "15/3/2022 0:00"
     tournament = datetime.datetime.strptime(tournament, "%d/%m/%Y %H:%M")
 
     if today > tournament:
